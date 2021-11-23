@@ -1,0 +1,17 @@
+// Spur Gear, Right.
+translate([0, 25, 53]) rotate([0, 90, 90]) cylinder(r=11, h=10, center=true);
+
+// Pinion Gear, Right.
+translate([-28, 25, 40]) rotate([90, 0, 0]) cylinder($fn=128, r=6, h=10, center=true);
+
+// Idler Gear, Right.
+translate([-14, 25, 39]) rotate([90, 0, 0]) cylinder($fn=128, r=6, h=10, center=true);
+
+// Spur Gear, Left.
+translate([0, -25, 53]) rotate([0, 90, 90]) cylinder(r=11, h=10, center=true);
+
+// Pinion Gear, Left.
+translate([28, -25, 40]) rotate([90, 0, 0]) cylinder($fn=128, r=6, h=10, center=true);
+
+// Idler  Gear, Left.
+translate([14, -25, 39]) rotate([90, 0, 0]) cylinder($fn=128, r=6, h=10, center=true);
