@@ -59,6 +59,8 @@ module triangle(o_len, a_len, depth, center=false) {
 // ----------------------------------------------------------------------------------------------------
 // GEOMETRY
 
+module Center_Bracket () { 
+
 // Upright portion, left.
 difference() { 
     // Main body of upright.
@@ -198,8 +200,7 @@ difference() {
     translate([8.75, -14, 14]) cylinder($fn=28, r=1.22, h=9.2);
     translate([0, -14, 14]) cylinder($fn=28, r=1.22, h=9.2);
     translate([-8.75, -14, 14]) cylinder($fn=28, r=1.22, h=9.2);
-    translate([-20, -14, 14]) cylinder($fn=28, r=1.22, h=9.2);
-    }
+    translate([-20, -14, 14]) cylinder($fn=28, r=1.22, h=9.2); }
 
 // Sides.
 difference() { 
@@ -215,8 +216,7 @@ difference() {
     translate([50, 0, 25]) rotate([10, 0, 0]) cube([10, 1.5, 7], center=true);
     translate([50, -2.5, 25]) rotate([10, 0, 0]) cube([10, 1.5, 7], center=true);
     translate([50, -5, 25]) rotate([10, 0, 0]) cube([10, 1.5, 7], center=true);
-    translate([50, -7.5, 25]) rotate([10, 0, 0]) cube([10, 1.5, 7], center=true);
-    }
+    translate([50, -7.5, 25]) rotate([10, 0, 0]) cube([10, 1.5, 7], center=true); }
     
 difference() { 
     // Main body of side.
@@ -254,8 +254,10 @@ difference() {
 
 // Dowels, top cover.
 translate([-48, 0, 54]) rotate([0, 0, 0]) cylinder($fn=15, r1=1.22, r2=1.15, h=6, center=true);
-translate([48, 0, 54]) rotate([0, 0, 0]) cylinder($fn=15, r1=1.22, r2=1.15, h=6, center=true);
+translate([48, 0, 54]) rotate([0, 0, 0]) cylinder($fn=15, r1=1.22, r2=1.15, h=6, center=true); }
 
-
+// Render the object. 
+// Comment or uncomment as needed.
+//Center_Bracket();
 // ---------------------------------------------------------------------------------------------------- 
 
