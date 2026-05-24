@@ -1,0 +1,3 @@
+This file contains workfiles that were written in Sublime Text.
+
+I like to use Sublime for bulk-code-writing, and then debug in .scad.

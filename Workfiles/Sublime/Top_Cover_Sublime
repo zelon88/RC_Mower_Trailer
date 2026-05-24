@@ -1,0 +1,27 @@
+// Fan mounting bracket.
+difference() { 
+    // Main body of fan mounting bracket.
+    translate([0, 0, 84.5]) cube([42, 42, 3.5], center=true);
+    
+    // Hollow section connecting cone to cover.
+    translate([0, 0, 85]) cylinder($fn=256, r=19, h=20, center=true); 
+    // Fan mounting holes.
+    translate([16, 16, 85]) cylinder($fn=22, r=1.22, h=22, center=true);
+    translate([-16, 16, 85]) cylinder($fn=22, r=1.22, h=22, center=true);
+    translate([16, -16, 85]) cylinder($fn=22, r=1.22, h=22, center=true);
+    translate([-16, -16, 85]) cylinder($fn=22, r=1.22, h=22, center=true); 
+    // Rounded corners.
+    translate([23, 25, 85]) rotate([0, 0, 67.5]) cube([15, 20, 5], center=true);
+    translate([23.5, 23.5, 85]) rotate([0, 0, 45]) cube([15, 20, 5], center=true);
+    translate([25, 23, 85]) rotate([0, 0, 22.5]) cube([15, 20, 5], center=true);
+    translate([-23, 25, 85]) rotate([0, 0, -67.5]) cube([15, 20, 5], center=true);
+    translate([-23.5, 23.5, 85]) rotate([0, 0, -45]) cube([15, 20, 5], center=true);
+    translate([-25, 23, 85]) rotate([0, 0, -22.5]) cube([15, 20, 5], center=true);
+    translate([23, -25, 85]) rotate([0, 0, -67.5]) cube([15, 20, 5], center=true);
+    translate([23.5, -23.5, 85]) rotate([0, 0, -45]) cube([15, 20, 5], center=true);
+    translate([25, -23, 85]) rotate([0, 0, -22.5]) cube([15, 20, 5], center=true);
+    translate([-23, -25, 85]) rotate([0, 0, 67.5]) cube([15, 20, 5], center=true);
+    translate([-23.5, -23.5, 85]) rotate([0, 0, 45]) cube([15, 20, 5], center=true);
+    translate([-25, -23, 85]) rotate([0, 0, 22.5]) cube([15, 20, 5], center=true);
+    
+    }
