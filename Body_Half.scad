@@ -65,11 +65,11 @@ module Body_Half() {
       // Through hole for planetary shaft.
       translate([0, 0, 0]) rotate([0, 0, 0]) cylinder($fn=64, r=3.03, h=100, center=true); 
       // Torus screw holes.
-    translate([13.25, 0, 6]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
-    translate([23.25, 0, 10]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
+    translate([13.25, 0, 4]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
+    translate([23.25, 0, 7]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
     translate([33.25, 0, 8]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
-    translate([-13.25, 0, 6]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
-    translate([-23.25, 0, 10]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
+    translate([-13.25, 0, 4]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
+    translate([-23.25, 0, 7]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
     translate([-33.25, 0, 8]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true); }
     translate([0, 75, -20]) cylinder(r=150, h=20); }
 
@@ -105,11 +105,11 @@ module Body_Half() {
     // Through hole for planetary shaft.
     translate([0, 0, 0]) rotate([0, 0, 0]) cylinder($fn=64, r=3.03, h=100, center=true);
     // Torus screw holes.
-    translate([13.25, 0, 6]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
-    translate([23.25, 0, 10]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
+    translate([13.25, 0, 4]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
+    translate([23.25, 0, 7]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
     translate([33.25, 0, 8]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
-    translate([-13.25, 0, 6]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
-    translate([-23.25, 0, 10]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
+    translate([-13.25, 0, 4]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
+    translate([-23.25, 0, 7]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
     translate([-33.25, 0, 8]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true); }
 
   // Create the back torus inside mating surface.
@@ -128,11 +128,11 @@ module Body_Half() {
     // Through hole for planetary shaft.
     translate([0, 0, 0]) rotate([0, 0, 0]) cylinder($fn=64, r=3.03, h=100, center=true); 
     // Torus screw holes.
-    translate([13.25, 0, 6]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
-    translate([23.25, 0, 10]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
+    translate([13.25, 0, 4]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
+    translate([23.25, 0, 7]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
     translate([33.25, 0, 8]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
-    translate([-13.25, 0, 6]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
-    translate([-23.25, 0, 10]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
+    translate([-13.25, 0, 4]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
+    translate([-23.25, 0, 7]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
     translate([-33.25, 0, 8]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true); } }
 
 // Render the object. 
