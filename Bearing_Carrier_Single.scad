@@ -8,7 +8,6 @@
 // LICENSE:  GPLv3
 // AUTHOR:  Justin Grimes (@zelon88)
 // DESCRIPTION:  A tow-behind lawn mowing attachment for retrofit onto low-speed R/C vehicles.
-
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
@@ -16,19 +15,18 @@
 
 // NAME:  Bearing Carrier (Single)
 // REVISION:  A1
-// START DATE:  2026-05-24
-// CURRENT VERSION DATE:  2026-05-24
+// START DATE:  5/24/2026
+// CURRENT VERSION DATE:  5/24/2026
 // AUTHOR:  Justin Grimes (@zelon88) & Copilot - Claude 4.5.
 // DESCRIPTION:  
 //    A cylindrical cup bearing carrier that houses a 1/4" ID x 1/2" OD x 3/16" Width (R4 Series) ball bearing.
 //    Features a flange with mounting holes and integrated endcaps to retain the bearing.
 // FILE NAME: Bearing_Carrier_Single.scad
-
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
 // PRINTER CONFIGURATION
-
+// [Printing instructions to be added]
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
@@ -86,5 +84,5 @@ module Bearing_Carrier_Single () {
 
 // Render the object. 
 // Comment or uncomment as needed.
-Bearing_Carrier_Single();
+//Bearing_Carrier_Single();
 // ----------------------------------------------------------------------------------------------------

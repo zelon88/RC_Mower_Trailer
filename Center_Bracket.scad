@@ -8,7 +8,6 @@
 // LICENSE:  GPLv3
 // AUTHOR:  Justin Grimes (@zelon88)
 // DESCRIPTION:  A tow-behind lawn mowing attachment for retrofit onto low-speed R/C vehicles.
-
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
@@ -17,18 +16,17 @@
 // NAME:  Center Bracket
 // REVISION:  A1
 // START DATE:  8/23/2021
-// CURRENT VERSION DATE:  11/22/2021
+// CURRENT VERSION DATE:  5/25/2026
 // AUTHOR:  Justin Grimes (@zelon88)
 // DESCRIPTION:  
 //    The center bracket that serves as the basis for the chassis and transmission for the mower.
 //    All other components are built off of this piece.
 // FILE NAME: Center_Bracket.scad
-
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
 // PRINTER CONFIGURATION
-
+// [Printing instructions to be added]
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
@@ -36,24 +34,16 @@
 
 // 1. Deburr all edges to break sharp edges.
 // 2. Make studs by installing extra long screws and cutting off the heads.
-
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
 // MODULES
 
 // A module for creating torus' to aide in crafting the body.
-module Torus(R1,R2) { 
-  RA=R1 /2;
-  RB=R2 /2 - R1/2 ;
-  rotate_extrude(convexity = 10, $fn = 144) translate([RB, 0, 0]) circle(r = RA, $fn = 144); }
+include <Workfiles/Torus.scad>;
 
 // A module for creating right triangles.
-// https://github.com/openscad/MCAD/blob/master/triangles.scad
-module triangle(o_len, a_len, depth, center=false) {
-    centroid = center ? [-a_len/3, -o_len/3, -depth/2] : [0, 0, 0];
-    translate(centroid) linear_extrude(height=depth) {
-        polygon(points=[[0, 0], [a_len,0], [0,o_len]], paths=[[0, 1, 2]]); } }
+include <Workfiles/Right_Triangle.scad>;
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
@@ -231,8 +221,7 @@ difference() {
     translate([-50, 0, 25]) rotate([10, 0, 0]) cube([10, 1.5, 7], center=true);
     translate([-50, -2.5, 25]) rotate([10, 0, 0]) cube([10, 1.5, 7], center=true);
     translate([-50, -5, 25]) rotate([10, 0, 0]) cube([10, 1.5, 7], center=true);
-    translate([-50, -7.5, 25]) rotate([10, 0, 0]) cube([10, 1.5, 7], center=true);
-    }
+    translate([-50, -7.5, 25]) rotate([10, 0, 0]) cube([10, 1.5, 7], center=true); }
 
 // Center reinforcement.
 difference() { 

@@ -8,33 +8,34 @@
 // LICENSE:  GPLv3
 // AUTHOR:  Justin Grimes (@zelon88)
 // DESCRIPTION:  A tow-behind lawn mowing attachment for retrofit onto low-speed R/C vehicles.
-
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
 // PART INFORMATION
 
-// NAME:  Body
+// NAME:  Body Half
 // REVISION:  A1
 // START DATE:  11/22/2021
-// CURRENT VERSION DATE:  5/24/2026
+// CURRENT VERSION DATE:  5/25/2026
 // AUTHOR:  Justin Grimes (@zelon88)
 // DESCRIPTION:  
 //    The main body torus structure for the mower assembly.
-// FILE NAME: Body.scad
-
+//    This part is 150mm x 150mm, the largest my printer can hold.
+// FILE NAME: Body_Half.scad
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
 // PRINTER CONFIGURATION
-
+// [Printing instructions to be added]
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
 // MANUFACTURING INSTRUCTIONS
 
-// [Manufacturing instructions to be added]
-
+// 1. Deburr all edges to break sharp edges.
+// 2. Make studs by installing extra long screws and cutting off the heads.
+// 3. Use studs, washers, lock-washers & locknuts for torus-to-torus bolts.
+// 4. Countersink torus-to-torus through-holes so hardware sits flush.
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
@@ -64,8 +65,12 @@ module Body_Half() {
       // Through hole for planetary shaft.
       translate([0, 0, 0]) rotate([0, 0, 0]) cylinder($fn=64, r=3.03, h=100, center=true); 
       // Torus screw holes.
-      translate([33.25, 0, 8]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=30, center=true);
-      translate([-33.25, 0, 8]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=30, center=true); }
+    translate([13.25, 0, 6]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
+    translate([23.25, 0, 10]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
+    translate([33.25, 0, 8]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
+    translate([-13.25, 0, 6]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
+    translate([-23.25, 0, 10]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
+    translate([-33.25, 0, 8]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true); }
     translate([0, 75, -20]) cylinder(r=150, h=20); }
 
   // Top cover for back torus.
@@ -100,8 +105,12 @@ module Body_Half() {
     // Through hole for planetary shaft.
     translate([0, 0, 0]) rotate([0, 0, 0]) cylinder($fn=64, r=3.03, h=100, center=true);
     // Torus screw holes.
-    translate([33.25, 0, 8]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=30, center=true);
-    translate([-33.25, 0, 8]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=30, center=true); }
+    translate([13.25, 0, 6]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
+    translate([23.25, 0, 10]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
+    translate([33.25, 0, 8]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
+    translate([-13.25, 0, 6]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
+    translate([-23.25, 0, 10]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
+    translate([-33.25, 0, 8]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true); }
 
   // Create the back torus inside mating surface.
   difference() {
@@ -119,10 +128,14 @@ module Body_Half() {
     // Through hole for planetary shaft.
     translate([0, 0, 0]) rotate([0, 0, 0]) cylinder($fn=64, r=3.03, h=100, center=true); 
     // Torus screw holes.
-    translate([33.25, 0, 8]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=30, center=true);
-    translate([-33.25, 0, 8]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=30, center=true); } }
+    translate([13.25, 0, 6]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
+    translate([23.25, 0, 10]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
+    translate([33.25, 0, 8]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
+    translate([-13.25, 0, 6]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
+    translate([-23.25, 0, 10]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true);
+    translate([-33.25, 0, 8]) rotate([90, 0, 0]) cylinder($fn=20, r=1.22, h=40, center=true); } }
 
 // Render the object. 
 // Comment or uncomment as needed.
-Body_Half();
+//Body_Half();
 // ----------------------------------------------------------------------------------------------------
