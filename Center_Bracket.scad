@@ -4,7 +4,7 @@
 // NAME:  R/C Mower Trailer
 // REVISION:  A1
 // START DATE:  8/20/2021
-// CURRENT VERSION DATE:  9/8/2021
+// CURRENT VERSION DATE:  5/28/2026
 // LICENSE:  GPLv3
 // AUTHOR:  Justin Grimes (@zelon88)
 // DESCRIPTION:  A tow-behind lawn mowing attachment for retrofit onto low-speed R/C vehicles.
@@ -16,7 +16,7 @@
 // NAME:  Center Bracket
 // REVISION:  A1
 // START DATE:  8/23/2021
-// CURRENT VERSION DATE:  5/25/2026
+// CURRENT VERSION DATE:  5/28/2026
 // AUTHOR:  Justin Grimes (@zelon88)
 // DESCRIPTION:  
 //    The center bracket that serves as the basis for the chassis and transmission for the mower.
@@ -41,9 +41,10 @@
 
 // A module for creating torus' to aide in crafting the body.
 include <Workfiles/Torus.scad>;
-
 // A module for creating right triangles.
 include <Workfiles/Right_Triangle.scad>;
+// A module for creating low-poly 540 DC Brushed Electric Motors.
+include <Workfiles/Motors.scad>;
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
@@ -164,7 +165,8 @@ difference() {
 
     // Reinforcement slot.
     translate([0, 0, 16.59]) cube([25.6, 100, 3.175], center=true);
-    translate([0, 0, ]) cube([25.6, 100, 31], center=true);
+    translate([0, 0, 0]) cube([25.6, 100, 31], center=true);
+
     // Toruses.
     translate([0, 75, 0]) Torus(40, 150); 
     translate([0, -75, 0]) Torus(40, 150); 
@@ -248,5 +250,7 @@ translate([48, 0, 54]) rotate([0, 0, 0]) cylinder($fn=15, r1=1.22, r2=1.15, h=6,
 // Render the object. 
 // Comment or uncomment as needed.
 //Center_Bracket();
+// Comment or uncomment to simulate motors as needed.
+ //Motors();
 // ---------------------------------------------------------------------------------------------------- 
 

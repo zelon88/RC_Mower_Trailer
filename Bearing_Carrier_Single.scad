@@ -129,6 +129,6 @@ module Bearing_Carrier_Single_Cap() {
 
 // Render the object for printing. 
 // Comment or uncomment as needed.
-Bearing_Carrier_Single();
+//Bearing_Carrier_Single();
 //translate([30, 0, 0]) Bearing_Carrier_Single_Cap();
 // ----------------------------------------------------------------------------------------------------

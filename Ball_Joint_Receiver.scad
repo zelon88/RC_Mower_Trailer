@@ -92,15 +92,15 @@ module Ball_Joint_Receiver () {
 
   // Flange.
   difference() {
-      // Main flange plate.
-      translate([0, 0, 0]) cylinder($fn=96, r=flange_od/2, h=flange_thickness);
-      // Six mounting holes spaced evenly around flange.
-      for(i = [0:5]) {
-          angle = i * 60;  // 360/6 = 60 degrees.
-          radius = flange_od/2 - 3;  // Holes in middle of flange width.
-          translate([radius * cos(angle), radius * sin(angle), -1]) cylinder($fn=20, r=1.25, h=flange_thickness + 2); } 
-      // Center hole through bottom half of body for bearing ID clearance.
-      translate([0, 0, 0]) cylinder($fn=96, r=body_od/2 - 1, h=flange_thickness + cup_depth / 2); } 
+    // Main flange plate.
+    translate([0, 0, 0]) cylinder($fn=96, r=flange_od/2, h=flange_thickness);
+    // Six mounting holes spaced evenly around flange.
+    for(i = [0:5]) {
+      angle = i * 60;  // 360/6 = 60 degrees.
+      radius = flange_od/2 - 3;  // Holes in middle of flange width.
+      translate([radius * cos(angle), radius * sin(angle), -1]) cylinder($fn=20, r=1.25, h=flange_thickness + 2); } 
+    // Center hole through bottom half of body for bearing ID clearance.
+    translate([0, 0, 0]) cylinder($fn=96, r=body_od/2 - 1, h=flange_thickness + cup_depth / 2); } 
 
   // Add a lip for attaching a boot.
   difference() {
@@ -129,6 +129,7 @@ module Ball_Joint_Receiver_Cap() {
 //Ball_Joint_Receiver_Cap();
 
 // Render the object for printing.
-Ball_Joint_Receiver();
-translate([30, 0, 0]) Ball_Joint_Receiver_Cap();
+// Comment or uncomment as needed.
+//Ball_Joint_Receiver();
+//translate([30, 0, 0]) Ball_Joint_Receiver_Cap();
 // ----------------------------------------------------------------------------------------------------

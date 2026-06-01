@@ -57,5 +57,5 @@ module Ball_Joint_Ball() {
 
 // Render the object. 
 // Comment or uncomment as needed.
-Ball_Joint_Ball();
+//Ball_Joint_Ball();
 // ----------------------------------------------------------------------------------------------------

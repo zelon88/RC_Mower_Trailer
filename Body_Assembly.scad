@@ -42,12 +42,18 @@
 // ----------------------------------------------------------------------------------------------------
 // MODULES
 
-// A module for creating torus' to aide in crafting the body.
-include <Workfiles/Torus.scad>;
 // A module for creating the Center Bracket for crafting mating surfaces.
 include <Center_Bracket.scad>;
 // A module for calling in both halves of the body & positioning them.
 include <Body_Half.scad>
+// A module for calling in the ball joint ball.
+include <Ball_Joint_Ball.scad>;
+// A module for calling in the ball joint receiver.
+include <Ball_Joint_Receiver.scad>;
+// A module for calling in the single bearing carrier.
+include <Bearing_Carrier_Single.scad>;
+// A module for calling in the dual bearing carrier.
+include <Bearing_Carrier_Dual.scad>;
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
@@ -56,4 +62,11 @@ include <Body_Half.scad>
 // The two halves of the body, with mating surfaces touching each other.
 rotate([0, 0, 0]) Body_Half ();
 rotate([0, 0, 180]) Body_Half ();
+// The ball joint receivers.
+translate([0, 0, 3]) rotate([0, 0, 90]) translate([75, 32.5, 15]) Ball_Joint_Receiver();
+translate([0, 0, 3]) rotate([0, 0, 90]) translate([75, -32.5, 15]) Ball_Joint_Receiver();
+// The center hub bearing carriers.
+translate([0, 75, 18]) Bearing_Carrier_Dual();
+
+
 // ----------------------------------------------------------------------------------------------------

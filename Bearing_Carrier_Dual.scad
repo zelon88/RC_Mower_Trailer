@@ -126,11 +126,11 @@ module Bearing_Carrier_Dual_Cap() {
 
 // Render the object. 
 // Comment or uncomment as needed.
-//Bearing_Carrier_Dual();
+///Bearing_Carrier_Dual();
 //Bearing_Carrier_Dual_Cap();
 
 // Render the object for printing. 
 // Comment or uncomment as needed.
-Bearing_Carrier_Dual();
+//Bearing_Carrier_Dual();
 //translate([30, 0, 0]) Bearing_Carrier_Dual_Cap();
 // ----------------------------------------------------------------------------------------------------

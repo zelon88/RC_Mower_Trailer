@@ -17,7 +17,7 @@
 // NAME:  Center Bracket Support
 // REVISION:  A1
 // START DATE:  8/24/2021
-// CURRENT VERSION DATE:  9/8/2021
+// CURRENT VERSION DATE:  5/28/2026
 // AUTHOR:  Justin Grimes (@zelon88)
 // DESCRIPTION:  
 //    A triangular support bracket that secures the mower decks to the center bracket. 
@@ -47,41 +47,45 @@
 // MODULES
 
 // A module for creating torus' to aide in crafting the body.
-module Torus(R1,R2) { 
-  RA=R1 /2;
-  RB=R2 /2 - R1/2 ;
-  rotate_extrude(convexity = 10, $fn = 144) translate([RB, 0, 0]) circle(r = RA, $fn = 144); }
+include <Workfiles/Torus.scad>;
 
 // A module for creating right triangles.
-// https://github.com/openscad/MCAD/blob/master/triangles.scad
-module triangle(o_len, a_len, depth, center=false) {
-    centroid = center ? [-a_len/3, -o_len/3, -depth/2] : [0, 0, 0];
-    translate(centroid) linear_extrude(height=depth) {
-        polygon(points=[[0,0],[a_len,0],[0,o_len]], paths=[[0,1,2]]); } }
+include <Workfiles/Right_Triangle.scad>;
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
 // GEOMETRY
 
-// Triangle upright supports, outer, lower.
-difference() { 
+module Center_Bracket_Support() {
+  // Triangle upright supports, outer, lower.
+  difference() { 
     // Main body of center bracket support,
-    translate([2.5, -17, 15]) rotate([90, 0, 270]) triangle(25.5, 40, 5, center=false);
-    
-    // Simulate the area consumed by the reinforcement rail. 
-    translate([-50, -60, 15]) cube([60, 60, 3.175], center=false); 
+    translate([2.5, -17, 15.23]) rotate([90, 0, 270]) triangle(26.5, 55, 5, center=false);
+
+    // Cut off the end of the triangle after the final screw hole.
+    translate([0, -62, 20]) cube([10, 15, 10], center=true);
+
+    // Square off the top of the triangle for aesthetics, weight & material savings.
+    translate([0, 0, 46]) cube([10, 50, 10], center=true);
+
+    // Adjust height to match reinforcement slot.
+    translate([0, 0, 16.59]) cube([25.6, 150, 3.175], center=true);
+
+    // Adjust height to match top cover plate of mower deck.
+    // Note that this is offset slightly to trim an unwanted chunk of leftover geometry.
+    translate([0, -70, 16]) cylinder(r1=62, r2=57, h=4, $fn=144);
+
     // Bottom screw holes for mower deck.
-    translate([0, -50, 18.17]) cylinder($fn=28, r=1.22, h=6.5, center=false);
-    translate([0, -40, 18.17]) cylinder($fn=28, r=1.22, h=6.5, center=false);
-    translate([0, -30, 18.17]) cylinder($fn=28, r=1.22, h=6.5, center=false);
-    translate([0, -20, 18.17]) cylinder($fn=28, r=1.22, h=6.5, center=false); }
-// Screw support.
-difference() { 
-    translate([0, -50, 18.17]) cylinder($fn=28, r=2.25, h=5.5, center=false);
-    // Through hole for screw. 
-    translate([0, -50, 18.17]) cylinder($fn=28, r=1.22, h=8, center=false); }
-// Locating dowel, center bracket suppport, lower.
-translate([0, -13, 28.5]) rotate([90, 0, 0]) cylinder($fn=28, r=2.5, h=10, center = true); 
-// Locating dowel, center bracket suppport, upper.
-translate([0, -13, 37]) rotate([90, 0, 0]) cylinder($fn=28, r=2.5, h=10, center = true);
+    translate([0, -50, 15]) cylinder($fn=28, r=1.22, h=10, center=false);
+    translate([0, -40, 15]) cylinder($fn=28, r=1.22, h=10, center=false);
+    translate([0, -30, 15]) cylinder($fn=28, r=1.22, h=10, center=false); }
+
+  // Locating dowel, center bracket suppport, lower.
+  translate([0, -13, 28.5]) rotate([90, 0, 0]) cylinder($fn=28, r=2.5, h=10, center = true); 
+  // Locating dowel, center bracket suppport, upper.
+  translate([0, -13, 37]) rotate([90, 0, 0]) cylinder($fn=28, r=2.5, h=10, center = true); }
+
+// Render the object. 
+// Comment or uncomment as needed.
+//Center_Bracket_Support();
 // ----------------------------------------------------------------------------------------------------
