@@ -58,7 +58,7 @@ module Attachment_Hinge_Boss() {
 
   // Horizontal hinge pin boss dimensions.
   boss_od          = 10;     // Outer diameter of cylindrical boss.
-  pin_id           = 5.2;    // Inner bore diameter (5mm pin + 0.2mm clearance).
+  pin_id           = 5.1;    // Inner bore diameter (5mm pin + 0.2mm clearance).
   boss_length      = 20;     // Total Y span of cylindrical boss.
 
   // Anchor: mates to top face of mounting pad (Z=20), centered at (63, 75).
