@@ -47,28 +47,32 @@ module Attachment_Adjustment_Arm_Insert() {
       // Create the side bosses.
       translate([0, 7, 0]) rotate([90, 0, 0]) cylinder($fn=48, r=1.5, h=14);
       // Create the center boss.
-      translate([0, 0, 4]) cylinder($fn=48, r=2.95, h=4, center=true); }
+      translate([0, 0, 4]) cylinder($fn=48, r=2.95, h=4, center=true);
+      // Taper the base of the upper portion of the center boss for strength.
+      translate([0, 0, 3]) cylinder($fn=48, r1=3.05, r2=2.95, h=2, center=true);
+      // Chamfer the bottom of the center boss to support a shrink wrap dust boot.
+      translate([0, 0, -2.5]) cylinder($fn=48, r=2.95, h=1.5, center=true); 
+      // Add a lip to the bottom of the center boss to support a shrink wrap dust boot.
+      translate([0, 0, -3.15]) cylinder($fn=48, r=3.15, h=0.5, center=true); 
+}
     // Drill the center hole for the adjustment screw.
     cylinder($fn=48, r=2.495, h=15, center=true);
     // Chamfer the front & rear top & bottom edges along X axis.
-    // Block Y half = 3.5, Block Z half = 2.5.
     translate([0,  3.5,  2.5]) rotate([45, 0, 0]) cube([14, 0.7, 0.7], center=true);
     translate([0, -3.5,  2.5]) rotate([45, 0, 0]) cube([14, 0.7, 0.7], center=true);
     translate([0,  3.5, -2.5]) rotate([45, 0, 0]) cube([14, 0.7, 0.7], center=true);
     translate([0, -3.5, -2.5]) rotate([45, 0, 0]) cube([14, 0.7, 0.7], center=true);
-    // Chamfer the left & right top & bottom edges along Y axis (80% of side material).
-    // Block X half = 6, Block Z half = 2.5.
+    // Chamfer the left & right top & bottom edges along Y axis.
     translate([ 6, 0,  2.5]) rotate([0, 45, 0]) cube([2.828, 9, 2.828], center=true);
     translate([-6, 0,  2.5]) rotate([0, 45, 0]) cube([2.828, 9, 2.828], center=true);
     translate([ 6, 0, -2.5]) rotate([0, 45, 0]) cube([2.828, 9, 2.828], center=true);
     translate([-6, 0, -2.5]) rotate([0, 45, 0]) cube([2.828, 9, 2.828], center=true);
     // Chamfer the vertical corner edges along Z axis (tips of the Y axis wedges).
-    // Block X half = 6, Block Y half = 3.5.
     translate([ 6,  3.5, 0]) rotate([0, 0, 45]) cube([0.7, 0.7, 6], center=true);
     translate([ 6, -3.5, 0]) rotate([0, 0, 45]) cube([0.7, 0.7, 6], center=true);
     translate([-6,  3.5, 0]) rotate([0, 0, 45]) cube([0.7, 0.7, 6], center=true);
     translate([-6, -3.5, 0]) rotate([0, 0, 45]) cube([0.7, 0.7, 6], center=true);
-    // Chamfer the circular end faces of the side bosses (r=2, 0.5mm chamfer).
+    // Chamfer the circular end faces of the side bosses.
     translate([0,  7, 0]) rotate([ 90, 0, 0]) cylinder($fn=48, r1=2.5, r2=2, h=0.5);
     translate([0, -7, 0]) rotate([-90, 0, 0]) cylinder($fn=48, r1=2.5, r2=2, h=0.5); } }
 

@@ -16,7 +16,7 @@
 // NAME:  Bearing Carrier (Single)
 // REVISION:  A1
 // START DATE:  5/24/2026
-// CURRENT VERSION DATE:  5/27/2026
+// CURRENT VERSION DATE:  6/4/2026
 // AUTHOR:  Justin Grimes (@zelon88) & Copilot - Claude Sonnet 4.6.
 // DESCRIPTION:  
 //    A cylindrical cup bearing carrier that houses a 1/4" ID x 1/2" OD x 3/16" Width (R4 Series) ball bearing.
@@ -51,7 +51,7 @@ module Bearing_Carrier_Single () {
   // Flange dimensions.
   flange_od = 25.4;       // 1" OD.
   flange_thickness = 3;   // 3mm thick.
-  cup_depth = 10;          // Cup depth to hold bearing.
+  cup_depth = 8;          // Cup depth to hold bearing.
 
   // Cup body with integrated caps.
   difference() {
@@ -62,8 +62,12 @@ module Bearing_Carrier_Single () {
           translate([0, 0, cup_depth]) cylinder($fn=96, r=bearing_od/2 + 1, h=flange_thickness); }
       // Hollow interior for bearing.
       translate([0, 0, flange_thickness - 0.5]) cylinder($fn=96, r=bearing_od/2 + 0.1, h=cup_depth - flange_thickness);
+      // Center hole through bottom — must be cut here too, otherwise the cup body
+      // solid (Z=0 to Z=2.5) plugs the flange center hole when the two are unioned.
+      translate([0, 0, -1]) cylinder($fn=96, r=bearing_id/2 + 0.5, h=flange_thickness + 2);
       // Center hole through top cap for bearing ID clearance.
-      translate([0, 0, cup_depth - 1]) cylinder($fn=96, r=bearing_id/2 + 0.5, h=flange_thickness + 2); }
+      // Starts at cup_depth-1.5 to ensure overlap with hollow interior.
+      translate([0, 0, cup_depth - 1.5]) cylinder($fn=96, r=bearing_id/2 + 0.2, h=flange_thickness + 2); }
 
   // Tapered reinforcement ribs (6x, between screw holes).
   // Each rib spans from the top of the flange to the top of the integrated cap.
@@ -114,7 +118,7 @@ module Bearing_Carrier_Single_Cap() {
   // Flange dimensions.
   flange_od = 25.4;       // 1" OD.
   flange_thickness = 3;   // 3mm thick.
-  cup_depth = 10;          // Cup depth to hold bearing.
+  cup_depth = 8;          // Cup depth to hold bearing.
 
   difference() {
     // Cap at bottom.
@@ -129,6 +133,6 @@ module Bearing_Carrier_Single_Cap() {
 
 // Render the object for printing. 
 // Comment or uncomment as needed.
-//Bearing_Carrier_Single();
+Bearing_Carrier_Single();
 //translate([30, 0, 0]) Bearing_Carrier_Single_Cap();
 // ----------------------------------------------------------------------------------------------------

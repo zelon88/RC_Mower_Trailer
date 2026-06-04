@@ -98,15 +98,12 @@ module Attachment_Adjustment_Arm() {
     translate([-16.5,  13, -5.75]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true);
     translate([-16.5,  13,  0]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true);
     translate([-16.5,  13,  5.75]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true);
-
     translate([-16.5, -13, -5.75]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true);
     translate([-16.5, -13,  0]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true);
     translate([-16.5, -13,  5.75]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true);
-
     translate([-16.5,   6.5, -5.75]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true);
     translate([-16.5,   0, -5.75]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true);
     translate([-16.5,  -6.5, -5.75]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true);
-
     translate([-16.5,   6.5,  5.75]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true);
     translate([-16.5,   0,  5.75]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true);
     translate([-16.5,  -6.5,  5.75]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true); } }

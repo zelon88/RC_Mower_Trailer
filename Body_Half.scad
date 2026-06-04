@@ -16,7 +16,7 @@
 // NAME:  Body Half
 // REVISION:  A1
 // START DATE:  11/22/2021
-// CURRENT VERSION DATE:  5/25/2026
+// CURRENT VERSION DATE:  6/4/2026
 // AUTHOR:  Justin Grimes (@zelon88)
 // DESCRIPTION:  
 //    The main body torus structure for the mower assembly.
@@ -102,11 +102,15 @@ module Body_Half() {
       translate([-68, 78, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
       translate([-68, 72, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
       translate([-68, 66, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-      translate([-63, 66, 10]) cylinder($fn=28, r=1.22, h=20, center=true); 
-      
-}
-      
-  // Top cover for torus.
+      translate([-63, 66, 10]) cylinder($fn=28, r=1.22, h=20, center=true); }
+
+  // Create the side skirt.
+  difference() {
+    translate([0, 75, -5]) cylinder($fn=48, r=75, h=10, center=true);
+    // Cut out the center of the side skirt.
+    translate([0, 75, -5]) cylinder($fn=48, r=70, h=10, center=true); }
+
+  // Create the top cover for the torus.
   difference() {
     union() {
       // Main body of top cover.
@@ -157,8 +161,7 @@ module Body_Half() {
     // 1" flange landing pads.
     translate([32.5, 75, 20.4]) cylinder($fn=28, r1=12.75, r2=12.85, h=1, center=true);
     translate([0, 75, 20.4]) cylinder($fn=28, r1=12.75, r2=12.85, h=1, center=true);
-    translate([-32.5, 75, 20.4]) cylinder($fn=28, r1=12.75, r2=12.85, h=1, center=true);
-}
+    translate([-32.5, 75, 20.4]) cylinder($fn=28, r1=12.75, r2=12.85, h=1, center=true); }
 
   // Create the torus outside mating surface.
   difference() {
@@ -226,6 +229,7 @@ module Body_Half() {
     translate([68, 72, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
     translate([68, 66, 10]) cylinder($fn=28, r=1.22, h=20, center=true); 
     translate([63, 66, 10]) cylinder($fn=28, r=1.22, h=20, center=true); }
+
 // Create the mounting pad for the rear attachment boss.
   difference() {
     translate([-63, 75, 10]) cube([15, 28, 20], center=true);

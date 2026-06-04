@@ -52,7 +52,7 @@ bearing_width = 10;   // 10mm width.
 // Flange dimensions.
 flange_od = 25.4;       // 1" OD.
 flange_thickness = 3;   // 3mm thick.
-cup_depth = 14;          // Cup depth to hold bearing.
+cup_depth = 7.5;          // Cup depth to hold bearing.
 
 module Ball_Joint_Receiver () { 
 

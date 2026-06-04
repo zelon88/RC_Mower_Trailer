@@ -16,7 +16,7 @@
 // NAME:  Bearing Carrier (Dual)
 // REVISION:  A1
 // START DATE:  5/24/2026
-// CURRENT VERSION DATE:  5/27/2026
+// CURRENT VERSION DATE:  6/4/2026
 // AUTHOR:  Justin Grimes (@zelon88) & Copilot - Claude Sonnet 4.6.
 // DESCRIPTION:  
 //    A cylindrical cup bearing carrier that houses dual 1/4" ID x 1/2" OD x 3/16" Width (R4 Series) ball bearing.
@@ -51,7 +51,7 @@ module Bearing_Carrier_Dual () {
   // Flange dimensions.
   flange_od = 25.4;       // 1" OD.
   flange_thickness = 3;   // 3mm thick.
-  cup_depth = 16;          // Cup depth to hold bearing.
+  cup_depth = 14;          // Cup depth to hold bearing.
 
   // Cup body with integrated caps.
   difference() {
@@ -116,7 +116,7 @@ module Bearing_Carrier_Dual_Cap() {
   // Flange dimensions.
   flange_od = 25.4;       // 1" OD.
   flange_thickness = 3;   // 3mm thick.
-  cup_depth = 10;          // Cup depth to hold bearing.
+  cup_depth = 14;          // Cup depth to hold bearing.
 
   difference() {
     // Cap at bottom.
@@ -131,6 +131,6 @@ module Bearing_Carrier_Dual_Cap() {
 
 // Render the object for printing. 
 // Comment or uncomment as needed.
-//Bearing_Carrier_Dual();
+Bearing_Carrier_Dual();
 //translate([30, 0, 0]) Bearing_Carrier_Dual_Cap();
 // ----------------------------------------------------------------------------------------------------
