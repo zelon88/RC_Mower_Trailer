@@ -22,4 +22,4 @@ module Lower_Attachment_Arm() {
     translate([0,   0,  5.75]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true);
     translate([0,  -6.5,  5.75]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true); } }
 
-//Lower_Attachment_Arm();
+Lower_Attachment_Arm();

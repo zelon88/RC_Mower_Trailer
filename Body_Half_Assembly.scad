@@ -74,6 +74,10 @@ include <Wheel.scad>;
 include <Blade.scad>;
 // A module for calling in the Blade Holder.
 include <Blade_Holder.scad>;
+// A module for calling in the Body Skirt.
+include <Body_Skirt.scad>;
+// Modules for calling in the Inner & Outer Body Stiffeners.
+include <Body_Stiffeners.scad>;
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
@@ -86,7 +90,12 @@ Motors();
 // The Center Bracket Support.
 rotate([0, 0, 180]) Center_Bracket_Support();
 // The Body that houses the adjustment screws & blade bearings.
-rotate([0, 0, 0]) Body_Half ();
+Body_Half ();
+// The body stiffeners that attach to the top of the main body.
+translate([0, 40, 22.25]) rotate([0, 0, 180]) Body_Stiffener_Inner();
+translate([0, 110, 22.25]) Body_Stiffener_Outer();
+// The Body Skirt that screws on beneath the main body.
+Body_Skirt ();
 // The Ball Joint Receivers for adjustment screws located on the top cover.
 translate([0, 0, 3.5]) rotate([0, 0, 90]) translate([75, 32.5, 16.5]) Ball_Joint_Receiver();
 translate([0, 0, 3.5]) rotate([0, 0, 90]) translate([75, -32.5, 16.5]) Ball_Joint_Receiver();
@@ -107,7 +116,7 @@ translate([-78.25, 75, 38]) Lower_Attachment_Arm();
 // The rear left wheel.
 translate([-127, 105, 30]) Wheel();
 // The Blade Holder.
-translate([0, 75, 0]) Blade_Holder();
+translate([0, 75, -2]) Blade_Holder();
 // The Blade.
-translate([0, 75, 0]) Blade();
+translate([0, 75, -2]) Blade();
 // ----------------------------------------------------------------------------------------------------

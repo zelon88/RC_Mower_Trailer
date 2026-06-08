@@ -13,15 +13,15 @@
 // ----------------------------------------------------------------------------------------------------
 // PART INFORMATION
 
-// NAME:  Blade
+// NAME:  Body Skirt
 // REVISION:  A1
 // START DATE:  6/7/2026
 // CURRENT VERSION DATE:  6/7/2026
 // AUTHOR:  Justin Grimes (@zelon88)
 // DESCRIPTION:
-//    A cutting blade for the R/C mower trailer assembly.
-//    Features a flat rectangular body with a center mounting hole.
-// FILE NAME: Blade.scad
+//    A detachable side skirt for the main body.
+//    Attaches from below via screws that pass up through the main body.
+// FILE NAME: Body_Skirt.scad
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
@@ -33,24 +33,25 @@
 // MANUFACTURING INSTRUCTIONS
 
 // 1. Deburr all edges to break sharp edges.
-// 2. Mount blade via center hole onto drive shaft.
+// 2. Thread boss screws up through Body_Half skirt holes from below.
+// 3. Fasten skirt to torus with nuts from above.
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
 // GEOMETRY
 
-module Blade() {
+module Body_Skirt() {
+  // Create the side skirt.
   difference() {
-    // Create the body of the blade.
-    cube([135, 19.05, 3.175], center=true);
-    // Cut the center hole.
-    cylinder($fn=28, r=3.125, h=4, center=true); } }
+    translate([0, 75, -5]) cylinder($fn=48, r=75, h=10, center=true);
+    // Cut out the center of the side skirt.
+    translate([0, 75, -5]) cylinder($fn=48, r=70, h=10, center=true); } }
 
 // Render the object.
 // Comment or uncomment as needed.
-//Blade();
+//Body_Skirt();
 
 // Render the object for printing.
 // Comment or uncomment as needed.
-//Blade();
+Body_Skirt();
 // ----------------------------------------------------------------------------------------------------
