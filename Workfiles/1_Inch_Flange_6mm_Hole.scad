@@ -1,5 +1,5 @@
 // 1" flange mounting holes.
-module  1_Inch_Flange_6mm_Hole() {
+module  One_Inch_Flange_6mm_Hole() {
   // Six mounting holes spaced evenly around flange.
   for(i = [0:5]) {
     angle = i * 60;  // 360/6 = 60 degrees.
