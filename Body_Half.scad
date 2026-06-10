@@ -51,8 +51,10 @@ include <Workfiles/1_Inch_Flange_6mm_Hole.scad>
 include <Workfiles/1_Inch_Flange_No_Hole.scad>
 // A module for creating the Center Bracket for crafting mating surfaces.
 include <Center_Bracket.scad>;
-// A module for creating the Body Stiffeners for crafting mating surfaces.
-include <Body_Stiffeners.scad>;
+// A module for creating the Inner Body Stiffener for crafting mating surfaces.
+include <Body_Stiffener_Inner.scad>;
+// A module for creating the Outer Body Stiffener for crafting mating surfaces.
+include <Body_Stiffener_Outer.scad>;
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
@@ -132,14 +134,12 @@ module Body_Half() {
       translate([0, 142, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
       translate([-5, 142, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
       translate([-10, 142, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-      // Skirt boss through-holes (20x) through torus outer rim wall.
-      // r=72 = midpoint of skirt ring (r=70-75). Screws install from below, nuts on top.
-      // 18deg spacing, offset 9deg to clear attachment boss (0/180deg) & rail slots (90/270deg).
-      // h=22 spans from below skirt face (Z=-1) to above standoff tops (Z=21).
+      // Skirt screw bosses.
       for (i = [0:19]) {
         skirt_angle = i * 18 + 9;
         translate([72 * cos(skirt_angle), 75 + 72 * sin(skirt_angle), -1])
-          cylinder($fn=28, r=1.22, h=22); }     // Body Stiffener landing pads.
+          cylinder($fn=28, r=1.22, h=22); }
+      // Body Stiffener landing pads.
       translate([0, 40, 22.25]) rotate([0, 0, 180]) Body_Stiffener_Inner();
       translate([0, 110, 22.25]) Body_Stiffener_Outer(); }
 
@@ -229,13 +229,8 @@ module Body_Half() {
     translate([16, 100, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
     translate([16, 110, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
     translate([16, 120, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-    translate([8, 100, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-    translate([8, 110, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
     translate([8, 120, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
     translate([8, 135, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-    translate([0, 100, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-    translate([0, 110, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-    translate([0, 120, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
     translate([0, 135, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
     translate([-40, 100, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
     translate([-32, 100, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
@@ -246,18 +241,33 @@ module Body_Half() {
     translate([-16, 100, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
     translate([-16, 110, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
     translate([-16, 120, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-    translate([-8, 100, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-    translate([-8, 110, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
     translate([-8, 120, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
     translate([-8, 135, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
+    // Center Body Stiffener screw holes.
+    translate([46.5, 85, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
+    translate([46.5, 65, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
+    translate([8, 88.75, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
+    translate([8, 62.75, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
+    translate([16, 75, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
+    translate([16, 85, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
+    translate([16, 65, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
+    translate([-16, 75, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
+    translate([-16, 85, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
+    translate([-16, 65, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
+    translate([-8, 88.75, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
+    translate([-8, 62.75, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
+    translate([-46.5, 85, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
+    translate([-46.5, 65, 10]) cylinder($fn=28, r=1.22, h=15, center=false); 
     // 1" flange mounting holes.
     rotate([0, 0, 90]) translate([75, 32.5, 15]) One_Inch_Flange_No_Hole();
     translate([0, 75, 15]) One_Inch_Flange_6mm_Hole();
     rotate([0, 0, 90]) translate([75, -32.5, 15]) One_Inch_Flange_No_Hole();
+    translate([0, 107.5, 15]) rotate([0, 0, 90]) One_Inch_Flange_No_Hole();
     // 1" flange landing pads.
     translate([32.5, 75, 20.4]) cylinder($fn=28, r1=12.75, r2=12.85, h=1, center=true);
     translate([0, 75, 20.4]) cylinder($fn=28, r1=12.75, r2=12.85, h=1, center=true);
     translate([-32.5, 75, 20.4]) cylinder($fn=28, r1=12.75, r2=12.85, h=1, center=true); 
+    translate([0, 107.5, 20.4]) cylinder($fn=28, r1=12.75, r2=12.85, h=1, center=true);
     // Body Stiffener landing pads.
     translate([0, 40, 22.25]) rotate([0, 0, 180]) Body_Stiffener_Inner();
     translate([0, 110, 22.25]) Body_Stiffener_Outer(); }

@@ -76,8 +76,12 @@ include <Blade.scad>;
 include <Blade_Holder.scad>;
 // A module for calling in the Body Skirt.
 include <Body_Skirt.scad>;
-// Modules for calling in the Inner & Outer Body Stiffeners.
-include <Body_Stiffeners.scad>;
+// A module for calling in the Inner Body Stiffener.
+include <Body_Stiffener_Inner.scad>;
+// A module for calling in the Outer Body Stiffener.
+include <Body_Stiffener_Outer.scad>;
+// A module for calling in the Center Body Stiffener.
+include <Body_Stiffener_Center.scad>;
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
@@ -94,11 +98,13 @@ Body_Half ();
 // The body stiffeners that attach to the top of the main body.
 translate([0, 40, 22.25]) rotate([0, 0, 180]) Body_Stiffener_Inner();
 translate([0, 110, 22.25]) Body_Stiffener_Outer();
+translate([0, 75, 22.25]) Body_Stiffener_Center();
 // The Body Skirt that screws on beneath the main body.
 Body_Skirt ();
 // The Ball Joint Receivers for adjustment screws located on the top cover.
-translate([0, 0, 3.5]) rotate([0, 0, 90]) translate([75, 32.5, 16.5]) Ball_Joint_Receiver();
-translate([0, 0, 3.5]) rotate([0, 0, 90]) translate([75, -32.5, 16.5]) Ball_Joint_Receiver();
+translate([-32.5, 75, 19.5]) rotate([0, 0, 90])  Ball_Joint_Receiver();
+translate([32.5, 75, 19.5]) rotate([0, 0, 90]) Ball_Joint_Receiver();
+translate([0, 107.5, 19.5]) rotate([0, 0, 90]) Ball_Joint_Receiver();
 // The center hub Bearing Carriers.
 translate([0, 75, 20]) Bearing_Carrier_Dual();
 translate([0, 75, 12.825]) rotate([180, 0, 0]) Bearing_Carrier_Single();
