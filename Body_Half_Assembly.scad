@@ -78,16 +78,20 @@ include <Blade_Holder.scad>;
 include <Body_Skirt.scad>;
 // A module for calling in the Inner Body Stiffener.
 include <Body_Stiffener_Inner.scad>;
+// A module for calling in the Inner Lower Body Stiffener.
+include <Body_Stiffener_Inner_Lower.scad>;
 // A module for calling in the Outer Body Stiffener.
 include <Body_Stiffener_Outer.scad>;
 // A module for calling in the Center Body Stiffener.
 include <Body_Stiffener_Center.scad>;
+// A module for calling in the 1 Inch Flange Plug.
+include <1_Inch_Flange_Plug.scad>;
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
 // GEOMETRY
 
-// The center bracket that houses the motors & gearbox.
+// The Center Bracket that houses the motors & gearbox.
 Center_Bracket();
 // The Dual Electric Motors.
 Motors();
@@ -95,34 +99,44 @@ Motors();
 rotate([0, 0, 180]) Center_Bracket_Support();
 // The Body that houses the adjustment screws & blade bearings.
 Body_Half ();
-// The body stiffeners that attach to the top of the main body.
+// The Body Stiffeners that attach to the top & bottom of the main body.
 translate([0, 40, 22.25]) rotate([0, 0, 180]) Body_Stiffener_Inner();
 translate([0, 110, 22.25]) Body_Stiffener_Outer();
+translate([0, 110, 12.425]) rotate([0, 180, 0]) Body_Stiffener_Outer();
 translate([0, 75, 22.25]) Body_Stiffener_Center();
+translate([0, 75, 9.25]) rotate([0, 180, 0]) Body_Stiffener_Center();
+translate([0, 40, 12.425]) rotate([0, 180, 180]) Body_Stiffener_Inner_Lower();
+// Fill in the Center Lower Body Stiffener with two 1" Plugs.
+translate([32.5, 75, 9.425]) rotate([0, 180, 90]) One_Inch_Flange_Plug();
+translate([-32.5, 75, 9.425]) rotate([0, 180, 90]) One_Inch_Flange_Plug();
 // The Body Skirt that screws on beneath the main body.
 Body_Skirt ();
 // The Ball Joint Receivers for adjustment screws located on the top cover.
 translate([-32.5, 75, 19.5]) rotate([0, 0, 90])  Ball_Joint_Receiver();
 translate([32.5, 75, 19.5]) rotate([0, 0, 90]) Ball_Joint_Receiver();
-translate([0, 107.5, 19.5]) rotate([0, 0, 90]) Ball_Joint_Receiver();
 // The center hub Bearing Carriers.
 translate([0, 75, 20]) Bearing_Carrier_Dual();
-translate([0, 75, 12.825]) rotate([180, 0, 0]) Bearing_Carrier_Single();
+translate([0, 75, 11.825]) rotate([180, 0, 0]) Bearing_Carrier_Single();
 // The Attachment Hinge Bosses.
 Attachment_Hinge_Boss();
 translate([0, 150, 0]) rotate([0, 0, 180]) Attachment_Hinge_Boss();
-// The Attachment Adjustment Arm Insert.
+// The Attachment Adjustment Arm Inserts.
 translate([-32.5, 75, 43.5]) Attachment_Adjustment_Arm_Insert();
-// The Attachment Adjustment Arm.
+rotate([0, 0, 180]) translate([-32.5, -75, 43.5]) Attachment_Adjustment_Arm_Insert();
+// The Attachment Adjustment Arms.
 translate([-58.75, 75, 38]) Attachment_Adjustment_Arm();
-// The Attachment Adjustment Arm Cover.
+rotate([0, 0, 180]) translate([-58.75, -75, 38]) Attachment_Adjustment_Arm();
+// The Attachment Adjustment Arm Covers.
 translate([-58.75, 75, 41.25]) Attachment_Adjustment_Arm_Cover();
-// The Lower Attachment Arm.
+rotate([0, 0, 180]) translate([-58.75, -75, 41.25]) Attachment_Adjustment_Arm_Cover();
+// The Lower Attachment Arms.
 translate([-78.25, 75, 38]) Lower_Attachment_Arm();
-// The rear left wheel.
+rotate([0, 0, 180]) translate([-78.25, -75, 38]) Lower_Attachment_Arm();
+// The wheels.
 translate([-127, 105, 30]) Wheel();
+rotate([0, 0, 180]) translate([-127, -105, 30]) Wheel();
 // The Blade Holder.
-translate([0, 75, -2]) Blade_Holder();
+translate([0, 75, -2]) rotate([0, 0, 45]) Blade_Holder();
 // The Blade.
-translate([0, 75, -2]) Blade();
+translate([0, 75, -2]) rotate([0, 0, 45]) Blade();
 // ----------------------------------------------------------------------------------------------------

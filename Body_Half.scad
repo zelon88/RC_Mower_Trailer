@@ -49,6 +49,8 @@ include <Workfiles/Torus.scad>;
 include <Workfiles/1_Inch_Flange_6mm_Hole.scad>
 // A module for mating a 1" flange with 6 screw holes & no through hole.
 include <Workfiles/1_Inch_Flange_No_Hole.scad>
+// A module for mating the attachment boss screw holes.
+include <Workfiles/Attachment_Boss_Screw_Holes.scad>
 // A module for creating the Center Bracket for crafting mating surfaces.
 include <Center_Bracket.scad>;
 // A module for creating the Inner Body Stiffener for crafting mating surfaces.
@@ -69,6 +71,11 @@ module Body_Half() {
       // Cut out for the reinforcement slots.
       translate([0, 0, 16.59]) cube([25.6, 300, 3.175], center=true);
       rotate([0, 0, 90]) translate([75, 0, 13.415]) cube([25.6, 150, 3.175], center=true);
+      // Cut out the hole for clippings.
+      translate([-32, 40, 16]) cylinder(r=13, h=4, $fn=48, center=false);
+      translate([-32, 40, 16]) cylinder(r1=18, r2=13.75, h=2.5, $fn=48, center=false);
+      // Cut the landing pad for the clippings flange.
+      translate([-32, 40, 19.9]) cylinder(r1=19, r2=15.25, h=0.33, $fn=48, center=false);
       // Cut out for the center bracket.
       translate([0, 0, 0]) Center_Bracket (); 
       // Mounting holes for the center bracket.
@@ -88,52 +95,11 @@ module Body_Half() {
       translate([-33.25, 0, 8]) rotate([90, 0, 0]) cylinder($fn=28, r=1.22, h=40, center=true); }
       translate([0, 75, -20]) cylinder(r=150, h=20); 
       // Front Attachment Boss screw holes.
-      translate([53, 84, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-      translate([53, 78, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-      translate([53, 72, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-      translate([53, 66, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-      translate([58, 84, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-      translate([58, 78, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-      translate([58, 72, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-      translate([58, 66, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-      translate([63, 84, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-      translate([63, 78, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-      translate([63, 72, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-      translate([63, 66, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-      translate([68, 84, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-      translate([68, 78, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-      translate([68, 72, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-      translate([68, 66, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
+      Attachment_Boss_Screw_Holes(52, 1, 75, 10);
       // Rear Attachment Boss screw holes.
-      translate([-53, 84, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-      translate([-53, 78, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-      translate([-53, 72, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-      translate([-53, 66, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-      translate([-58, 84, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-      translate([-58, 78, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-      translate([-58, 72, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-      translate([-58, 66, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-      translate([-63, 84, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-      translate([-63, 78, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-      translate([-63, 72, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-      translate([-63, 66, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-      translate([-68, 84, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-      translate([-68, 78, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-      translate([-68, 72, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-      translate([-68, 66, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
+      Attachment_Boss_Screw_Holes(-52, -1, 75, 10);
       // Side Attachment Boss screw holes.
-      translate([10, 132, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-      translate([5, 132, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-      translate([0, 132, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-      translate([-5, 132, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-      translate([-10, 132, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-      translate([10, 137, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-      translate([-10, 137, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-      translate([10, 142, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-      translate([5, 142, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-      translate([0, 142, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-      translate([-5, 142, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-      translate([-10, 142, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
+      rotate([0, 0, 90]) translate([134, 0, 0]) Attachment_Boss_Screw_Holes(-7.5, 1, 0, 10);
       // Skirt screw bosses.
       for (i = [0:19]) {
         skirt_angle = i * 18 + 9;
@@ -150,6 +116,11 @@ module Body_Half() {
       translate([0, 75, 16]) cylinder(r1=62, r2=57, h=4, $fn=144);
       // Create lower reinforcement.
       rotate([0, 0, 90]) translate([75, 0, 15.25]) cube([25.6, 140, 1.175], center=true); }
+    // Cut out the hole for clippings.
+    translate([-32, 40, 16]) cylinder(r=13, h=4, $fn=48, center=false);
+    translate([-32, 40, 16]) cylinder(r1=18, r2=13.75, h=2.5, $fn=48, center=false);
+    // Cut the landing pad for the clippings flange.
+    translate([-32, 40, 19.9]) cylinder(r1=19, r2=15.25, h=0.33, $fn=48, center=false);
     // Cut out for the reinforcement slots.
     translate([0, 0, 16.59]) cube([25.6, 300, 3.175], center=true);
     rotate([0, 0, 90]) translate([75, 0, 13.415]) cube([25.6, 150, 3.175], center=true);
@@ -162,63 +133,32 @@ module Body_Half() {
     translate([-8.75, 14, 14]) cylinder($fn=28, r=1.22, h=9.2);
     translate([-20, 14, 14]) cylinder($fn=28, r=1.22, h=9.2); 
     // Front Attachment Boss screw holes.
-    translate([53, 84, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([53, 78, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([53, 72, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([53, 66, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([58, 84, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([58, 78, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([58, 72, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([58, 66, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([63, 84, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([63, 78, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([63, 72, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([63, 66, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([68, 84, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([68, 78, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([68, 72, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([68, 66, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
+    Attachment_Boss_Screw_Holes(52, 1, 75, 10);
     // Rear Attachment Boss screw holes.
-    translate([-53, 84, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([-53, 78, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([-53, 72, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([-53, 66, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([-58, 84, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([-58, 78, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([-58, 72, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([-58, 66, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([-63, 84, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([-63, 78, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([-63, 72, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([-63, 66, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([-68, 84, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([-68, 78, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([-68, 72, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([-68, 66, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
+    Attachment_Boss_Screw_Holes(-52, -1, 75, 10);
     // Side Attachment Boss screw holes.
-    translate([10, 132, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-    translate([5, 132, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-    translate([0, 132, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-    translate([-5, 132, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-    translate([-10, 132, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-    translate([10, 137, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-    translate([-10, 137, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-    translate([10, 142, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-    translate([5, 142, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-    translate([0, 142, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-    translate([-5, 142, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-    translate([-10, 142, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
+    rotate([0, 0, 90]) translate([139, 0, 0]) Attachment_Boss_Screw_Holes(-7.5, 1, 0, 10);
     // Center bracket support screw holes.
     translate([0, 50, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
     translate([0, 40, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
     translate([0, 30, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-    // Inner Body Stiffener screw holes.
+    // Inner Upper Body Stiffener screw holes.
     translate([8, 50, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
     translate([8, 40, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
     translate([8, 30, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
     translate([-8, 50, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
     translate([-8, 40, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
     translate([-8, 30, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
+    // Inner Lower Body Stiffener screw holes.
+    translate([ 16, 30, 10]) cylinder($fn=28, r=1.22, h=25, center=true);
+    translate([ 16, 40, 10]) cylinder($fn=28, r=1.22, h=25, center=true);
+    translate([ 16, 50, 10]) cylinder($fn=28, r=1.22, h=25, center=true);
+    translate([ 24, 30, 10]) cylinder($fn=28, r=1.22, h=25, center=true);
+    translate([ 24, 40, 10]) cylinder($fn=28, r=1.22, h=25, center=true);
+    translate([ 24, 50, 10]) cylinder($fn=28, r=1.22, h=25, center=true);
+    translate([ 32, 40, 10]) cylinder($fn=28, r=1.22, h=25, center=true);
+    translate([ 32, 50, 10]) cylinder($fn=28, r=1.22, h=25, center=true);
+    translate([ 40, 50, 10]) cylinder($fn=28, r=1.22, h=25, center=true);
     // Outer Body Stiffener screw holes.
     translate([40, 100, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
     translate([32, 100, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
@@ -272,9 +212,22 @@ module Body_Half() {
     translate([0, 40, 22.25]) rotate([0, 0, 180]) Body_Stiffener_Inner();
     translate([0, 110, 22.25]) Body_Stiffener_Outer(); }
 
-  // Create the torus outside mating surface.
+  // Create the clippings flange boss.
   difference() {
-    translate([0, 10, 10]) cube([75, 20, 20], center=true); 
+      // Create the body of the flange boss.
+      translate([-32, 40, 15]) cylinder(r1=20.75, r2=17.25, h=5, $fn=48, center=false);
+      // Cut out the inside of the torus.
+      translate([0, 75, 0]) Torus(40, 150);
+      translate([0, 75, 0]) cylinder(r=50, h=38, $fn=28, center=false);
+      // Cut out the hole for clippings.
+      translate([-32, 40, 16]) cylinder(r=13, h=4, $fn=48, center=false);
+      translate([-32, 40, 16]) cylinder(r1=18, r2=13.75, h=2.5, $fn=48, center=false);
+      // Cut the landing pad for the clippings flange.
+      translate([-32, 40, 19.9]) cylinder(r1=19, r2=15.25, h=0.33, $fn=48, center=false); }
+    
+  // Create the torus to center bracket outside mating surface.
+  difference() {
+    translate([0, 20, 10]) cube([75, 40, 20], center=true); 
     // Cut out for the torus.
     translate([0, 75, 0]) Torus(40, 140); 
     // Cut out for the reinforcement slot.
@@ -295,9 +248,35 @@ module Body_Half() {
     translate([33.25, 0, 8]) rotate([90, 0, 0]) cylinder($fn=28, r=1.22, h=40, center=true);
     translate([-13.25, 0, 4]) rotate([90, 0, 0]) cylinder($fn=28, r=1.22, h=40, center=true);
     translate([-23.25, 0, 7]) rotate([90, 0, 0]) cylinder($fn=28, r=1.22, h=40, center=true);
-    translate([-33.25, 0, 8]) rotate([90, 0, 0]) cylinder($fn=28, r=1.22, h=40, center=true); }
+    translate([-33.25, 0, 8]) rotate([90, 0, 0]) cylinder($fn=28, r=1.22, h=40, center=true); 
+    // Cut the landing pad for the clippings flange.
+    translate([-32, 40, 19.9]) cylinder(r1=19, r2=15.25, h=0.33, $fn=48, center=false);
+    // Cut out the hole for clippings.
+    translate([-32, 40, 16]) cylinder(r=13, h=4, $fn=48, center=false);
+    translate([-32, 40, 16]) cylinder(r1=18, r2=13.75, h=2.5, $fn=48, center=false);
+    // Body Stiffener landing pads.
+    translate([0, 40, 22.25]) rotate([0, 0, 180]) Body_Stiffener_Inner(); 
+    // Inner Upper Body Stiffener screw holes.
+    translate([0, 30, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
+    translate([0, 40, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
+    translate([8, 50, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
+    translate([8, 30, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
+    translate([8, 40, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
+    translate([-8, 30, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
+    translate([-8, 40, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
+    translate([-8, 50, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
+    // Inner Lower Body Stiffener screw holes.
+    translate([ 16, 30, 10]) cylinder($fn=28, r=1.22, h=25, center=true);
+    translate([ 16, 40, 10]) cylinder($fn=28, r=1.22, h=25, center=true);
+    translate([ 16, 50, 10]) cylinder($fn=28, r=1.22, h=25, center=true);
+    translate([ 24, 30, 10]) cylinder($fn=28, r=1.22, h=25, center=true);
+    translate([ 24, 40, 10]) cylinder($fn=28, r=1.22, h=25, center=true);
+    translate([ 24, 50, 10]) cylinder($fn=28, r=1.22, h=25, center=true);
+    translate([ 32, 40, 10]) cylinder($fn=28, r=1.22, h=25, center=true);
+    translate([ 32, 50, 10]) cylinder($fn=28, r=1.22, h=25, center=true);
+    translate([ 40, 50, 10]) cylinder($fn=28, r=1.22, h=25, center=true); }
 
-  // Create the torus inside mating surface.
+  // Create the torus to center bracket inside mating surface.
   difference() {
     translate([0, 12, 16]) cube([75, 15, 7], center=true); 
     // Cut out for the reinforcement slot.
@@ -322,67 +301,52 @@ module Body_Half() {
 
   // Create the mounting pad for the front attachment boss.
   difference() {
-    translate([63, 75, 10]) cube([15, 28, 20], center=true);
+      union() {
+      // Create the body of the boss.
+      translate([63.25, 75, 10]) cube([16, 28.5, 20], center=true); 
+      // Create the screw hole bosses at the corners.
+      translate([71.25, 86.25, 10]) cylinder(r=3, h=10, $fn=28, center=false); 
+      translate([71.25, 63.75, 10]) cylinder(r=3, h=10, $fn=28, center=false); }
     // Cut out the torus.
     translate([0, 75, 0]) Torus(40, 140);
     // Cut out for the reinforcement slot.
-    rotate([0, 0, 90]) translate([75, 0, 13.415]) cube([25.6, 150, 3.175], center=true);
+    rotate([0, 0, 90]) translate([75, 0, 13.415]) cube([25.6, 165, 3.175], center=true);
     // Cut screw holes for Skirt standoffs.
     for (i = [0:19]) {
       skirt_angle = i * 18 + 9;
       translate([72 * cos(skirt_angle), 75 + 72 * sin(skirt_angle), -1])
-        cylinder($fn=28, r=1.5, h=14); }
+        cylinder($fn=28, r=1.5, h=25); }
     // Front Attachment Boss screw holes.
-    translate([53, 84, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([53, 78, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([53, 72, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([53, 66, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([58, 84, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([58, 78, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([58, 72, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([58, 66, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([63, 84, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([63, 78, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([63, 72, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([63, 66, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([68, 84, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([68, 78, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([68, 72, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([68, 66, 10]) cylinder($fn=28, r=1.22, h=20, center=true); }
+    Attachment_Boss_Screw_Holes(52, 1, 75, 10); }
 
   // Create the mounting pad for the rear attachment boss.
   difference() {
-    translate([-63, 75, 10]) cube([15, 28, 20], center=true);
+      union() {
+      // Create the body of the boss.
+      translate([-63.25, 75, 10]) cube([16, 28.5, 20], center=true);
+      // Create the screw hole bosses at the corners.
+      translate([-71.25, 86.25, 10]) cylinder(r=3, h=10, $fn=28, center=false);
+      translate([-71.25, 63.75, 10]) cylinder(r=3, h=10, $fn=28, center=false); }
     // Cut out the torus.
     translate([0, 75, 0]) Torus(40, 140);
     // Cut out for the reinforcement slot.
-    rotate([0, 0, 90]) translate([75, 0, 13.415]) cube([25.6, 150, 3.175], center=true);
+    rotate([0, 0, 90]) translate([75, 0, 13.415]) cube([25.6, 165, 3.175], center=true);
     // Cut screw holes for Skirt standoffs.
     for (i = [0:19]) {
       skirt_angle = i * 18 + 9;
       translate([72 * cos(skirt_angle), 75 + 72 * sin(skirt_angle), -1])
-        cylinder($fn=28, r=1.33, h=14); }
+        cylinder($fn=28, r=1.33, h=25); }
     // Rear Attachment Boss screw holes.
-    translate([-53, 84, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([-53, 78, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([-53, 72, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([-53, 66, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([-58, 84, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([-58, 78, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([-58, 72, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([-58, 66, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([-63, 84, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([-63, 78, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([-63, 72, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([-63, 66, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([-68, 84, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([-68, 78, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([-68, 72, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([-68, 66, 10]) cylinder($fn=28, r=1.22, h=20, center=true); }
+    Attachment_Boss_Screw_Holes(-52, -1, 75, 10); }
 
   // Create the mounting pad for the side attachment boss.
   difference() {
-    translate([0, 137.5, 10]) cube([28, 15, 20], center=true);
+      union() {
+      // Create the body of the boss.
+      translate([0, 137.5, 10]) cube([28.5, 18.25, 20], center=true);
+      // Create the screw hole bosses at the corners.
+      translate([11.25, 146.25, 10]) cylinder(r=3, h=10, $fn=28, center=false);
+      translate([-11.25, 146.25, 10]) cylinder(r=3, h=10, $fn=28, center=false); }
     // Cut out the torus.
     translate([0, 75, 0]) Torus(40, 140);
     // Cut out for the reinforcement slot.
@@ -391,20 +355,9 @@ module Body_Half() {
     for (i = [0:19]) {
       skirt_angle = i * 18 + 9;
       translate([72 * cos(skirt_angle), 75 + 72 * sin(skirt_angle), -1])
-        cylinder($fn=28, r=1.5, h=14); }
+        cylinder($fn=28, r=1.5, h=25); }
     // Side Attachment Boss screw holes.
-    translate([10, 132, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-    translate([5, 132, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-    translate([0, 132, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-    translate([-5, 132, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-    translate([-10, 132, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-    translate([10, 137, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-    translate([-10, 137, 10]) cylinder($fn=28, r=1.22, h=15, center=false);  
-    translate([10, 142, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-    translate([5, 142, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-    translate([0, 142, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-    translate([-5, 142, 10]) cylinder($fn=28, r=1.22, h=15, center=false);
-    translate([-10, 142, 10]) cylinder($fn=28, r=1.22, h=15, center=false); }
+    rotate([0, 0, 90]) translate([134, 0, 0]) Attachment_Boss_Screw_Holes(-7.5, 1, 0, 10); }
     
   // Skirt attachment standoffs on torus outer rim (20x).
   // Small cylinders provide a flat nut seat above the curved torus surface.
@@ -436,27 +389,23 @@ module Body_Half() {
     translate([0, 14, 10]) cylinder($fn=28, r=1.22, h=15);
     translate([-8.75, 14, 10]) cylinder($fn=28, r=1.22, h=15);
     translate([-20, 14, 10]) cylinder($fn=28, r=1.22, h=15);    
-    // Front Attachment Boss Screw Holes.
-    translate([68, 84, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([68, 78, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([68, 72, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([68, 66, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    // Rear Attachment Boss Screw Holes.
-    translate([-68, 84, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([-68, 78, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([-68, 72, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
-    translate([-68, 66, 10]) cylinder($fn=28, r=1.22, h=20, center=true);
+    // Front Attachment Boss screw holes.
+    Attachment_Boss_Screw_Holes(53, 1, 75, 10);
+    // Rear Attachment Boss screw holes.
+    Attachment_Boss_Screw_Holes(-53, -1, 75, 10);
+    // Side Attachment Boss screw holes.
+    rotate([0, 0, 90]) translate([134, 0, 0]) Attachment_Boss_Screw_Holes(-7.5, 1, 0, 10);
     // Through hole for planetary shaft.
-    translate([0, 0, 0]) rotate([0, 0, 0]) cylinder($fn=64, r=3.03, h=100, center=true);
+    translate([0, 0, 0]) rotate([0, 0, 0]) cylinder($fn=64, r=3.03, h=100, center=true);     
     // Torus screw holes.
     translate([13.25, 0, 4]) rotate([90, 0, 0]) cylinder($fn=28, r=1.22, h=40, center=true);
     translate([23.25, 0, 7]) rotate([90, 0, 0]) cylinder($fn=28, r=1.22, h=40, center=true);
     translate([33.25, 0, 8]) rotate([90, 0, 0]) cylinder($fn=28, r=1.22, h=40, center=true);
     translate([-13.25, 0, 4]) rotate([90, 0, 0]) cylinder($fn=28, r=1.22, h=40, center=true);
     translate([-23.25, 0, 7]) rotate([90, 0, 0]) cylinder($fn=28, r=1.22, h=40, center=true);
-    translate([-33.25, 0, 8]) rotate([90, 0, 0]) cylinder($fn=28, r=1.22, h=40, center=true); } }
+    translate([-33.25, 0, 8]) rotate([90, 0, 0]) cylinder($fn=28, r=1.22, h=40, center=true);} }
 
 // Render the object. 
 // Comment or uncomment as needed.
-//Body_Half();
+Body_Half();
 // ----------------------------------------------------------------------------------------------------

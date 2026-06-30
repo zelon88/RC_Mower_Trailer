@@ -41,6 +41,13 @@
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
+// MODULES
+
+// A module for mating the attachment boss screw holes.
+include <Workfiles/Attachment_Boss_Screw_Holes.scad>
+// ----------------------------------------------------------------------------------------------------
+
+// ----------------------------------------------------------------------------------------------------
 // GEOMETRY
 
 module Attachment_Hinge_Boss() {
@@ -62,7 +69,7 @@ module Attachment_Hinge_Boss() {
   boss_length      = 20;     // Total Y span of cylindrical boss.
 
   // Anchor: mates to top face of mounting pad (Z=20), centered at (63, 75).
-  cx = 63; cy = 75; cz = 20;
+  cx = 62; cy = 75; cz = 20;
 
   difference() {
     union() {
@@ -76,17 +83,7 @@ module Attachment_Hinge_Boss() {
       translate([cx, cy, cz + flange_thickness + post_height])
         rotate([90, 0, 0]) cylinder($fn=48, r=boss_od/2, h=boss_length, center=true); }
 
-    // Matching through-holes (10x) mirroring the mounting pad screw pattern.
-    translate([58, 84, cz - 0.5]) cylinder($fn=28, r=1.22, h=flange_thickness + 1);
-    translate([58, 78, cz - 0.5]) cylinder($fn=28, r=1.22, h=flange_thickness + 1);
-    translate([58, 72, cz - 0.5]) cylinder($fn=28, r=1.22, h=flange_thickness + 1);
-    translate([58, 66, cz - 0.5]) cylinder($fn=28, r=1.22, h=flange_thickness + 1);
-    translate([63, 84, cz - 0.5]) cylinder($fn=28, r=1.22, h=flange_thickness + 1);
-    translate([68, 84, cz - 0.5]) cylinder($fn=28, r=1.22, h=flange_thickness + 1);
-    translate([68, 78, cz - 0.5]) cylinder($fn=28, r=1.22, h=flange_thickness + 1);
-    translate([68, 72, cz - 0.5]) cylinder($fn=28, r=1.22, h=flange_thickness + 1);
-    translate([68, 66, cz - 0.5]) cylinder($fn=28, r=1.22, h=flange_thickness + 1);
-    translate([63, 66, cz - 0.5]) cylinder($fn=28, r=1.22, h=flange_thickness + 1);
+    Attachment_Boss_Screw_Holes(52, 1, 75, 20);
 
     // Hinge pin bore through the boss, centered along Y axis.
     translate([cx, cy, cz + flange_thickness + post_height])

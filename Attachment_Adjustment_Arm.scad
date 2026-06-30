@@ -53,18 +53,18 @@ module Attachment_Adjustment_Arm() {
       // Create the thinner paddle body portion that attaches to the adjustment screw.
       translate([18.5, 0, 5]) cube([27.5, 22.5, 5], center=true);
       // Create a reinforcement boss for the attachment boss connection point.
-      translate([-4.25, 0, 0]) rotate([90, 0, 0]) cylinder($fn=48, r=6, h=22.5, center=true);
+      translate([-3.25, 0, 0]) rotate([90, 0, 0]) cylinder($fn=48, r=6, h=22.5, center=true);
       // Create the flange on the end that attaches to the lower attachment arm.
       translate([-16.5, 0, 0]) cube([3, 30, 15], center=true); }
     // Cut out the reinforcement boss.
-    translate([-4.25, 0, 0]) rotate([90, 0, 0]) cylinder($fn=48, r=4, h=20, center=true);
-    translate([-4.25, 0, -1]) rotate([90, 0, 0]) cylinder($fn=48, r=4, h=20, center=true);
-    translate([-4.25, 0, -2]) rotate([90, 0, 0]) cylinder($fn=48, r=4, h=20, center=true);
-    translate([-4.25, 0, -3]) rotate([90, 0, 0]) cylinder($fn=48, r=4, h=20, center=true);
-    translate([-4.25, 0, -4]) rotate([90, 0, 0]) cylinder($fn=48, r=4, h=20, center=true);
-    translate([-4.25, 0, -5]) rotate([90, 0, 0]) cylinder($fn=48, r=4, h=20, center=true);
+    translate([-3.25, 0, 0]) rotate([90, 0, 0]) cylinder($fn=48, r=4, h=20, center=true);
+    translate([-3.25, 0, -1]) rotate([90, 0, 0]) cylinder($fn=48, r=4, h=20, center=true);
+    translate([-3.25, 0, -2]) rotate([90, 0, 0]) cylinder($fn=48, r=4, h=20, center=true);
+    translate([-3.25, 0, -3]) rotate([90, 0, 0]) cylinder($fn=48, r=4, h=20, center=true);
+    translate([-3.25, 0, -4]) rotate([90, 0, 0]) cylinder($fn=48, r=4, h=20, center=true);
+    translate([-3.25, 0, -5]) rotate([90, 0, 0]) cylinder($fn=48, r=4, h=20, center=true);
     // Cut out the center through hole for the reinforcement boss.
-    translate([-4.25, 0, 0]) rotate([90, 0, 0]) cylinder($fn=48, r=2.55, h=25, center=true);
+    translate([-3.25, 0, 0]) rotate([90, 0, 0]) cylinder($fn=48, r=2.55, h=25, center=true);
     // Cut the chamfer on the bottom of the arm.
     translate([17.4, 0, -4.2]) rotate([0, 25, 0]) cube([10, 25, 10], center=true);
     translate([14.9, 0, -5.7]) rotate([0, 45, 0]) cube([10, 25, 8], center=true);
