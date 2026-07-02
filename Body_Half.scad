@@ -66,8 +66,8 @@ module Body_Half() {
   // Create the torus.
   difference() { 
     difference() {
-      translate([0, 75, 0]) Torus(40, 150); 
-      translate([0, 75, 0]) Torus(40, 140); 
+      translate([0, 75, 0]) Torus(40, 150);
+      translate([0, 75, 0]) Torus(40, 140);
       // Cut out for the reinforcement slots.
       translate([0, 0, 16.59]) cube([25.6, 300, 3.175], center=true);
       rotate([0, 0, 90]) translate([75, 0, 13.415]) cube([25.6, 150, 3.175], center=true);
@@ -315,7 +315,7 @@ module Body_Half() {
     for (i = [0:19]) {
       skirt_angle = i * 18 + 9;
       translate([72 * cos(skirt_angle), 75 + 72 * sin(skirt_angle), -1])
-        cylinder($fn=28, r=1.5, h=25); }
+        cylinder($fn=28, r=1.22, h=25); }
     // Front Attachment Boss screw holes.
     Attachment_Boss_Screw_Holes(52, 1, 75, 10); }
 
@@ -335,7 +335,7 @@ module Body_Half() {
     for (i = [0:19]) {
       skirt_angle = i * 18 + 9;
       translate([72 * cos(skirt_angle), 75 + 72 * sin(skirt_angle), -1])
-        cylinder($fn=28, r=1.33, h=25); }
+        cylinder($fn=28, r=1.22, h=25); }
     // Rear Attachment Boss screw holes.
     Attachment_Boss_Screw_Holes(-52, -1, 75, 10); }
 
@@ -407,5 +407,5 @@ module Body_Half() {
 
 // Render the object. 
 // Comment or uncomment as needed.
-Body_Half();
+//Body_Half();
 // ----------------------------------------------------------------------------------------------------

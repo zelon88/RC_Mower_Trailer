@@ -60,6 +60,8 @@ include <Bearing_Carrier_Dual.scad>;
 include <Attachment_Hinge_Boss.scad>;
 // A module for creating low-poly 540 DC Brushed Electric Motors.
 include <Workfiles/Motors.scad>;
+// A module for creating low-poly R/C Compatible Servo.
+include <Workfiles/RC_Servo.scad>;
 // A module for calling in the Attachment Adjustment Arm Insert.
 include <Attachment_Adjustment_Arm_Insert.scad>;
 // A module for calling in the Attachment Adjustment Arm.
@@ -86,6 +88,10 @@ include <Body_Stiffener_Outer.scad>;
 include <Body_Stiffener_Center.scad>;
 // A module for calling in the 1 Inch Flange Plug.
 include <1_Inch_Flange_Plug.scad>;
+// A module for calling in the Hopper Bracket.
+include <Hopper_Bracket.scad>;
+// A module for calling in the Hopper Base.
+include <Hopper_Base.scad>;
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
@@ -95,10 +101,13 @@ include <1_Inch_Flange_Plug.scad>;
 Center_Bracket();
 // The Dual Electric Motors.
 Motors();
+// The Hopper Lift Servos.
+translate([70.25, 20.25, 97.5]) rotate([90, 90, 180]) RC_Servo();
 // The Center Bracket Support.
 rotate([0, 0, 180]) Center_Bracket_Support();
 // The Body that houses the adjustment screws & blade bearings.
 Body_Half ();
+rotate([0, 0, 180]) Body_Half ();
 // The Body Stiffeners that attach to the top & bottom of the main body.
 translate([0, 40, 22.25]) rotate([0, 0, 180]) Body_Stiffener_Inner();
 translate([0, 110, 22.25]) Body_Stiffener_Outer();
@@ -109,26 +118,32 @@ translate([0, 40, 12.425]) rotate([0, 180, 180]) Body_Stiffener_Inner_Lower();
 // Fill in the Center Lower Body Stiffener with two 1" Plugs.
 translate([32.5, 75, 9.425]) rotate([0, 180, 90]) One_Inch_Flange_Plug();
 translate([-32.5, 75, 9.425]) rotate([0, 180, 90]) One_Inch_Flange_Plug();
+translate([0, 107.5, 13.425]) rotate([0, 180, 90]) One_Inch_Flange_Plug();
 // The Body Skirt that screws on beneath the main body.
 Body_Skirt ();
 // The Ball Joint Receivers for adjustment screws located on the top cover.
 translate([-32.5, 75, 19.5]) rotate([0, 0, 90])  Ball_Joint_Receiver();
 translate([32.5, 75, 19.5]) rotate([0, 0, 90]) Ball_Joint_Receiver();
+translate([0, 107.5, 19.5]) rotate([0, 0, 90]) Ball_Joint_Receiver();
 // The center hub Bearing Carriers.
 translate([0, 75, 20]) Bearing_Carrier_Dual();
 translate([0, 75, 11.825]) rotate([180, 0, 0]) Bearing_Carrier_Single();
 // The Attachment Hinge Bosses.
 Attachment_Hinge_Boss();
 translate([0, 150, 0]) rotate([0, 0, 180]) Attachment_Hinge_Boss();
+translate([75, 74.5, 0]) rotate([0, 0, 90]) Attachment_Hinge_Boss();
 // The Attachment Adjustment Arm Inserts.
 translate([-32.5, 75, 43.5]) Attachment_Adjustment_Arm_Insert();
-rotate([0, 0, 180]) translate([-32.5, -75, 43.5]) Attachment_Adjustment_Arm_Insert();
+translate([32.5, 75, 43.5]) rotate([0, 0, 180]) Attachment_Adjustment_Arm_Insert();
+translate([0, 107, 43.5]) rotate([0, 0, 270]) Attachment_Adjustment_Arm_Insert();
 // The Attachment Adjustment Arms.
 translate([-58.75, 75, 38]) Attachment_Adjustment_Arm();
-rotate([0, 0, 180]) translate([-58.75, -75, 38]) Attachment_Adjustment_Arm();
+translate([58.75, 75, 38]) rotate([0, 0, 180]) Attachment_Adjustment_Arm();
+translate([0, 133.25, 38]) rotate([0, 0, 270]) Attachment_Adjustment_Arm();
 // The Attachment Adjustment Arm Covers.
 translate([-58.75, 75, 41.25]) Attachment_Adjustment_Arm_Cover();
-rotate([0, 0, 180]) translate([-58.75, -75, 41.25]) Attachment_Adjustment_Arm_Cover();
+translate([58.75, 75, 41.25]) rotate([0, 0, 180]) Attachment_Adjustment_Arm_Cover();
+translate([0, 133.25, 41.25]) rotate([0, 0, 270]) Attachment_Adjustment_Arm_Cover();
 // The Lower Attachment Arms.
 translate([-78.25, 75, 38]) Lower_Attachment_Arm();
 rotate([0, 0, 180]) translate([-78.25, -75, 38]) Lower_Attachment_Arm();
@@ -139,4 +154,10 @@ rotate([0, 0, 180]) translate([-127, -105, 30]) Wheel();
 translate([0, 75, -2]) rotate([0, 0, 45]) Blade_Holder();
 // The Blade.
 translate([0, 75, -2]) rotate([0, 0, 45]) Blade();
+// The Hopper Brackets.
+Hopper_Bracket();
+rotate([0, 0, 180]) Hopper_Bracket();
+// The Hopper Bases.
+Hopper_Base();
+rotate([0, 0, 180]) Hopper_Base();
 // ----------------------------------------------------------------------------------------------------

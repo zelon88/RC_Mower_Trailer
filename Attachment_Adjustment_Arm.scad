@@ -55,7 +55,7 @@ module Attachment_Adjustment_Arm() {
       // Create a reinforcement boss for the attachment boss connection point.
       translate([-3.25, 0, 0]) rotate([90, 0, 0]) cylinder($fn=48, r=6, h=22.5, center=true);
       // Create the flange on the end that attaches to the lower attachment arm.
-      translate([-16.5, 0, 0]) cube([3, 30, 15], center=true); }
+      translate([-16.5, 0, 0]) cube([3, 32.5, 17.5], center=true); }
     // Cut out the reinforcement boss.
     translate([-3.25, 0, 0]) rotate([90, 0, 0]) cylinder($fn=48, r=4, h=20, center=true);
     translate([-3.25, 0, -1]) rotate([90, 0, 0]) cylinder($fn=48, r=4, h=20, center=true);
@@ -95,18 +95,18 @@ module Attachment_Adjustment_Arm() {
     translate([39.5,  -4.5, 5]) cylinder($fn=28, r=1.22, h=10, center=true);
 
     // Cut lower adjustment arm flange perimeter through-holes.
-    translate([-16.5,  13, -5.75]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true);
-    translate([-16.5,  13,  0]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true);
-    translate([-16.5,  13,  5.75]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true);
-    translate([-16.5, -13, -5.75]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true);
-    translate([-16.5, -13,  0]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true);
-    translate([-16.5, -13,  5.75]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true);
-    translate([-16.5,   6.5, -5.75]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true);
-    translate([-16.5,   0, -5.75]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true);
-    translate([-16.5,  -6.5, -5.75]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true);
-    translate([-16.5,   6.5,  5.75]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true);
-    translate([-16.5,   0,  5.75]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true);
-    translate([-16.5,  -6.5,  5.75]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true); } }
+    translate([-16.5, 13, -6.25]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true);
+    translate([-16.5, 13, 0]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true);
+    translate([-16.5, 13, 6.25]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true);
+    translate([-16.5, -13, -6.25]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true);
+    translate([-16.5, -13, 0]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true);
+    translate([-16.5, -13, 6.25]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true);
+    translate([-16.5, 6.5, -6.25]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true);
+    translate([-16.5, 0, -6.25]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true);
+    translate([-16.5, -6.5, -6.25]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true);
+    translate([-16.5,  6.5, 6.25]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true);
+    translate([-16.5, 0, 6.25]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true);
+    translate([-16.5, -6.5, 6.25]) rotate([0,90,0]) cylinder($fn=28, r=1.22, h=4, center=true); } }
 
 // Render the object.
 // Comment or uncomment as needed.
