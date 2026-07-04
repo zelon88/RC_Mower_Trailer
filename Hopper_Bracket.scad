@@ -17,7 +17,21 @@ include <Workfiles/Torus.scad>;
 module Hopper_Bracket() {
 difference() {
   // Create the body of the Hopper Bracket.
-  translate([57.5, 0, 15.25]) cube([40, 121.5, 9], center=true);
+  union() {
+    // Create the wide flat plate that mates with both Body Halves & the Center Bracket.
+    translate([57.5, 0, 15.25]) cube([40, 121.5, 9], center=true);
+    // Create a mating surface for the Center Bracket on the X surface.
+    translate([44, 0, 6.5]) cube([14, 121.5, 13], center=true);
+    // Create the support braces for the Center Bracket support.
+    translate([62.5, 20, 7.5]) cube([30, 2.5, 15], center=true);
+    translate([62.5, 11, 7.5]) cube([30, 2.5, 15], center=true);
+    translate([62.5, 3.5, 7.5]) cube([30, 2.5, 15], center=true);
+    translate([62.5, -20, 7.5]) cube([30, 2.5, 15], center=true);
+    translate([62.5, -11, 7.5]) cube([30, 2.5, 15], center=true);
+    translate([62.5, -3.5, 7.5]) cube([30, 2.5, 15], center=true); }
+  // Chamfer the front edge of the Hopper Bracket.
+  translate([82.5, 0, 0]) rotate([0, 45, 0]) cube([25, 125, 25], center=true);
+  translate([70, 0, -10]) rotate([0, 65, 0]) cube([25, 125, 25], center=true);
   // Cut out a relief for the Center Bracket.
   Center_Bracket();
   // Cut out a mating surface for the Hopper.

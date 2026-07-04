@@ -45,7 +45,12 @@ module Body_Skirt() {
   difference() {
     translate([0, 75, -5]) cylinder($fn=48, r=75, h=10, center=true);
     // Cut out the center of the side skirt.
-    translate([0, 75, -5]) cylinder($fn=48, r=70, h=10, center=true); } }
+    translate([0, 75, -5]) cylinder($fn=48, r=70, h=10, center=true);
+    // Cut screw holes.
+    for (i = [0:19]) {
+      skirt_angle = i * 18 + 9;
+      translate([72 * cos(skirt_angle), 75 + 72 * sin(skirt_angle), -10])
+        cylinder($fn=28, r=1.22, h=30); } } }
 
 // Render the object.
 // Comment or uncomment as needed.

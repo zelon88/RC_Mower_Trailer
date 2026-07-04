@@ -60,6 +60,8 @@ include <Bearing_Carrier_Dual.scad>;
 include <Attachment_Hinge_Boss.scad>;
 // A module for creating low-poly 540 DC Brushed Electric Motors.
 include <Workfiles/Motors.scad>;
+// A module for calling in the Left & Right Servo Brackets.
+include <Servo_Bracket.scad>;
 // A module for creating low-poly R/C Compatible Servo.
 include <Workfiles/RC_Servo.scad>;
 // A module for calling in the Attachment Adjustment Arm Insert.
@@ -101,8 +103,15 @@ include <Hopper_Base.scad>;
 Center_Bracket();
 // The Dual Electric Motors.
 Motors();
+
+
+// The Servo Brackets.
+translate([46, 36, 86.65]) rotate([90, 0, 90]) RC_Servo_Bracket_Left();
+translate([46, 36, 68.35]) rotate([180, 270, 0]) RC_Servo_Bracket_Right();
+
+
 // The Hopper Lift Servos.
-translate([70.25, 20.25, 97.5]) rotate([90, 90, 180]) RC_Servo();
+translate([68.5, 20.25, 97.75]) rotate([90, 90, 180]) RC_Servo();
 // The Center Bracket Support.
 rotate([0, 0, 180]) Center_Bracket_Support();
 // The Body that houses the adjustment screws & blade bearings.
@@ -115,9 +124,9 @@ translate([0, 110, 12.425]) rotate([0, 180, 0]) Body_Stiffener_Outer();
 translate([0, 75, 22.25]) Body_Stiffener_Center();
 translate([0, 75, 9.25]) rotate([0, 180, 0]) Body_Stiffener_Center();
 translate([0, 40, 12.425]) rotate([0, 180, 180]) Body_Stiffener_Inner_Lower();
-// Fill in the Center Lower Body Stiffener with two 1" Plugs.
-translate([32.5, 75, 9.425]) rotate([0, 180, 90]) One_Inch_Flange_Plug();
-translate([-32.5, 75, 9.425]) rotate([0, 180, 90]) One_Inch_Flange_Plug();
+// Fill in the Center Lower Body Stiffener with 1" Plugs.
+translate([32.5, 75, 10.325]) rotate([0, 180, 90]) One_Inch_Flange_Plug();
+translate([-32.5, 75, 10.325]) rotate([0, 180, 90]) One_Inch_Flange_Plug();
 translate([0, 107.5, 13.425]) rotate([0, 180, 90]) One_Inch_Flange_Plug();
 // The Body Skirt that screws on beneath the main body.
 Body_Skirt ();
@@ -160,4 +169,5 @@ rotate([0, 0, 180]) Hopper_Bracket();
 // The Hopper Bases.
 Hopper_Base();
 rotate([0, 0, 180]) Hopper_Base();
+
 // ----------------------------------------------------------------------------------------------------
