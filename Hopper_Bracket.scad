@@ -85,8 +85,20 @@ difference() {
   translate([73, -7.5, 10]) cylinder(r=1.22, h=20, $fn=28, center=true);
   translate([73, 15, 10]) cylinder(r=1.22, h=20, $fn=28, center=true);
   translate([73, -15, 10]) cylinder(r=1.22, h=20, $fn=28, center=true);
-      
+  
+  // Drill through holes for the Center Bracket. 
+  translate([53, 0, 8]) rotate([0, 90, 0]) cylinder(r=1.22, h=20, $fn=28, center=true);
+  translate([53, 7.5, 8]) rotate([0, 90, 0]) cylinder(r=1.22, h=20, $fn=28, center=true);
+  translate([53, -7.5, 8]) rotate([0, 90, 0]) cylinder(r=1.22, h=20, $fn=28, center=true);
+  translate([53, 15, 8]) rotate([0, 90, 0]) cylinder(r=1.22, h=20, $fn=28, center=true);
+  translate([53, -15, 8]) rotate([0, 90, 0]) cylinder(r=1.22, h=20, $fn=28, center=true);
+  
+  translate([53, 0, 3]) rotate([0, 90, 0]) cylinder(r=1.22, h=20, $fn=28, center=true);
+  translate([53, 7.5, 3]) rotate([0, 90, 0]) cylinder(r=1.22, h=20, $fn=28, center=true);
+  translate([53, -7.5, 3]) rotate([0, 90, 0]) cylinder(r=1.22, h=20, $fn=28, center=true);
+  translate([53, 15, 3]) rotate([0, 90, 0]) cylinder(r=1.22, h=20, $fn=28, center=true);
+  translate([53, -15, 3]) rotate([0, 90, 0]) cylinder(r=1.22, h=20, $fn=28, center=true);
   
   } }
   
-  //Hopper_Bracket();
+ //Hopper_Bracket();

@@ -192,7 +192,36 @@ difference() {
     translate([8.75, -14, 14]) cylinder($fn=28, r=1.22, h=9.2);
     translate([0, -14, 14]) cylinder($fn=28, r=1.22, h=9.2);
     translate([-8.75, -14, 14]) cylinder($fn=28, r=1.22, h=9.2);
-    translate([-20, -14, 14]) cylinder($fn=28, r=1.22, h=9.2); }
+    translate([-20, -14, 14]) cylinder($fn=28, r=1.22, h=9.2);
+    // Bottom screw holes for the Center Bracket Skid Plate. 
+    translate([24.75, 0, -5]) cylinder(r=1.22, h=20, $fn=28, center=true);
+    translate([39.75, 7.5, -5]) cylinder(r=1.22, h=20, $fn=28, center=true);
+    translate([39.75, -7.5, -5]) cylinder(r=1.22, h=20, $fn=28, center=true); 
+    
+    // Screw holes for the Hopper Brackets. 
+    translate([50, 0, 8]) rotate([0, 90, 0]) cylinder(r=1.22, h=20, $fn=28, center=true);
+    translate([50, 7.5, 8]) rotate([0, 90, 0]) cylinder(r=1.22, h=20, $fn=28, center=true);
+    translate([50, -7.5, 8]) rotate([0, 90, 0]) cylinder(r=1.22, h=20, $fn=28, center=true);
+    translate([50, 15, 8]) rotate([0, 90, 0]) cylinder(r=1.22, h=20, $fn=28, center=true);
+    translate([50, -15, 8]) rotate([0, 90, 0]) cylinder(r=1.22, h=20, $fn=28, center=true);
+  
+    translate([50, 0, 3]) rotate([0, 90, 0]) cylinder(r=1.22, h=20, $fn=28, center=true);
+    translate([50, 7.5, 3]) rotate([0, 90, 0]) cylinder(r=1.22, h=20, $fn=28, center=true);
+    translate([50, -7.5, 3]) rotate([0, 90, 0]) cylinder(r=1.22, h=20, $fn=28, center=true);
+    translate([50, 15, 3]) rotate([0, 90, 0]) cylinder(r=1.22, h=20, $fn=28, center=true);
+    translate([50, -15, 3]) rotate([0, 90, 0]) cylinder(r=1.22, h=20, $fn=28, center=true);
+ 
+    translate([-50, 0, 8]) rotate([0, 90, 0]) cylinder(r=1.22, h=20, $fn=28, center=true);
+    translate([-50, 7.5, 8]) rotate([0, 90, 0]) cylinder(r=1.22, h=20, $fn=28, center=true);
+    translate([-50, -7.5, 8]) rotate([0, 90, 0]) cylinder(r=1.22, h=20, $fn=28, center=true);
+    translate([-50, 15, 8]) rotate([0, 90, 0]) cylinder(r=1.22, h=20, $fn=28, center=true);
+    translate([-50, -15, 8]) rotate([0, 90, 0]) cylinder(r=1.22, h=20, $fn=28, center=true);
+  
+    translate([-50, 0, 3]) rotate([0, 90, 0]) cylinder(r=1.22, h=20, $fn=28, center=true);
+    translate([-50, 7.5, 3]) rotate([0, 90, 0]) cylinder(r=1.22, h=20, $fn=28, center=true);
+    translate([-50, -7.5, 3]) rotate([0, 90, 0]) cylinder(r=1.22, h=20, $fn=28, center=true);
+    translate([-50, 15, 3]) rotate([0, 90, 0]) cylinder(r=1.22, h=20, $fn=28, center=true);
+    translate([-50, -15, 3]) rotate([0, 90, 0]) cylinder(r=1.22, h=20, $fn=28, center=true); }
 
 // Sides.
 difference() { 
@@ -250,7 +279,8 @@ translate([48, 0, 54]) rotate([0, 0, 0]) cylinder($fn=15, r1=1.22, r2=1.15, h=6,
 // Render the object. 
 // Comment or uncomment as needed.
 //Center_Bracket();
+
 // Comment or uncomment to simulate motors as needed.
- //Motors();
+//Motors();
 // ---------------------------------------------------------------------------------------------------- 
 

@@ -44,6 +44,8 @@
 
 // A module for calling in the Center Bracket.
 include <Center_Bracket.scad>;
+// A module for calling in the Center Bracket Skid Plate.
+include <Center_Bracket_Skid_Plate.scad>;
 // A module for calling in the Center Bracket Support.
 include <Center_Bracket_Support.scad>;
 // A module for calling in half of the Body.
@@ -89,7 +91,7 @@ include <Body_Stiffener_Outer.scad>;
 // A module for calling in the Center Body Stiffener.
 include <Body_Stiffener_Center.scad>;
 // A module for calling in the 1 Inch Flange Plug.
-include <1_Inch_Flange_Plug.scad>;
+include <Workfiles/1_Inch_Flange_Plug.scad>;
 // A module for calling in the Hopper Bracket.
 include <Hopper_Bracket.scad>;
 // A module for calling in the Hopper Base.
@@ -101,15 +103,14 @@ include <Hopper_Base.scad>;
 
 // The Center Bracket that houses the motors & gearbox.
 Center_Bracket();
+// The Center Bracket Skid Plate that protects the bottom of the Center Bracket.
+Center_Bracket_Skid_Plate();
+rotate([0, 0, 180]) Center_Bracket_Skid_Plate();
 // The Dual Electric Motors.
 Motors();
-
-
 // The Servo Brackets.
 translate([46, 36, 86.65]) rotate([90, 0, 90]) RC_Servo_Bracket_Left();
 translate([46, 36, 68.35]) rotate([180, 270, 0]) RC_Servo_Bracket_Right();
-
-
 // The Hopper Lift Servos.
 translate([68.5, 20.25, 97.75]) rotate([90, 90, 180]) RC_Servo();
 // The Center Bracket Support.
@@ -129,7 +130,7 @@ translate([32.5, 75, 10.325]) rotate([0, 180, 90]) One_Inch_Flange_Plug();
 translate([-32.5, 75, 10.325]) rotate([0, 180, 90]) One_Inch_Flange_Plug();
 translate([0, 107.5, 13.425]) rotate([0, 180, 90]) One_Inch_Flange_Plug();
 // The Body Skirt that screws on beneath the main body.
-Body_Skirt ();
+Body_Skirt();
 // The Ball Joint Receivers for adjustment screws located on the top cover.
 translate([-32.5, 75, 19.5]) rotate([0, 0, 90])  Ball_Joint_Receiver();
 translate([32.5, 75, 19.5]) rotate([0, 0, 90]) Ball_Joint_Receiver();

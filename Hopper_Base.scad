@@ -96,7 +96,7 @@ module Hopper_Base_Inner_Body() {
   difference() {
     translate([15, 0, 10]) scale([0.9, 0.9, 0.9]) Hopper_Base_Outer_Body();
     Hopper_Base_Flange_Holes(); } }
-    
+            
 module Hopper_Base() {
   // Create the mounting flange that mates to the Hopper Bracket.
   Hopper_Base_Flange();
@@ -111,6 +111,9 @@ module Hopper_Base() {
         // Add the mounting holes for the Servo Brackets.
         translate([46, 36, 86.65]) rotate([90, 0, 90]) RC_Servo_Bracket_Mount_Holes_Left();
         translate([46, 36, 68.375]) rotate([180, 270, 0]) RC_Servo_Bracket_Mount_Holes_Right();
+        // Add clearance for Servo Bracket hardware on the inside of the Hopper Base.
+        translate([84.1, 50.5, 92.3]) rotate([0, 90, 0]) cylinder(r=3, h=5, $fn=28, center=true);
+        translate([84.1, 50.5, 62.75]) rotate([0, 90, 0]) cylinder(r=3, h=5, $fn=28, center=true);
         // Hollow out the middle bottom section of the inside of the hopper to enable screw access.
       // Add support material.
       translate([88.75, 0, 29.25]) cube([50, 35, 12], center=true); } } 
@@ -169,4 +172,4 @@ module Hopper_Base() {
 
 
 
-Hopper_Base();
+//Hopper_Base();
