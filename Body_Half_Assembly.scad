@@ -91,7 +91,7 @@ include <Body_Stiffener_Outer.scad>;
 // A module for calling in the Center Body Stiffener.
 include <Body_Stiffener_Center.scad>;
 // A module for calling in the 1 Inch Flange Plug.
-include <Workfiles/1_Inch_Flange_Plug.scad>;
+include <1_Inch_Flange_Plug.scad>;
 // A module for calling in the Hopper Bracket.
 include <Hopper_Bracket.scad>;
 // A module for calling in the Hopper Base.
