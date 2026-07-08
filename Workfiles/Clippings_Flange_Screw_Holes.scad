@@ -5,4 +5,6 @@ module Clippings_Flange_Screw_Holes() {
       // Through hole.
       cylinder($fn=28, r=1.22, h=15, center=false);
       // Deep screw recess on bottom (-Z) face.
-      translate([0, 0, -5]) cylinder($fn=28, r=1.25, h=5, center=false); } } }
+      translate([0, 0, -5]) cylinder($fn=28, r=2, h=10, center=false); } } }
+
+//Clippings_Flange_Screw_Holes();

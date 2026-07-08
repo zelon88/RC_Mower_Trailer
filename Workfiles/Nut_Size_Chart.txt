@@ -1,0 +1,21 @@
+OpenSCAD's $fn=6 cylinder measures r= to the vertices (across corners), not the flats. Formula: r = wrench_size ÷ √3. Add ~0.15mm clearance when cutting a nut pocket.
+
+Metric
+Size	Wrench (AF)	r= (exact)	r= (+0.15)
+M2	4.00 mm	2.31	2.46
+M2.5	5.00 mm	2.89	3.04
+M3	5.50 mm	3.18	3.33
+M4	7.00 mm	4.04	4.19
+M5	8.00 mm	4.62	4.77
+M6	10.00 mm	5.77	5.92
+
+Imperial (under 5/8" wrench)
+Size	Wrench (AF)	r= (exact)	r= (+0.15)
+#4-40	1/4" / 6.35 mm	3.67	3.82
+#6-32	5/16" / 7.94 mm	4.58	4.73
+#8-32	11/32" / 8.73 mm	5.04	5.19
+#10-32	3/8" / 9.53 mm	5.50	5.65
+1/4"-20	7/16" / 11.11 mm	6.42	6.57
+5/16"-18	1/2" / 12.70 mm	7.33	7.48
+
+Nut height reference (for h=): M2 1.6mm · M2.5 2.0mm · M3 2.4mm · M4 3.2mm · M5 4.0mm · M6 5.0mm · #4 1.6mm · #6 2.4mm · #8 2.8mm · #10 3.2mm · 1/4" 5.6mm · 5/16" 6.4mm
