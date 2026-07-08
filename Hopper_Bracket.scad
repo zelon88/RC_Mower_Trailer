@@ -34,6 +34,7 @@ difference() {
   translate([70, 0, -10]) rotate([0, 65, 0]) cube([25, 125, 25], center=true);
   // Cut out a relief for the Center Bracket.
   Center_Bracket();
+  translate([43, 0, 6.5]) cube([14, 35, 20], center=true);
   // Cut out a mating surface for the Hopper.
   translate([63, 0, 20]) rotate([90, 0, 0]) cylinder(r=7.5, h=25, $fn=28, center=true);
   // Cut a slot at the bottom of the hopper mating surface to allow debris to escape.
@@ -41,8 +42,8 @@ difference() {
   // Cut out the mating surface for the Hopper Flange.
   translate([32, -40, 15]) cylinder(r1=20.75, r2=17.25, h=5, $fn=48, center=false);
   // Cut out the Body Halves.
-  Body_Half ();
-  rotate([0, 0, 180]) Body_Half ();
+  Body_Half();
+  rotate([0, 0, 180]) Body_Half();
   // Cut out a mating surface for the toruses.
   translate([0, 75, 0]) Torus(40, 150);
   translate([0, -75, 0]) Torus(40, 150);
@@ -99,6 +100,9 @@ difference() {
   translate([53, 15, 3]) rotate([0, 90, 0]) cylinder(r=1.22, h=20, $fn=28, center=true);
   translate([53, -15, 3]) rotate([0, 90, 0]) cylinder(r=1.22, h=20, $fn=28, center=true);
   
+  // Drill through holes for eyelets.
+  translate([69, 28.5, 10]) cylinder(r=4, h=20, $fn=28, center=true);
+  translate([69, -28.5, 10]) cylinder(r=4, h=20, $fn=28, center=true);
   } }
   
- //Hopper_Bracket();
+ Hopper_Bracket();

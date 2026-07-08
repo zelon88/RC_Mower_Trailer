@@ -79,7 +79,7 @@ module Body_Half_Dirty() {
     // Cut the landing pad for the clippings flange.
     translate([-32, 40, 19.9]) cylinder(r1=19, r2=15.25, h=0.33, $fn=48, center=false);
     // Clippings flange screw holes.
-    translate([-32, 40, 10]) Clippings_Flange_Screw_Holes();
+    translate([-32, 40, 13.5]) Clippings_Flange_Screw_Holes();
     // Cut out for the center bracket.
     translate([0, 0, 0]) Center_Bracket (); 
     // Mounting holes for the center bracket.
@@ -134,7 +134,7 @@ module Body_Half_Dirty() {
     // Cut the landing pad for the clippings flange.
     translate([-32, 40, 19.9]) cylinder(r1=19, r2=15.25, h=0.33, $fn=48, center=false);
     // Clippings flange screw holes.
-    translate([-32, 40, 10]) Clippings_Flange_Screw_Holes();
+    translate([-32, 40, 13.5]) Clippings_Flange_Screw_Holes();
     // Cut out for the reinforcement slots.
     translate([0, 0, 16.59]) cube([25.6, 300, 3.175], center=true);
     rotate([0, 0, 90]) translate([75, 0, 13.415]) cube([25.6, 150, 3.175], center=true);
@@ -240,9 +240,7 @@ module Body_Half_Dirty() {
       // Cut the landing pad for the clippings flange.
       translate([-32, 40, 19.9]) cylinder(r1=19, r2=15.25, h=0.33, $fn=48, center=false); 
       // Clippings flange screw holes.
-      for (i = [0:7]) {
-        translate([-32 + 15.25 * cos(i * 45), 40 + 15.25 * sin(i * 45), 10])
-          cylinder($fn=28, r=1.22, h=15, center=false); } }
+      translate([-32, 40, 13.5]) Clippings_Flange_Screw_Holes(); }
     
   // Create the torus to center bracket outside mating surface.
   difference() {
@@ -282,7 +280,7 @@ module Body_Half_Dirty() {
     translate([-32, 40, 16]) cylinder(r1=18, r2=13.75, h=2.5, $fn=48, center=false);
     translate([-32, 40, 12]) cylinder(r1=20, r2=18, h=4, $fn=48, center=false);
     // Clippings flange screw holes.
-    translate([-32, 40, 10]) Clippings_Flange_Screw_Holes();
+    translate([-32, 40, 13.5]) Clippings_Flange_Screw_Holes();
     // Body Stiffener landing pads.
     translate([0, 40, 22.25]) rotate([0, 0, 180]) Body_Stiffener_Inner(); 
     // Inner Upper Body Stiffener screw holes.
@@ -396,10 +394,7 @@ module Body_Half_Dirty() {
     // Side Attachment Boss screw holes.
     rotate([0, 0, 90]) translate([134, 0, 0]) Attachment_Boss_Screw_Holes(-7.5, 1, 0, 10); }
     
-  // Skirt attachment standoffs on torus outer rim (20x).
-  // Small cylinders provide a flat nut seat above the curved torus surface.
-  // Screws install from below through Body_Skirt; nuts seat on top of standoffs.
-  // Same angular positions as skirt through-holes (18deg, offset 9deg).
+  // Skirt attachment standoffs on torus outer rim.
   difference() {
     union() {
       for (i = [0:19]) {
@@ -459,5 +454,5 @@ module Body_Half() {
     
 // Render the object. 
 // Comment or uncomment as needed.
-Body_Half();
+//Body_Half();
 // ----------------------------------------------------------------------------------------------------
