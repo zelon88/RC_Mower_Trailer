@@ -51,9 +51,10 @@ When using only one input & one output terminal observed current is similar to a
 Every design element has been carefully selected with heavy consideration towards containing debris, managing vibration, surviving impact, & providing durability.
 
 ![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Body_Half_Rev-A1_7-8-2026_1.png)
-![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Body_Half_Rev-A1_7-8-2026_2.png)
 
 The mower chassis is comprised of a steel frame with a thickness between 3.175mm and 6.35mm. Wrapped around this steel frame is an impact resistant plastic body with a thickness between 4mm and 14mm. The average material thickness around the rotating blades is 10mm with additional plastic gussets and steel screws built into the body every 19 degrees around the circumfrence of the blade. 
+
+![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Body_Half_Rev-A1_7-8-2026_2.png)
 
 ---
 
