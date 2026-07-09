@@ -39,13 +39,12 @@ Due to the length of the bolt being greater than the clearance from the blade to
 The mower features blueprints & instructions for building dual "Rollover Protection Switches" which disable the mower automatically in the event that it tips over. The adjustable switches will prevent the blade motors and blades from spinning while the mower is inverted. The switches self-reset once the mower has been placed upright again.
 
 ![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Rollover_Safety_Assembly_Rev-A1_7-8-2026_1.png)
-![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Rollover_Safety_Assembly_Rev-A1_7-8-2026_2.png)
 
 The switches are incredibly small, at only 30mm x 15mm x 8.5mm each. They feature a modular design with optional input/output terminals on left & right sides. 
 
 When using only one input & one output terminal observed current is similar to a 14 AWG wire. When using both sets of terminals observed current is similar to a 12 AWG wire. Two swiches are included in this mower design, wired in series to provide double fault tolerant rollover protection.
 
-![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Rollover_Safety_Assembly_Rev-A1_7-8-2026_1.png)
+![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Rollover_Safety_Assembly_Rev-A1_7-8-2026_2.png)
 
 ### Steel Reinforced Chassis
 
