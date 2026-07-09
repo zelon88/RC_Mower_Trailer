@@ -60,7 +60,7 @@ The mower chassis is comprised of a steel frame with a thickness between 3.175mm
 
 ## More Screenshots
 
-[View All Screenshots](https://github.com/zelon88/RC_Mower_Trailer/tree/main/Screenshots)
+### [View All Screenshots](https://github.com/zelon88/RC_Mower_Trailer/tree/main/Screenshots)
 
 ![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Body_Assembly_Rev-A1_6-10-2026_1.png)
 ![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Body_Assembly_Rev-A1_7-4-2026_1.png)
