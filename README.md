@@ -26,6 +26,16 @@ A set of SCAD models for a tow-behind lawn mower attachment for R/C trucks.
 
 ## Safety Features
 
+### Steel Reinforced Chassis
+
+Every design element has been carefully selected with heavy consideration towards containing debris, managing vibration, surviving impact, & providing durability.
+
+![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Body_Half_Rev-A1_7-8-2026_1.png)
+
+The mower chassis is comprised of a steel frame with a thickness between 3.175mm and 6.35mm. Wrapped around this steel frame is an impact resistant plastic body with a thickness between 4mm and 14mm. The average material thickness around the rotating blades is 10mm with additional plastic gussets and steel screws built into the body every 19 degrees around the circumfrence of the blade. 
+
+![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Body_Half_Rev-A1_7-8-2026_2.png)
+
 ### Captured Blade Design
 
 The mower blades are installed via a very long grade 8 bolt which traverses a through hole in the center of the blade. This bolt is then installed into the chassis from the bottom-up through three stages of ball bearings.
@@ -45,16 +55,6 @@ The switches are incredibly small, at only 30mm x 15mm x 8.5mm each. They featur
 When using only one input & one output terminal observed current is similar to a 14 AWG wire. When using both sets of terminals observed current is similar to a 12 AWG wire. Two swiches are included in this mower design, wired in series to provide double fault tolerant rollover protection.
 
 ![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Rollover_Safety_Assembly_Rev-A1_7-8-2026_2.png)
-
-### Steel Reinforced Chassis
-
-Every design element has been carefully selected with heavy consideration towards containing debris, managing vibration, surviving impact, & providing durability.
-
-![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Body_Half_Rev-A1_7-8-2026_1.png)
-
-The mower chassis is comprised of a steel frame with a thickness between 3.175mm and 6.35mm. Wrapped around this steel frame is an impact resistant plastic body with a thickness between 4mm and 14mm. The average material thickness around the rotating blades is 10mm with additional plastic gussets and steel screws built into the body every 19 degrees around the circumfrence of the blade. 
-
-![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Body_Half_Rev-A1_7-8-2026_2.png)
 
 ---
 
