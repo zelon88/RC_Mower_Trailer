@@ -26,7 +26,7 @@ A set of SCAD models for a tow-behind lawn mower attachment for R/C trucks.
 
 ## Safety Features
 
-### Captured blade & holder design ensures that the blade remains contained even during catastropic failure.
+### Captured Blade Design
 
 The mower blades are installed via a very long grade 8 bolt which traverses a through hole in the center of the blade. This bolt is then installed into the chassis from the bottom-up through three stages of ball bearings.
 
