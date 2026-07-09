@@ -55,15 +55,19 @@ module Attachment_Adjustment_Arm_Cover() {
   difference() {
     union() {
       // Create the body of the cover.
-      translate([18.5, 0, 5]) cube([27.5, 22.5, 2.5], center=true);
+      translate([18.5, 0, 4.5]) cube([27.5, 22.5, 3.5], center=true);
       // Create the rounded end of the cover.
-      translate([32, 0, 5]) cylinder($fn=48, r=11.25, h=2.5, center=true); }
+      translate([32, 0, 4.5]) cylinder($fn=48, r=11.25, h=3.5, center=true); }
 
     // Cut the slot in the paddle for the Attachment Adjustment Arm Insert body.
-    translate([26.25, 0, 5]) cube([22, 7, 5], center=true);
+    translate([26.25, 0, 5]) cube([22.85, 8, 8], center=true);
+
+    // Cut out a mating surface for the Attachment Adjustment Arm Ramp Insert.
+    translate([26.25,  5.5, 2.15]) cube([23.15, 3.53, 4.75], center=true);
+    translate([26.25,  -5.5, 2.15]) cube([23.15, 3.53, 4.75], center=true);
 
     // Cut the chamfer on the top of the cover.
-    translate([0.5, 0, 11]) rotate([0, 29, 0]) cube([20, 25, 10], center=true);
+    translate([0.5, 0, 11]) rotate([0, 29, 0]) cube([20, 25, 15], center=true);
 
     // Chamfer the top outer edges along Y axis.
     translate([22,  11.25, 6.25]) rotate([ 45, 0, 0]) cube([50, 0.707, 0.707], center=true);
@@ -100,6 +104,7 @@ module Attachment_Adjustment_Arm_Cover() {
     translate([35.25, -8.75, 5]) cylinder($fn=28, r=1.22, h=10, center=true);
     translate([39.5, -4.5, 5]) cylinder($fn=28, r=1.22, h=10, center=true); } }
 
+// ----------------------------------------------------------------------------------------------------
 // Render the object.
 // Comment or uncomment as needed.
 //Attachment_Adjustment_Arm_Cover();

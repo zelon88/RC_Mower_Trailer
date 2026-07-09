@@ -42,8 +42,16 @@
 // ----------------------------------------------------------------------------------------------------
 // MODULES
 
+// A module for creating low-poly 540 DC Brushed Electric Motors.
+include <Workfiles/Motors.scad>;
+// A module for creating low-poly R/C Compatible Servo.
+include <Workfiles/RC_Servo.scad>;
+// A variety of modules representing different possilbe battery configurations.
+include <Workfiles/RC_Batteries.scad>;
 // A module for calling in the Center Bracket.
 include <Center_Bracket.scad>;
+// A module for calling in the Center Bracket Cover.
+include <Top_Cover.scad>;
 // A module for calling in the Center Bracket Skid Plate.
 include <Center_Bracket_Skid_Plate.scad>;
 // A module for calling in the Center Bracket Support.
@@ -60,18 +68,16 @@ include <Bearing_Carrier_Single.scad>;
 include <Bearing_Carrier_Dual.scad>;
 // A module for calling in the Attachment Hinge Boss.
 include <Attachment_Hinge_Boss.scad>;
-// A module for creating low-poly 540 DC Brushed Electric Motors.
-include <Workfiles/Motors.scad>;
 // A module for calling in the Left & Right Servo Brackets.
 include <Servo_Bracket.scad>;
-// A module for creating low-poly R/C Compatible Servo.
-include <Workfiles/RC_Servo.scad>;
 // A module for calling in the Attachment Adjustment Arm Insert.
 include <Attachment_Adjustment_Arm_Insert.scad>;
 // A module for calling in the Attachment Adjustment Arm.
 include <Attachment_Adjustment_Arm.scad>;
 // A module for calling in the Attachment Adjustment Arm Cover.
 include <Attachment_Adjustment_Arm_Cover.scad>;
+// A module for calling in the Attachment Adjustment Arm Ramp Insert.
+include <Attachment_Adjustment_Arm_Ramp_Insert.scad>;
 // A module for calling in the Lower Attachment Arm.
 include <Lower_Attachment_Arm.scad>;
 // A module for calling in the Wheel.
@@ -96,6 +102,8 @@ include <1_Inch_Flange_Plug.scad>;
 include <Hopper_Bracket.scad>;
 // A module for calling in the Hopper Base.
 include <Hopper_Base.scad>;
+// A module for calling in the Rollover Safety Switch Assembly.
+include <Rollover_Safety_Switch.scad>;
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
@@ -111,8 +119,11 @@ Motors();
 // The Servo Brackets.
 translate([46, 36, 86.65]) rotate([90, 0, 90]) RC_Servo_Bracket_Left();
 translate([46, 36, 68.35]) rotate([180, 270, 0]) RC_Servo_Bracket_Right();
+translate([-46, -36, 86.65]) rotate([90, 0, -90]) RC_Servo_Bracket_Left();
+translate([-46, -36, 68.35]) rotate([-180, 270, 180]) RC_Servo_Bracket_Right();
 // The Hopper Lift Servos.
 translate([68.5, 20.25, 97.75]) rotate([90, 90, 180]) RC_Servo();
+translate([-68.5, -20.25, 97.75]) rotate([-90, 90, 180]) RC_Servo();
 // The Center Bracket Support.
 rotate([0, 0, 180]) Center_Bracket_Support();
 // The Body that houses the adjustment screws & blade bearings.
@@ -151,12 +162,21 @@ translate([-58.75, 75, 38]) Attachment_Adjustment_Arm();
 translate([58.75, 75, 38]) rotate([0, 0, 180]) Attachment_Adjustment_Arm();
 translate([0, 133.25, 38]) rotate([0, 0, 270]) Attachment_Adjustment_Arm();
 // The Attachment Adjustment Arm Covers.
-translate([-58.75, 75, 41.25]) Attachment_Adjustment_Arm_Cover();
-translate([58.75, 75, 41.25]) rotate([0, 0, 180]) Attachment_Adjustment_Arm_Cover();
-translate([0, 133.25, 41.25]) rotate([0, 0, 270]) Attachment_Adjustment_Arm_Cover();
+translate([-58.75, 75, 42.75]) Attachment_Adjustment_Arm_Cover();
+translate([58.75, 75, 42.75]) rotate([0, 0, 180]) Attachment_Adjustment_Arm_Cover();
+translate([0, 133.25, 42.75]) rotate([0, 0, 270]) Attachment_Adjustment_Arm_Cover();
 // The Lower Attachment Arms.
 translate([-78.25, 75, 38]) Lower_Attachment_Arm();
 rotate([0, 0, 180]) translate([-78.25, -75, 38]) Lower_Attachment_Arm();
+// The Attachment Arm Ramp Inserts.
+translate([-58.75, 75, 38]) Attachment_Adjustment_Arm_Ramp_Insert_Left();
+translate([-58.75, 75, 38]) Attachment_Adjustment_Arm_Ramp_Insert_Right();
+
+translate([58.75, 75, 38]) rotate([0, 0, 180]) Attachment_Adjustment_Arm_Ramp_Insert_Left();
+translate([58.75, 75, 38]) rotate([0, 0, 180]) Attachment_Adjustment_Arm_Ramp_Insert_Right();
+
+translate([0, 80.75, 38]) rotate([0, 0, 90]) Attachment_Adjustment_Arm_Ramp_Insert_Left();
+translate([0, 80.75, 38]) rotate([0, 0, 90]) Attachment_Adjustment_Arm_Ramp_Insert_Right();
 // The wheels.
 translate([-127, 105, 30]) Wheel();
 rotate([0, 0, 180]) translate([-127, -105, 30]) Wheel();
@@ -170,5 +190,11 @@ rotate([0, 0, 180]) Hopper_Bracket();
 // The Hopper Bases.
 Hopper_Base();
 rotate([0, 0, 180]) Hopper_Base();
+// The Rollover Safety Switches.
+translate([61.75, -47.5, 45]) rotate([0, 90, 180]) Rollover_Safety_Switch_Assembly();
+translate([-61.75, 47.5, 45]) rotate([0, 90, 0]) Rollover_Safety_Switch_Assembly();
+// The Batteries.
+//translate([-85, 0, 150]) rotate([0, 0, 90]) Large_3s_Lipo_Battery();
+//translate([85, 0, 150]) rotate([0, 0, 90]) Large_3s_Lipo_Battery();
 
 // ----------------------------------------------------------------------------------------------------

@@ -1,10 +1,11 @@
 include <Workfiles/RC_Servo.scad>;
+include <Rollover_Safety_Switch.scad>;
 include <Servo_Bracket.scad>;
 // The Hopper Lift Servo.
 //translate([70.25, 20.25, 97.5]) rotate([90, 90, 180]) RC_Servo();
 // The Servo Brackets.
-translate([46, 36, 86.65]) rotate([90, 0, 90]) RC_Servo_Bracket_Left();
-translate([46, 36, 68.35]) rotate([180, 270, 0]) RC_Servo_Bracket_Right();
+//translate([46, 36, 86.65]) rotate([90, 0, 90]) RC_Servo_Bracket_Left();
+//translate([46, 36, 68.35]) rotate([180, 270, 0]) RC_Servo_Bracket_Right();
 
 // A Module to cut out the relief for the Hopper Lift Servo.
 // This relief aligns with the optimal Hopper Lift Servo location.
@@ -114,6 +115,9 @@ module Hopper_Base() {
         // Add clearance for Servo Bracket hardware on the inside of the Hopper Base.
         translate([84.1, 50.5, 92.3]) rotate([0, 90, 0]) cylinder(r=3, h=5, $fn=28, center=true);
         translate([84.1, 50.5, 62.75]) rotate([0, 90, 0]) cylinder(r=3, h=5, $fn=28, center=true);
+        // Add the mounting holes for the Rollover Safety Switch.
+        translate([61.75, -47.5, 45]) rotate([0, 90, 180]) Rollover_Safety_Switch_Screw_Holes();
+        translate([-61.75, 47.5, 45]) rotate([0, 90, 0]) Rollover_Safety_Switch_Screw_Holes();
         // Hollow out the middle bottom section of the inside of the hopper to enable screw access.
       // Add support material.
       translate([88.75, 0, 29.25]) cube([50, 35, 12], center=true); } } 
@@ -172,4 +176,4 @@ module Hopper_Base() {
 
 
 
-//Hopper_Base();
+Hopper_Base();

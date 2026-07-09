@@ -28,6 +28,10 @@
 //    additional protection. All terminals are duplicated for parallel to enable modular wiring setups.
 //    For additional current; wire both inputs to the same supply and both outputs to the same motor.
 //    Regularly test, verify, & calibrate this unit carefully to ensure proper operation before use.
+//    This file contains all pieces required for assembly, but the only parts to be 3D Printed are;
+//      1. The Rollover_Safety_Switch_Body();
+//      2. The Rollover_Safety_Switch_Cover();
+//      3. All other parts are sourced or fabricated components.
 // FILE NAME: Rollover_Safety_Switch.scad
 // ----------------------------------------------------------------------------------------------------
 
@@ -41,6 +45,8 @@
 
 // 1.  Deburr all edges to break sharp edges.
 // 2.  Cut a metal nail to length and grind the tip flat for the Contact Pin.
+// 3.  Cut slots in the Contact Pin for copper wire to be wound and soldered.
+// 4.  Add a solder ball to the top, wide flat surface of the Contact Pin to support a spring.
 // 3.  Wind only one turn of copper wire per side into each Contact Slot on the Contact Pin.
 // 4.  Scuff all metal contact surfaces to remove plating before soldering.
 // 5.  Solder the wire turns into the slots to secure and ensure conductivity.
@@ -59,12 +65,12 @@
     
 module Rollover_Safety_Switch_Screw_Holes() {
   // Mounting screw holes — shared by body, standoffs, and center divider.
-  translate([12.5, 5.5, 0]) cylinder(r=1.22, h=15, $fn=28, center=true);
-  translate([-12.5, 5.5, 0]) cylinder(r=1.22, h=15, $fn=28, center=true);
-  translate([0, 5.5, 0]) cylinder(r=1.22, h=15, $fn=28, center=true);
-  translate([0, -5.5, 0]) cylinder(r=1.22, h=15, $fn=28, center=true);
-  translate([12.5, -5.5, 0]) cylinder(r=1.22, h=15, $fn=28, center=true);
-  translate([-12.5, -5.5, 0]) cylinder(r=1.22, h=15, $fn=28, center=true); }
+  translate([12.5, 5.5, 0]) cylinder(r=1.22, h=25, $fn=28, center=true);
+  translate([-12.5, 5.5, 0]) cylinder(r=1.22, h=25, $fn=28, center=true);
+  translate([0, 5.5, 0]) cylinder(r=1.22, h=25, $fn=28, center=true);
+  translate([0, -5.5, 0]) cylinder(r=1.22, h=25, $fn=28, center=true);
+  translate([12.5, -5.5, 0]) cylinder(r=1.22, h=25, $fn=28, center=true);
+  translate([-12.5, -5.5, 0]) cylinder(r=1.22, h=25, $fn=28, center=true); }
 
 module Rollover_Safety_Switch_Outer_Body() {
   difference() {
@@ -77,6 +83,17 @@ module Rollover_Safety_Switch_Outer_Body() {
     translate([15, -7.5, 0]) rotate([0, 0, 45]) cube([1.5, 1.5, 8.5], center=true);
     translate([-15, 7.5, 0]) rotate([0, 0, 45]) cube([1.5, 1.5, 8.5], center=true);
     translate([-15, -7.5, 0]) rotate([0, 0, 45]) cube([1.5, 1.5, 8.5], center=true);
+
+    translate([15.5, 7, 0]) rotate([0, 0, -65]) cube([1.5, 1.5, 8.5], center=true);
+    translate([15.5, -7, 0]) rotate([0, 0, 65]) cube([1.5, 1.5, 8.5], center=true);
+    translate([-15.5, 7, 0]) rotate([0, 0, 65]) cube([1.5, 1.5, 8.5], center=true);
+    translate([-15.5, -7, 0]) rotate([0, 0, -65]) cube([1.5, 1.5, 8.5], center=true);
+
+    translate([14.5, 8, 0]) rotate([0, 0, -25]) cube([1.5, 1.5, 8.5], center=true);
+    translate([14.5, -8, 0]) rotate([0, 0, 25]) cube([1.5, 1.5, 8.5], center=true);
+    translate([-14.5, 8, 0]) rotate([0, 0, 25]) cube([1.5, 1.5, 8.5], center=true);
+    translate([-14.5, -8, 0]) rotate([0, 0, -25]) cube([1.5, 1.5, 8.5], center=true);
+    
     // Drill out the screw holes.
     Rollover_Safety_Switch_Screw_Holes(); } }
 
@@ -284,6 +301,16 @@ module Rollover_Safety_Switch_Cover() {
     translate([15, -7.5, 3.75]) rotate([0, 0, 45]) cube([1.5, 1.5, 2.25], center=true);
     translate([-15, 7.5, 3.75]) rotate([0, 0, 45]) cube([1.5, 1.5, 2.25], center=true);
     translate([-15, -7.5, 3.75]) rotate([0, 0, 45]) cube([1.5, 1.5, 2.25], center=true);
+
+    translate([15.5, 7, 3.75]) rotate([0, 0, -65]) cube([1.5, 1.5, 2.25], center=true);
+    translate([15.5, -7, 3.75]) rotate([0, 0, 65]) cube([1.5, 1.5, 2.25], center=true);
+    translate([-15.5, 7, 3.75]) rotate([0, 0, 65]) cube([1.5, 1.5, 2.25], center=true);
+    translate([-15.5, -7, 3.75]) rotate([0, 0, -65]) cube([1.5, 1.5, 2.25], center=true);
+
+    translate([14.5, 8, 3.75]) rotate([0, 0, -25]) cube([1.5, 1.5, 2.25], center=true);
+    translate([14.5, -8, 3.75]) rotate([0, 0, 25]) cube([1.5, 1.5, 2.25], center=true);
+    translate([-14.5, 8, 3.75]) rotate([0, 0, 25]) cube([1.5, 1.5, 2.25], center=true);
+    translate([-14.5, -8, 3.75]) rotate([0, 0, -25]) cube([1.5, 1.5, 2.25], center=true);
     // Upward arrow cut into the outside (top) face of the cover at Z=4.375 — 0.5mm deep.
     // Points in -X direction to indicate correct installation orientation.
     // Stem: 2mm wide x 4mm tall. Head: 6mm wide x 4mm tall. Total arrow height: 8mm.
@@ -326,7 +353,7 @@ module Rollover_Safety_Switch_Assembly_Without_Cover() {
 
 // Render the object.
 // Comment or uncomment as needed.
-Rollover_Safety_Switch_Assembly();
+//Rollover_Safety_Switch_Assembly();
 //Rollover_Safety_Switch_Assembly_Without_Cover();
 
 // Render the object for printing.
