@@ -11,7 +11,7 @@ A set of SCAD models for a tow-behind lawn mower attachment for R/C trucks.
 * A hybrid assembly consisting of 3D printed & manufactured parts.
 * Complete with detailed manufacturing & assembly instructions.
 * Dual counter-rotating motors for exceptional torque & smoothness.
-* Twin counter-rotating cutting blades for smooth, balanced operation.
+* Dual counter-rotating cutting blades for smooth, balanced operation.
 * Differential gearbox provides rotational shock damping properties while ensuring both motors send power to both blades.
 * Uses standard 540 brushed R/C motors, 1/10th scale R/C servos, standard R/C batteries, & 1.9" or 2.2" R/C wheels.
 * Highly modular design with many interchangable parts makes repairs simple & inexpensive.
