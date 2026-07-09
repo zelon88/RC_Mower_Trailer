@@ -4,8 +4,6 @@
 
 A set of SCAD models for a tow-behind lawn mower attachment for R/C trucks.
 
----
-
 ## Main Features
 
 * A hybrid assembly consisting of 3D printed & manufactured parts.
@@ -21,8 +19,6 @@ A set of SCAD models for a tow-behind lawn mower attachment for R/C trucks.
 * Designed with numerous safety features. See below for more safety information.
 * Self-leveling suspension with adjustable ride height.
 * Integrated hoppers collect grass clippings and dump them out at the push of a button. 
-
----
 
 ## Safety Features
 
@@ -55,8 +51,6 @@ The switches are incredibly small, at only 30mm x 15mm x 8.5mm each. They featur
 When using only one input & one output terminal observed current is similar to a 14 AWG wire. When using both sets of terminals observed current is similar to a 12 AWG wire. Two swiches are included in this mower design, wired in series to provide double fault tolerant rollover protection.
 
 ![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Rollover_Safety_Assembly_Rev-A1_7-8-2026_2.png)
-
----
 
 ## More Screenshots
 
