@@ -23,10 +23,12 @@
 //    Attachment_Adjustment_Arm_Ramp_Insert. Converts the X travel of the
 //    Attachment_Adjustment_Arm_Insert boss pin into Z motion via the 5deg ramp,
 //    providing the compliant suspension action of the adjustment arm assembly.
-//    Features a 3mm deep spring perch recess on each X end face to locate
+//    Features cylindrical spring perch standoffs on each X end face to locate
 //    the pen springs that return the crosshead to the set position after
-//    downward wheel travel. A transverse pin hole through the Y faces accepts
-//    the boss pin from the Attachment_Adjustment_Arm_Insert.
+//    downward wheel travel. Standoff tips are chamfered via cone subtraction
+//    for a shallow lead-in angle that prevents binding against the ramp slot wall.
+//    A transverse pin hole through the Y faces accepts the boss pin from the
+//    Attachment_Adjustment_Arm_Insert.
 //    Two crossheads are required per arm — one per ramp insert (left and right).
 // FILE NAME: Attachment_Adjustment_Arm_Crosshead.scad
 // ----------------------------------------------------------------------------------------------------
@@ -41,7 +43,7 @@
 
 // 1. Deburr all edges to break sharp edges.
 // 2. Slide crosshead into ramp slot from the open end.
-// 3. Insert pen spring into each spring perch recess before installation.
+// 3. Place pen spring over each spring perch standoff before installation.
 // 4. Springs bear between crosshead face and ramp insert end wall.
 // 5. Align pin hole with boss pin on Attachment_Adjustment_Arm_Insert.
 // 6. Slide insert boss pin through pin hole to engage crosshead.
@@ -52,38 +54,55 @@
 // GEOMETRY
 
 module Attachment_Adjustment_Arm_Crosshead() {
-  // Body dimensions — sized to slide freely in ramp slot.
-  body_x = 8;    // X - length, short enough to slide freely in slot.
-  body_y = 3.0625; // Y - slightly less than slot width.
-  body_z = 3.49;  // Z - slightly less than slot height.
+// Body dimensions — sized to slide freely in ramp slot.
+body_x = 6.5;      // X - length, short enough to slide freely in slot.
+body_y = 3.0625; // Y - slightly less than slot width.
+body_z = 3.49;   // Z - slightly less than slot height.
 
-  // Spring perch recess dimensions.
-  // Recess accepts the end coil of a standard clicky pen spring (~4mm OD).
-  spring_perch_r = 1.6;   // Radius of recess which matches 4mm OD pen spring.
-  spring_perch_h = 5;   // Depth of recess.
+// Spring perch standoff dimensions.
+spring_perch_r = 1.5; // Radius — matches ~4mm OD pen spring inner coil.
+spring_perch_h = 1.5;   // Total height of standoff extending from body face.
+chamfer_h = 0.25;        // Depth of chamfer taper at the tip.
 
-  // Pin hole dimensions.
-  // Accepts the boss pin from Attachment_Adjustment_Arm_Insert.
-  pin_r = 1.5;
+// Pin hole dimensions (ready if you need to subtract this later).
+pin_r = 1.5; // Accepts boss pin from Attachment_Adjustment_Arm_Insert.
 
-  difference() {
+difference() {
     union() {
-      // Crosshead body.
-      cube([body_x, body_y, body_z], center=true);
-      // Spring perches.
-      translate([(-body_x/2) + (spring_perch_h/2), 0.5, 0]) rotate([0, -90, 0])
-        cylinder($fn=28, r=spring_perch_r, h=spring_perch_h);
-      // Spring perch recess on +X end face — 3mm deep into body toward -X.
-      translate([(body_x/2) - (spring_perch_h/2), 0.5, 0]) rotate([0, 90, 0])
-        cylinder($fn=28, r=spring_perch_r, h=spring_perch_h); }
+        // Crosshead body
+        cube([body_x, body_y, body_z], center=true);
+        // Spring perch standoff on -X face.
+        translate([-body_x/2, 0.5, 0]) rotate([0, -90, 0]) {
+            // Main cylinder base.
+            cylinder($fn=28, r=spring_perch_r, h=spring_perch_h - chamfer_h);
+            // Chamfered tip cones.
+            translate([0, 0, spring_perch_h - chamfer_h])
+                cylinder($fn=28, r1=spring_perch_r, r2=spring_perch_r - chamfer_h, h=chamfer_h); }
+        // Spring perch standoff on +X face.
+        translate([body_x/2, 0.5, 0]) rotate([0, 90, 0]) {
+            // Main cylinder base.
+            cylinder($fn=28, r=spring_perch_r, h=spring_perch_h - chamfer_h);
+            // Chamfered tip cones.
+            translate([0, 0, spring_perch_h - chamfer_h])
+                cylinder($fn=28, r1=spring_perch_r, r2=spring_perch_r - chamfer_h, h=chamfer_h);} }
 
+    // Create lubrication passages for the pin.
+    translate([1, 0, 0]) cylinder(r=0.125, h=5, $fn=28, center=true);
+    translate([-1, 0, 0]) cylinder(r=0.125, h=5, $fn=28, center=true);
+    translate([-2, -1, 0]) rotate([90, 0, -45]) cylinder(r=0.125, h=5, $fn=28, center=true);
+    translate([2, -1, 0]) rotate([90, 0, 45]) cylinder(r=0.125, h=5, $fn=28, center=true);
     // Create top lubrication pockets.
-    translate([(body_x/2-2.0625), 0, (body_z/2)]) cube([(body_x/2)-1, (body_y-0.75), 0.05], center=true);
-    translate([-(body_x/2-2.0625), 0, (body_z/2)]) cube([(body_x/2)-1, (body_y-0.75), 0.05], center=true);
+    translate([-(body_x/1.92-2.025), 0, (body_z/2)]) cube([(body_x/2)-1, (body_y-0.95), 0.05], center=true);
+    translate([(body_x/1.92-2.025), 0, (body_z/2)]) cube([(body_x/2)-1, (body_y-0.95), 0.05], center=true);
     // Create bottom lubrication pockets.
-    translate([(body_x/2-2.0625), 0, (body_z/2)]) cube([(body_x/2)-1, (body_y-0.75), 0.05], center=true);
-    translate([-(body_x/2-2.0625), 0, (body_z/2)]) cube([(body_x/2)-1, (body_y-0.75), 0.05], center=true);
-
+    translate([(body_x/1.92-2.025), 0, -(body_z/2)]) cube([(body_x/2)-1, (body_y-0.95), 0.05], center=true);
+    translate([-(body_x/1.92-2.025), 0, -(body_z/2)]) cube([(body_x/2)-1, (body_y-0.95), 0.05], center=true);
+    // Create side lubrication pockets.
+    translate([(body_x/3.1+0.165), -(body_y/2-.02), 0]) cube([(body_x/2.75)-1, 0.05, (body_z-0.75)], center=true);
+    translate([-(body_x/3.1+0.165), -(body_y/2-0.02), 0]) cube([(body_x/2.75)-1, 0.05, (body_z-0.75)], center=true);
+    // Chamfer the pin hole.
+    translate([0, (body_y/2+.0675), 0]) rotate([90, 0, 0]) cylinder(r1=2.25, r2=1, h=1, $fn=28, center=true);
+    translate([0, -(body_y/2+.0675), 0]) rotate([-90, 0, 0]) cylinder(r1=2.25, r2=1, h=1, $fn=28, center=true);
     // Chamfer along the X edges.
     translate([0, (body_y/2), (body_z/2)]) rotate([45, 0, 0]) cube([body_x+1, 0.25, 0.25], center=true);
     translate([0, -(body_y/2), (body_z/2)]) rotate([45, 0, 0]) cube([body_x+1, 0.25, 0.25], center=true);
@@ -97,18 +116,18 @@ module Attachment_Adjustment_Arm_Crosshead() {
     // Chamfer along the Z edges.
     translate([(body_x/2), -(body_y/2), 0]) rotate([0, 0, 45]) cube([0.25, 0.25, body_z+1], center=true);
     translate([-(body_x/2), -(body_y/2), 0]) rotate([0, 0, 45]) cube([0.25, 0.25, body_z+1], center=true);
-    // Clean up the outside edges of the Crosshead.
-    translate([(body_x/3), body_y+0.325, 0]) rotate([0, 0, 10]) cube([(body_x/2), body_y, body_z], center=true);
-    translate([-(body_x/3), body_y+0.325, 0]) rotate([0, 0, -10]) cube([(body_x/2), body_y, body_z], center=true);
+    // Clean up the outside edges of the crosshead.
+    translate([(body_x/1.47), body_y+0.375, 0]) rotate([0, 0, 15]) cube([(body_x/2), body_y, body_z], center=true);
+    translate([-(body_x/1.47), body_y+0.375, 0]) rotate([0, 0, -15]) cube([(body_x/2), body_y, body_z], center=true);
     translate([0, -body_y-0.001, 0]) cube([(body_x), body_y, body_z], center=true);
     // Pin hole through Y faces — boss pin slides in from the open side.
-    rotate([90, 0, 0]) cylinder($fn=28, r=pin_r, h=body_y + 1, center=true);
- } }
+    rotate([90, 0, 0]) cylinder($fn=28, r=pin_r, h=body_y + 1, center=true); } }
+
 // Render the object.
 // Comment or uncomment as needed.
 //Attachment_Adjustment_Arm_Crosshead();
 
 // Render the object for printing.
 // Comment or uncomment as needed.
-Attachment_Adjustment_Arm_Crosshead();
+//Attachment_Adjustment_Arm_Crosshead();
 // ----------------------------------------------------------------------------------------------------

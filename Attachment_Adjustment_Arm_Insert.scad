@@ -23,29 +23,17 @@
 // FILE NAME: Attachment_Adjustment_Arm_Insert.scad
 // ----------------------------------------------------------------------------------------------------
 
-// ----------------------------------------------------------------------------------------------------
-// PRINTER CONFIGURATION
-// [Printing instructions to be added]
-// ----------------------------------------------------------------------------------------------------
-
-// ----------------------------------------------------------------------------------------------------
-// MANUFACTURING INSTRUCTIONS
-// 1. Deburr all edges to break sharp edges.
-// 2. Thread Adjustment Screw into center hole.
-// 3. Clamp into Attachment Adjustment Arm.
-// 4. Clamp into place with Adjustment Arm Cover.
-// ----------------------------------------------------------------------------------------------------
-
-// ----------------------------------------------------------------------------------------------------
-// GEOMETRY
-
 module Attachment_Adjustment_Arm_Insert() {
   difference() {
     union() {
       // Create the rectangular center block.
-      cube([12, 7, 5], center=true);
-      // Create the side bosses.
-      translate([0, 7, 0]) rotate([90, 0, 0]) cylinder($fn=48, r=1.5, h=14);
+      cube([12, 7, 5], center=true);   
+      // Main body of pin.
+      translate([0, 0, 0]) rotate([90, 0, 0]) cylinder($fn=48, r=1.5, h=13.5, center=true);
+      // Front chamfer cap.
+      translate([0, 6.75, 0]) rotate([-90, 0, 0]) cylinder($fn=48, r1=1.5, r2=1.25, h=0.25); 
+      // Back chamfer cap.
+      translate([0, -6.75, 0]) rotate([90, 0, 0]) cylinder($fn=48, r1=1.5, r2=1.25, h=0.25);
       // Create the center boss.
       translate([0, 0, 4]) cylinder($fn=48, r=2.95, h=4, center=true);
       // Taper the base of the upper portion of the center boss for strength.
@@ -53,34 +41,28 @@ module Attachment_Adjustment_Arm_Insert() {
       // Chamfer the bottom of the center boss to support a shrink wrap dust boot.
       translate([0, 0, -2.5]) cylinder($fn=48, r=2.95, h=1.5, center=true); 
       // Add a lip to the bottom of the center boss to support a shrink wrap dust boot.
-      translate([0, 0, -3.15]) cylinder($fn=48, r=3.15, h=0.5, center=true); 
-}
+      translate([0, 0, -3.15]) cylinder($fn=48, r=3.15, h=0.5, center=true); }
+    
     // Drill the center hole for the adjustment screw.
     cylinder($fn=48, r=2.495, h=15, center=true);
+    
     // Chamfer the front & rear top & bottom edges along X axis.
     translate([0,  3.5,  2.5]) rotate([45, 0, 0]) cube([14, 0.7, 0.7], center=true);
     translate([0, -3.5,  2.5]) rotate([45, 0, 0]) cube([14, 0.7, 0.7], center=true);
     translate([0,  3.5, -2.5]) rotate([45, 0, 0]) cube([14, 0.7, 0.7], center=true);
     translate([0, -3.5, -2.5]) rotate([45, 0, 0]) cube([14, 0.7, 0.7], center=true);
+    
     // Chamfer the left & right top & bottom edges along Y axis.
     translate([ 6, 0,  2.5]) rotate([0, 45, 0]) cube([2.828, 9, 2.828], center=true);
     translate([-6, 0,  2.5]) rotate([0, 45, 0]) cube([2.828, 9, 2.828], center=true);
     translate([ 6, 0, -2.5]) rotate([0, 45, 0]) cube([2.828, 9, 2.828], center=true);
     translate([-6, 0, -2.5]) rotate([0, 45, 0]) cube([2.828, 9, 2.828], center=true);
+    
     // Chamfer the vertical corner edges along Z axis (tips of the Y axis wedges).
-    translate([ 6,  3.5, 0]) rotate([0, 0, 45]) cube([0.7, 0.7, 6], center=true);
-    translate([ 6, -3.5, 0]) rotate([0, 0, 45]) cube([0.7, 0.7, 6], center=true);
-    translate([-6,  3.5, 0]) rotate([0, 0, 45]) cube([0.7, 0.7, 6], center=true);
-    translate([-6, -3.5, 0]) rotate([0, 0, 45]) cube([0.7, 0.7, 6], center=true);
-    // Chamfer the circular end faces of the side bosses.
-    translate([0,  7, 0]) rotate([ 90, 0, 0]) cylinder($fn=48, r1=2.5, r2=2, h=0.5);
-    translate([0, -7, 0]) rotate([-90, 0, 0]) cylinder($fn=48, r1=2.5, r2=2, h=0.5); } }
+    translate([ 6,  4.5, 0]) rotate([0, 0, 50]) cube([6, 6, 6], center=true);
+    translate([ 6, -4.5, 0]) rotate([0, 0, 40]) cube([6, 6, 6], center=true);
+    translate([-6,  4.5, 0]) rotate([0, 0, 40]) cube([6, 6, 6], center=true);
+    translate([-6, -4.5, 0]) rotate([0, 0, 50]) cube([6, 6, 6], center=true); } }
 
 // Render the object.
-// Comment or uncomment as needed.
-//Attachment_Adjustment_Arm_Insert();
-
-// Render the object for printing.
-// Comment or uncomment as needed.
-//Attachment_Adjustment_Arm_Insert();
-// ----------------------------------------------------------------------------------------------------
+Attachment_Adjustment_Arm_Insert();

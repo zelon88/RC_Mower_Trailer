@@ -78,6 +78,8 @@ include <Attachment_Adjustment_Arm.scad>;
 include <Attachment_Adjustment_Arm_Cover.scad>;
 // A module for calling in the Attachment Adjustment Arm Ramp Insert.
 include <Attachment_Adjustment_Arm_Ramp_Insert.scad>;
+// A module for calling in the Attachment Adjustment Arm Crosshead.
+include <Attachment_Adjustment_Arm_Crosshead.scad>;
 // A module for calling in the Lower Attachment Arm.
 include <Lower_Attachment_Arm.scad>;
 // A module for calling in the Wheel.
@@ -171,12 +173,13 @@ rotate([0, 0, 180]) translate([-78.25, -75, 38]) Lower_Attachment_Arm();
 // The Attachment Arm Ramp Inserts.
 translate([-58.75, 75, 38]) Attachment_Adjustment_Arm_Ramp_Insert_Left();
 translate([-58.75, 75, 38]) Attachment_Adjustment_Arm_Ramp_Insert_Right();
-
 translate([58.75, 75, 38]) rotate([0, 0, 180]) Attachment_Adjustment_Arm_Ramp_Insert_Left();
 translate([58.75, 75, 38]) rotate([0, 0, 180]) Attachment_Adjustment_Arm_Ramp_Insert_Right();
-
 translate([0, 80.75, 38]) rotate([0, 0, 90]) Attachment_Adjustment_Arm_Ramp_Insert_Left();
 translate([0, 80.75, 38]) rotate([0, 0, 90]) Attachment_Adjustment_Arm_Ramp_Insert_Right();
+// The Attachment Adjustment Arm Crossheads.
+translate([-32.5, 69.9, 44.24]) rotate([0, 5, 0]) Attachment_Adjustment_Arm_Crosshead();
+translate([-32.5, 80.1, 44.24]) rotate([0, -5, 180]) Attachment_Adjustment_Arm_Crosshead();
 // The wheels.
 translate([-127, 105, 30]) Wheel();
 rotate([0, 0, 180]) translate([-127, -105, 30]) Wheel();

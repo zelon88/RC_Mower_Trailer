@@ -192,11 +192,11 @@ module Rollover_Safety_Switch_Terminals() {
 // If needed, this module can produce a spring which can be installed between the top of the body and the top of the Contact Pin to provide additional downward pressure.
 // A very light spring is reccomended.
 module Rollover_Safety_Switch_Spring() {
-  translate([-15, 0, 0]) rotate([0, 90, 0]) linear_extrude(height=5, twist=3600, slices=150, convexity=10) translate([1.25, 0, 0]) circle(r=0.15, $fn = 48); }
+  translate([-15, 0, 0]) rotate([0, 90, 0]) linear_extrude(height=5, twist=3600, slices=150, convexity=10) translate([2, 0, 0]) circle(r=0.15, $fn = 48); }
 
 // The Contact Pin Centering Spring Perch, located on the inside top surface of the Outer Body.
 module Rollover_Safety_Switch_Spring_Perch() {
-  translate([-13, 0, 0]) rotate([0, 90, 0]) cylinder(r=1, h=2.15, $fn=28, center=true); }
+  translate([-13, 0, 0]) rotate([0, 90, 0]) cylinder(r=1.6, h=2.15, $fn=28, center=true); }
 
 module Rollover_Safety_Switch_Center_Divider() {
   difference() {

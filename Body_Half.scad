@@ -454,5 +454,5 @@ module Body_Half() {
     
 // Render the object. 
 // Comment or uncomment as needed.
-//Body_Half();
+Body_Half();
 // ----------------------------------------------------------------------------------------------------
