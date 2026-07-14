@@ -42,6 +42,10 @@
 // ----------------------------------------------------------------------------------------------------
 // GEOMETRY
 
+include <Differential_Gears.scad>;
+
+translate([0, 0, 53]) differential_assembly();
+
 // Differential support.
 difference() { 
     // Outer case.
