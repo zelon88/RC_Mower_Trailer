@@ -56,12 +56,12 @@
 module Attachment_Adjustment_Arm_Crosshead() {
 // Body dimensions — sized to slide freely in ramp slot.
 body_x = 6.5;      // X - length, short enough to slide freely in slot.
-body_y = 3.0625; // Y - slightly less than slot width.
+body_y = 2.875; // Y - slightly less than slot width.
 body_z = 3.49;   // Z - slightly less than slot height.
 
 // Spring perch standoff dimensions.
 spring_perch_r = 1.5; // Radius — matches ~4mm OD pen spring inner coil.
-spring_perch_h = 1.5;   // Total height of standoff extending from body face.
+spring_perch_h = 1.45;   // Total height of standoff extending from body face.
 chamfer_h = 0.25;        // Depth of chamfer taper at the tip.
 
 // Pin hole dimensions (ready if you need to subtract this later).
@@ -117,15 +117,15 @@ difference() {
     translate([(body_x/2), -(body_y/2), 0]) rotate([0, 0, 45]) cube([0.25, 0.25, body_z+1], center=true);
     translate([-(body_x/2), -(body_y/2), 0]) rotate([0, 0, 45]) cube([0.25, 0.25, body_z+1], center=true);
     // Clean up the outside edges of the crosshead.
-    translate([(body_x/1.47), body_y+0.375, 0]) rotate([0, 0, 15]) cube([(body_x/2), body_y, body_z], center=true);
-    translate([-(body_x/1.47), body_y+0.375, 0]) rotate([0, 0, -15]) cube([(body_x/2), body_y, body_z], center=true);
+    translate([(body_x/1.75), body_y+0.375, 0]) rotate([0, 0, 15]) cube([(body_x/2), body_y, body_z], center=true);
+    translate([-(body_x/1.75), body_y+0.375, 0]) rotate([0, 0, -15]) cube([(body_x/2), body_y, body_z], center=true);
     translate([0, -body_y-0.001, 0]) cube([(body_x), body_y, body_z], center=true);
     // Pin hole through Y faces — boss pin slides in from the open side.
     rotate([90, 0, 0]) cylinder($fn=28, r=pin_r, h=body_y + 1, center=true); } }
 
 // Render the object.
 // Comment or uncomment as needed.
-//Attachment_Adjustment_Arm_Crosshead();
+Attachment_Adjustment_Arm_Crosshead();
 
 // Render the object for printing.
 // Comment or uncomment as needed.

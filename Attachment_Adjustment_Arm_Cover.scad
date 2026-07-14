@@ -67,7 +67,7 @@ module Attachment_Adjustment_Arm_Cover() {
     translate([26.25,  -5.5, 2.15]) cube([23.15, 3.53, 4.75], center=true);
 
     // Cut the chamfer on the top of the cover.
-    translate([0.5, 0, 11]) rotate([0, 29, 0]) cube([20, 25, 15], center=true);
+    translate([0.5, 0, 10.5]) rotate([0, 25, 0]) cube([20, 25, 15], center=true);
 
     // Chamfer the top outer edges along Y axis.
     translate([22,  11.25, 6.25]) rotate([ 45, 0, 0]) cube([50, 0.707, 0.707], center=true);
@@ -107,7 +107,7 @@ module Attachment_Adjustment_Arm_Cover() {
 // ----------------------------------------------------------------------------------------------------
 // Render the object.
 // Comment or uncomment as needed.
-//Attachment_Adjustment_Arm_Cover();
+Attachment_Adjustment_Arm_Cover();
 
 // Render the object for printing.
 // Comment or uncomment as needed.

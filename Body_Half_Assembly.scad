@@ -106,6 +106,8 @@ include <Hopper_Bracket.scad>;
 include <Hopper_Base.scad>;
 // A module for calling in the Rollover Safety Switch Assembly.
 include <Rollover_Safety_Switch.scad>;
+// A modue for calling in the Clippings Flange Exhaust Header.
+include <Clippings_Exhaust_Header.scad>;
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
@@ -144,7 +146,7 @@ translate([-32.5, 75, 10.325]) rotate([0, 180, 90]) One_Inch_Flange_Plug();
 translate([0, 107.5, 13.425]) rotate([0, 180, 90]) One_Inch_Flange_Plug();
 // The Body Skirt that screws on beneath the main body.
 Body_Skirt();
-// The Ball Joint Receivers for adjustment screws located on the top cover.
+// The Ball Joint Receivers.
 translate([-32.5, 75, 19.5]) rotate([0, 0, 90])  Ball_Joint_Receiver();
 translate([32.5, 75, 19.5]) rotate([0, 0, 90]) Ball_Joint_Receiver();
 translate([0, 107.5, 19.5]) rotate([0, 0, 90]) Ball_Joint_Receiver();
@@ -156,9 +158,9 @@ Attachment_Hinge_Boss();
 translate([0, 150, 0]) rotate([0, 0, 180]) Attachment_Hinge_Boss();
 translate([75, 74.5, 0]) rotate([0, 0, 90]) Attachment_Hinge_Boss();
 // The Attachment Adjustment Arm Inserts.
-translate([-32.5, 75, 43.5]) Attachment_Adjustment_Arm_Insert();
-translate([32.5, 75, 43.5]) rotate([0, 0, 180]) Attachment_Adjustment_Arm_Insert();
-translate([0, 107, 43.5]) rotate([0, 0, 270]) Attachment_Adjustment_Arm_Insert();
+translate([-32.5, 75, 44.3]) Attachment_Adjustment_Arm_Insert();
+translate([32.5, 75, 44.3]) rotate([0, 0, 180]) Attachment_Adjustment_Arm_Insert();
+translate([0, 107, 44.3]) rotate([0, 0, 270]) Attachment_Adjustment_Arm_Insert();
 // The Attachment Adjustment Arms.
 translate([-58.75, 75, 38]) Attachment_Adjustment_Arm();
 translate([58.75, 75, 38]) rotate([0, 0, 180]) Attachment_Adjustment_Arm();
@@ -178,8 +180,8 @@ translate([58.75, 75, 38]) rotate([0, 0, 180]) Attachment_Adjustment_Arm_Ramp_In
 translate([0, 80.75, 38]) rotate([0, 0, 90]) Attachment_Adjustment_Arm_Ramp_Insert_Left();
 translate([0, 80.75, 38]) rotate([0, 0, 90]) Attachment_Adjustment_Arm_Ramp_Insert_Right();
 // The Attachment Adjustment Arm Crossheads.
-translate([-32.5, 69.9, 44.24]) rotate([0, 5, 0]) Attachment_Adjustment_Arm_Crosshead();
-translate([-32.5, 80.1, 44.24]) rotate([0, -5, 180]) Attachment_Adjustment_Arm_Crosshead();
+translate([-32.5, 69.875, 44.325]) rotate([0, 5, 0]) Attachment_Adjustment_Arm_Crosshead();
+translate([-32.5, 80.125, 44.325]) rotate([0, -5, 180]) Attachment_Adjustment_Arm_Crosshead();
 // The wheels.
 translate([-127, 105, 30]) Wheel();
 rotate([0, 0, 180]) translate([-127, -105, 30]) Wheel();
@@ -199,5 +201,5 @@ translate([-61.75, 47.5, 45]) rotate([0, 90, 0]) Rollover_Safety_Switch_Assembly
 // The Batteries.
 //translate([-85, 0, 150]) rotate([0, 0, 90]) Large_3s_Lipo_Battery();
 //translate([85, 0, 150]) rotate([0, 0, 90]) Large_3s_Lipo_Battery();
-
+translate([-32, 40, 13.5]) rotate([0, 0, 180]) Clippings_Flange_Exhaust_Header();
 // ----------------------------------------------------------------------------------------------------

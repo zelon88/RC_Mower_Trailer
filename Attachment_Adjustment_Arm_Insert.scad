@@ -31,9 +31,9 @@ module Attachment_Adjustment_Arm_Insert() {
       // Main body of pin.
       translate([0, 0, 0]) rotate([90, 0, 0]) cylinder($fn=48, r=1.5, h=13.5, center=true);
       // Front chamfer cap.
-      translate([0, 6.75, 0]) rotate([-90, 0, 0]) cylinder($fn=48, r1=1.5, r2=1.25, h=0.25); 
+      translate([0, 6.75, 0]) rotate([-90, 0, 0]) cylinder($fn=48, r1=1.5, r2=1.25, h=0.1625); 
       // Back chamfer cap.
-      translate([0, -6.75, 0]) rotate([90, 0, 0]) cylinder($fn=48, r1=1.5, r2=1.25, h=0.25);
+      translate([0, -6.75, 0]) rotate([90, 0, 0]) cylinder($fn=48, r1=1.5, r2=1.25, h=0.1625);
       // Create the center boss.
       translate([0, 0, 4]) cylinder($fn=48, r=2.95, h=4, center=true);
       // Taper the base of the upper portion of the center boss for strength.
@@ -53,16 +53,21 @@ module Attachment_Adjustment_Arm_Insert() {
     translate([0, -3.5, -2.5]) rotate([45, 0, 0]) cube([14, 0.7, 0.7], center=true);
     
     // Chamfer the left & right top & bottom edges along Y axis.
-    translate([ 6, 0,  2.5]) rotate([0, 45, 0]) cube([2.828, 9, 2.828], center=true);
-    translate([-6, 0,  2.5]) rotate([0, 45, 0]) cube([2.828, 9, 2.828], center=true);
-    translate([ 6, 0, -2.5]) rotate([0, 45, 0]) cube([2.828, 9, 2.828], center=true);
-    translate([-6, 0, -2.5]) rotate([0, 45, 0]) cube([2.828, 9, 2.828], center=true);
+    translate([ 5.75, 0,  2.5]) rotate([0, 45, 0]) cube([2.828, 9, 2.828], center=true);
+    translate([-5.75, 0,  2.5]) rotate([0, 45, 0]) cube([2.828, 9, 2.828], center=true);
+    translate([ 5.75, 0, -2.5]) rotate([0, 45, 0]) cube([2.828, 9, 2.828], center=true);
+    translate([-5.75, 0, -2.5]) rotate([0, 45, 0]) cube([2.828, 9, 2.828], center=true);
     
     // Chamfer the vertical corner edges along Z axis (tips of the Y axis wedges).
-    translate([ 6,  4.5, 0]) rotate([0, 0, 50]) cube([6, 6, 6], center=true);
-    translate([ 6, -4.5, 0]) rotate([0, 0, 40]) cube([6, 6, 6], center=true);
-    translate([-6,  4.5, 0]) rotate([0, 0, 40]) cube([6, 6, 6], center=true);
-    translate([-6, -4.5, 0]) rotate([0, 0, 50]) cube([6, 6, 6], center=true); } }
+    translate([ 5.75,  4.6, 0]) rotate([0, 0, 60]) cube([6, 6, 6], center=true);
+    translate([ 5.75, -4.6, 0]) rotate([0, 0, 30]) cube([6, 6, 6], center=true);
+    translate([-5.75,  4.6, 0]) rotate([0, 0, 30]) cube([6, 6, 6], center=true);
+    translate([-5.75, -4.6, 0]) rotate([0, 0, 60]) cube([6, 6, 6], center=true); 
+
+    // Cut off the front and back faces of the X surface.
+    translate([ 5.675,  0, 0]) cube([2, 4, 4], center=true);
+    translate([ -5.675, 0, 0]) cube([2, 4, 4], center=true);
+} }
 
 // Render the object.
 Attachment_Adjustment_Arm_Insert();
