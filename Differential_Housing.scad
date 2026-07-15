@@ -56,6 +56,7 @@ module Differential_Housing() {
       translate([0, -7.5, 53.85]) rotate([90, 0, 0]) cylinder($fn=96, r=11.875, h=2.5, center=true);
       // Top perpendicular support rib.
       translate([0, 0, 65]) cube([2.5, 17.5, 1.25], center=true);
+      translate([0, 0, 62.5]) cube([2.5, 17.5, 1.25], center=true);
       // Side perpendicular support ribs.
       translate([12, 0, 53]) cube([1.25, 20, 2.5], center=true);
       translate([-12, 0, 53]) cube([1.25, 20, 2.5], center=true); }
@@ -87,21 +88,49 @@ module Differential_Housing() {
     translate([0, 18, 45]) rotate([90, 0, 0]) cylinder($fn=28, r=1.22, h=36);
     translate([0, 18, 61]) rotate([90, 0, 0]) cylinder($fn=28, r=1.22, h=36); }
     
-  // Round pads, planetary shaft support, outer case, outer.
-  difference() { 
-    translate([10.5, 0, 53]) rotate([0, 90, 0]) cylinder(r1=5.5, r2=4.75, h=4.5, center=true); 
+  // Round pads, planetary shaft support, inner & outer case.
+  difference() {
+    union() { 
+      // Right side inner perpendicular support rib.
+      translate([9.875, 0, 53]) cube([1.25, 20, 2.5], center=true);
+      // Right side inner parallel support rib.
+      translate([8.75, 0, 53]) cube([1, 1.25, 13.675], center=true);
+      // Right side inner bearing standoff.
+      translate([10.5, 0, 53]) rotate([0, 90, 0]) cylinder(r1=5.5, r2=4.75, h=4.5, center=true); }
+    // Drill the through hole through the standoff.
     translate([0, 0, 53]) rotate([0, 90, 0]) cylinder($fn=64, r=3.03, h=100, center=true); }
 
   difference() { 
-    translate([-10.5, 0, 53]) rotate([0, 270, 0]) cylinder(r1=5.5, r2=4.75, h=4.5, center=true); 
+    union() {     
+      // Left side inner perpendicular support rib.
+      translate([-9.875, 0, 53]) cube([1.25, 20, 2.5], center=true);
+      // Left side inner parallel support rib.
+      translate([-8.75, 0, 53]) cube([1, 1.25, 13.675], center=true);
+      // Left side inner bearing standoff.
+      translate([-10.5, 0, 53]) rotate([0, 270, 0]) cylinder(r1=5.5, r2=4.75, h=4.5, center=true); }
+    // Drill the through hole through the standoff.
     translate([0, 0, 53]) rotate([0, 270, 0]) cylinder($fn=64, r=3.03, h=100, center=true); }
 
   difference() { 
-    translate([0, 0, 63.5]) rotate([0, 0, 0]) cylinder(r1=5.5, r2=4.75, h=4.5, center=true); 
+    union() {
+      // Top inner perpendicular support rib.
+      translate([0, 0, 62.875]) cube([2.5, 18, 1], center=true);
+      // Top inner parallel support rib.
+      translate([0, 0, 61.75]) cube([15, 1.25, 1], center=true);
+      // Top bearing standoff.
+      translate([0, 0, 63.5]) rotate([0, 0, 0]) cylinder(r1=5.5, r2=4.75, h=4.5, center=true); }
+    // Drill the through hole through the standoff.
     translate([0, 0, 64]) rotate([0, 0, 0]) cylinder($fn=64, r=3.03, h=100, center=true); }
 
   difference() { 
-    translate([0, 0, 43.55]) rotate([0, 0, 0]) cylinder(r1=5, r2=4.75, h=2.4, center=true); 
+    union() {     
+      // Bottom inner perpendicular support rib.
+      translate([0, 0, 43.125]) cube([2.5, 18, 1], center=true);
+      // Bottom inner parallel support rib.
+      translate([0, 0, 44.25]) cube([13.675, 1.25, 1], center=true);
+      // Bottom inner bearing standoff.
+      translate([0, 0, 43.55]) rotate([0, 0, 0]) cylinder(r1=5, r2=4.75, h=2.4, center=true); }
+    // Drill the through hole through the standoff.
     translate([0, 0, 64]) rotate([0, 0, 0]) cylinder($fn=64, r=3.03, h=100, center=true); }
 
   // Inside lip.
@@ -127,4 +156,4 @@ module Differential_Housing() {
 
 
 Differential_Housing();
-translate([0, 0, 53]) Differential_Assembly();
+//translate([0, 0, 53]) Differential_Assembly();
