@@ -32,7 +32,7 @@ The rotation of the motors is joined via a Center Differential. This linked-rota
 
 ![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Differential_Assembly_Rev-A1_7-15-2026_1.png)
 
-The differential itself is a modular 3D printable planetary unit measuring 21mm x 21mm x 21mm. It's assembly consists of 2 Output gears, 4 Planet Gears, & a core block. The assembly is supported by 10x thrust ball bearings, & 2 flanged ball bearings. Great care has been taken in the design to ensure the differential assembly is isolated from shock, over-torque conditions, or unsupported side-loads.
+The differential itself is a modular 3D printable planetary unit measuring 21mm x 21mm x 21mm. It's assembly consists of 2 Output gears, 4 Planet Gears, & a core block. The assembly is supported by 10x thrust ball bearings, & 2 flanged ball bearings. Great care has been taken during design to ensure the differential assembly is isolated from shock, over-torque conditions, or unsupported side-loads.
 
 ![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Differential_Assembly_Rev-A1_7-15-2026_2.png)
 
@@ -70,7 +70,7 @@ When using only one input & one output terminal observed current is similar to a
 
 ### Multi-Mode Self-Leveling Suspension
 
-The mower features independant self-leveling suspension on all 4 wheels & side attachments. The suspension features prominent adjustment screws that enable the operator to quickly & easily adjust cutting height & side attachment height. The geometry of the suspension is designed to be identical between the front, rear, and side suspension arms to simplify the assembly.
+The mower features independant self-leveling suspension on all 4 wheels & side attachments. The suspension features prominent adjustment screws that enable the operator to quickly & easily adjust cutting height & side attachment height. The geometry of the suspension is designed to be identical between front, rear, and side suspension arms to simplify assembly & field repair.
 
 ![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Attachment_Adjustment_Arm_Assembly_Rev-A1_7-15-2026_3.png)
 
