@@ -2,9 +2,9 @@
 
 ## WORK IN PROGESS!!!
 
-A set of SCAD models for a tow-behind lawn mower attachment for R/C trucks.
+A set of SCAD models to 3D Print & Manufacture your own tow-behind lawn mower for R/C trucks.
 
-## Main Features
+## Features At-A-Glance
 
 * A hybrid assembly consisting of 3D printed & manufactured parts.
 * Complete with detailed manufacturing & assembly instructions.
@@ -20,7 +20,23 @@ A set of SCAD models for a tow-behind lawn mower attachment for R/C trucks.
 * Self-leveling suspension with adjustable ride height.
 * Integrated hoppers collect grass clippings and dump them out at the push of a button. 
 
-## Safety Features
+## Features In-Depth
+
+### Counter Rotating Blade Drivetrain
+
+The cutting blades are powered in opposite directions by a pair of "Silver Can" brushed 540 DC electric motors typically found in entry-level R/C vehicles. This motor is inexpensive, reliable, and offers decent performance. The gearbox accepts standard size, standard rotation motors, so most R/C motors will fit.
+
+![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Center_Bracket_Assembly_Rev-A1_7-15-2026_1.png)
+
+The rotation of the motors is joined via a Center Differential. This linked-rotation configuration allows for the equalization of impacts or over-torque events between both blades & both motors. The rotation of the blades being linked together acts means one blade acts as a flywheel & intertial damper for the other. It also means faster blade speed recovery after an impact, as each blade has torque from both motors. Finally, when our system impacts heavy debris; not all energy is lost like in separate blade systems. In our system, the impact energy is transferred to the opposite blade, actually increasing it's velocity. This temporary over-speed condition acts as an intertial "capacitor" that stores energy to be distributed back to the slower blade via the center differential.
+
+![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Differential_Assembly_Rev-A1_7-15-2026_1.png)
+
+The differential itself is a modular 3D printable planetary unit measuring 21mm x 21mm x 21mm. It's assembly consists of 2 Output gears, 4 Planet Gears, & a core block. The assembly is supported by 10x thrust ball bearings, 2 flanged ball bearings. Great care has been taken in the design to ensure the differential assembly is isolated from shock, over-torque conditions, or unsupported side-loads.
+
+![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Differential_Assembly_Rev-A1_7-15-2026_2.png)
+
+To compare; in systems with fully separate blade drive systems the energy contained within any blade is only equal to that of the mass of one blade. In our system; each blade contains the full potential energy of both rotating blades. When our system impacts heavy debris our blades keep more of their velocity and stability.
 
 ### Steel Reinforced Chassis
 
@@ -32,9 +48,9 @@ The mower chassis is comprised of a steel frame with a thickness between 3.175mm
 
 ![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Body_Half_Rev-A1_7-8-2026_2.png)
 
-### Captured Blade Design
+### Captured Blade Carrier Design
 
-The mower blades are installed via a very long grade 8 bolt which traverses a through hole in the center of the blade. This bolt is then installed into the chassis from the bottom-up through three stages of ball bearings.
+The cutting blades are made from 3.625mm thick steel flat bar. The blades rotate in opposite directions to minimize vibration and prevent build-up of gyroscopic forces that could destabilize the mower. The blades are installed via a very long grade 8 bolt which traverses a through hole in the center of the blade. This bolt is then installed into the chassis from the bottom-up through three stages of ball bearings.
 
 ![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Blade_Assembly_Rev-A1_7-8-2026_1.png)
 

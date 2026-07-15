@@ -1,4 +1,8 @@
 // Assembly Instructions:
+// 1. Slide an M3 Compression Washer & a Flanged 5x8mm Bearing onto the the Output Shaft of an Output Gear.
+//  1a. The flange of the bearing should be facing the gear.
+//  1b. The small diameter of the Compression Washer should face towards the bearing.
+//  1c. The large diameter of the Compression Washer should face towards the Output Gear.
 // 1. Install one Output Gear into the Differential Housing.
 // 2. Slide the Output Gear through bolt through the housing and output gear, but do not install the nut.
 // 3. Slide the Core Block over the Output Gear through bolt. 
@@ -6,77 +10,91 @@
 // 4. Install the Planet Gears into the housing with two F3-6-2.8M Thrust Bearings per gear, one per side.
 //  4a. Each Planet Gear should have 2 bearings each.
 // 5. Install one M3 Compression Washer on the outside face of the outer F3-6-2.8M thrust bearing on each Planet Gear.
-//  5a. The large diameter of the Compression Washer should face towards the bearing.
+//  5a. The small diameter of the Compression Washer should face towards the Planet Gear.
+//  5b. The large diameter of the Compression Washer should face towards the bearing.
 // 5. Install flat washers & a tiny amount of liquid thread locker onto the Planet Gear screws.
 // 6. Install each Planet Gear Screw through each Planet Gear. 
-//  6a. Each screws should pass through the Differential Housing, a Compression Washer, a F3-6-2.8M Thrust Bearing, a Planet Gear, a second F3-6-2.8M Thrust Bearing, & finally thread snugly into the Core Block.
-// 7. Slide the second Output Gear onto the Output Gear bolt.
-// 8. Install the Differential Gear Cover.
-// 9. Slide 
-
+//  6a. Each Planet Gear screws should pass through the Differential Housing, a Compression Washer, a F3-6-2.8M Thrust Bearing, a Planet Gear, a second F3-6-2.8M Thrust Bearing, & finally thread snugly into the Core Block.
+// 11. Slide an M3 Compression Washer & a Flanged 5x8mm Bearing onto the the Output Shaft of an Output Gear.
+//  11a. The flange of the bearing should be facing the gear.
+//  11b. The small diameter of the Compression Washer should face towards the bearing.
+//  11c. The large diameter of the Compression Washer should face towards the Output Gear.
+// 12. Slide the second Output Gear onto the Output Gear bolt.
+// 13. Install the Differential Gear Cover.
+//  13a. The cover rotates to lock into place.
+//  13b. The cover is fully seated & locked into place when all Differential Housing screw holes are fully lined up.
+// 14. Install the Differential Housing into the Center Bracket.
+// 15. Install the Differential Housing mounting screws.
 
 // Include the specific script requested
 include <Workfiles/Gears.scad>;
 include <Workfiles/Bearings.scad>;
 
-// --- MANDATORY MICRO GEOMETRY CONSTRAINTS (Gears only) ---
+// --- MANDATORY GEOMETRY CONSTRAINTS ---
+// The following variables are a reference to the clearance allowed inside the Differential Housing.
+
+// The maximum hypothetical diameter that all moving parts must stay within.
+// Applies strictly to the internal gears.
 max_diameter = 21.75;
-max_width    = 14.50; // Applies strictly to the internal gear core structure
+// The maximum width that all moving parts must stay within.
+// Applies strictly to the internal gears.
+max_width = 14.50;
 
-output_shaft_dia = 5.0;   
-planet_shaft_dia = 6.0;   
-num_planets      = 4;
+// --- BASIC CONSTRAINTS ---
+// The following variables are adjustable and from the dimensional requirements of the assembly.
+// Changes to these variables will require significant adjustment to integrate.
 
-// Extension distance beyond the housing constraints for bearings/casings
-shaft_extension  = 10.0; 
-
-// --- UNLOCKED SHAFT INTERFACE TUNING ---
-flat_width     = 2.50;    
-
-// --- BEARING POSITION ADJUSTMENT ---
-// Change this value to bump the 5x8 bearings outward or inward along the shafts
+// The diameter of the Output Shafts, measured in mm.
+output_shaft_dia = 5.0;
+// The diameter of the Planet Shafts, measured in mm.
+planet_shaft_dia = 6.0;
+// Extension distance beyond the housing constraints for bearings/casings, measured in mm.
+shaft_extension = 5.0; 
+// Offset the 5x8 bearings outward or inward along the Output Shafts, measured in mm.
 bearing_offset = 5.75; 
-
-// --- CLEARANCE FACTOR ---
+// Adjust mesh clearance.
 mesh_clearance = 0.45; 
 
 // --- CALCULATED PARAMETERS ---
-side_teeth   = 16;
-planet_teeth = 12;
-mm_per_tooth = 3.0; 
+// The following variables are derived from the dimensional requirements of the assembly.
+// Changes to these variables will require significant geometric adjustments to integrate.
 
+// The number of teeth on each Output Gear.
+side_teeth = 16;
+// The number of teeth on each Planet Gear.
+planet_teeth = 12;
+// The space between each tooth, measured in mm.
+mm_per_tooth = 3.0;
+// The total number of Planet Gears.
+num_planets = 4;
+// The width of the flats cut into the Output Shafts, measured in mm.
+flat_width = 2.50;
 // Expanded addendum calculation to let the tooth shapes grow longer
 addendum = (mm_per_tooth / 3.14159265) * 1.5;
-
+// The diameter of the Output Gears, measured in mm.
 side_pd   = (side_teeth * mm_per_tooth) / 3.14159265;   // ~15.28mm
+// The diameter of the Planet Gears, measured in mm..
 planet_pd = (planet_teeth * mm_per_tooth) / 3.14159265; // ~11.46mm
-
-// Face width of the gear teeth
+// The face width of the gear teeth, measured in mm.
 gear_h = 3.0;
-
-// Calculate scaling factor for tapering teeth toward the apex
+// Calculate scaling factor for tapering teeth toward the apex.
 side_outer_r = side_pd / 2;
 side_inner_r = side_outer_r - gear_h;
 side_scale   = side_inner_r / side_outer_r;
-
 planet_outer_r = planet_pd / 2;
 planet_inner_r = planet_outer_r - gear_h;
 planet_scale   = planet_inner_r / planet_outer_r;
-
-// Distance from origin including our custom clearance padding
+// The distance from origin including clearance padding.
 side_distance   = (planet_pd / 2) + mesh_clearance; 
 planet_distance = (side_pd / 2) + mesh_clearance;   
-
-// Dynamic calculation ensuring the shaft fills the main housing boundary and adds the 10mm extension
+// Dynamic calculation ensuring the shaft fills the main housing boundary and adds the extension specified above.
 total_shaft_len = ((max_width / 2) - side_distance) + shaft_extension;
-
-// SAFETY CHECK: Prevents the flat width from exceeding the physical shaft diameter (caps at 99% of shaft size)
+// Cap the flat size at 99% of theOutput Shaft width to prevent the flat width from exceeding the shaft diameter.
 safe_flat_width = min(flat_width, output_shaft_dia * 0.99);
-
 // MATHEMATICAL COMPASS OFFSET: Symmetrically tracks cutting depth to guarantee flat footprint matches flat_width cleanly
 flat_cut_offset = sqrt(pow(output_shaft_dia / 2, 2) - pow(safe_flat_width / 2, 2));
-
-$fn = 64; 
+// Set the rendering resolution for the entire assembly.
+$fn = 128; 
 
 // ====================================================================
 // MODULES
