@@ -87,7 +87,7 @@ The same suspension logic applies to the side attachment suspension assembly. Th
 
 Damping is achieved via friction dampers integrated into the Attachment Adjustment Arm Crossheads. The crossheads bear the load of the suspension from the suspension arm to the adjustment screw. They feature grease pockets, grease galleys, calculated surface area & carefully crafted geometry to optimize load handling & damping characteristics in an especially reliable & cost effective way. 
 
-![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/AttachmentArm_Crosshead_Rev-A1_7-15-2026_1.png)
+![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Attachment_Arm_Crosshead_Rev-A1_7-15-2026_1.png)
 
 ## More Screenshots
 
