@@ -72,7 +72,7 @@ When using only one input & one output terminal observed current is similar to a
 
 The mower features independant self-leveling suspension on all 4 wheels & side attachments. The suspension features prominent adjustment screws that enable the operator to quickly & easily adjust cutting height & side attachment height. The geometry of the suspension is designed to be identical between front, rear, and side suspension arms to simplify assembly & field repair.
 
-![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Attachment_Adjustment_Arm_Assembly_Rev-A1_7-15-2026_3.png)
+![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Attachment_Arm_Assembly_Rev-A1_7-15-2026_3.png)
 
 The geometry for the suspension is contained in modular "Ramp Inserts" which feature a reversible design. When these inserts are installed into the suspension arms in the "reversed" position, the damping behaviour of the suspension is altered significantly.
 
