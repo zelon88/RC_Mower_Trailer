@@ -68,17 +68,26 @@ When using only one input & one output terminal observed current is similar to a
 
 ![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Rollover_Safety_Assembly_Rev-A1_7-8-2026_2.png)
 
-### Self Leveling Suspension
+### Multi-Mode Self-Leveling Suspension
 
 The mower features independant self-leveling suspension on all 4 wheels & side attachments. The suspension features prominent adjustment screws that enable the operator to quickly & easily adjust cutting height & side attachment height. The geometry of the suspension is designed to be identical between the front, rear, and side suspension arms to simplify the assembly.
 
+![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Attachment_Adjustment_Arm_Assembly_Rev-A1_7-15-2026_3.png)
+
 The geometry for the suspension is contained in modular "Ramp Inserts" which feature a reversible design. When these inserts are installed into the suspension arms in the "reversed" position, the damping behaviour of the suspension is altered significantly.
 
-In the "**Default**" ramp insert position, the mower will "**Follow The Ground**." In this configuration the wheel will primarily travel and absorb bumps in the downward direction only. The adjusment screws that set height will set the "absolute floor" for ride-height that the suspension will not allow height to go beneath. When one wheel falls into a rut, that wheel will be allowed to gently follow the rut, and recover to it's original position natuarally. This default configuration allows each suspension arm to independently absorb low spots in terrain without the entire body "tilting" or the blades "digging" into the ground. The mower will seem to be "latched" to the ground. This configuration is best suited for relatively smooth lawns.
+![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Attachment_Adjustment_Arm_Assembly_Rev-A1_7-15-2026_1.png)
+![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Attachment_Adjustment_Arm_Assembly_Rev-A1_7-15-2026_2.png)
 
-In the "**Reversed**" ramp insert position, the mower will "**Stay Level**." In this configuration the wheel will travel and absorb bumps in the both the upward and downward directions. The adjusment screws that set height will set the "absolute ceiling" for ride-height that the suspension will not allow height to go above. Due to the spring rate being very low, the result is the suspension will sag somewhere in the middle of it's ride height. This will allow the wheel to travel in both directions, with the screw effectively setting a middle resting position for the suspension. This reversed configuration allows each suspension arm to independently absorb high spots and low spots in extremely uneven terrain, but with with greater risk for the body "tilting" or the blades "digging" into the ground. The mower will seem to be "floating" over the ground. This configuration is best suited for tall grass, uneven terrain, or heavy brush.
+In the "**Default**" ramp insert position, the mower will "**Follow The Ground**." In this configuration the wheel will primarily travel and absorb bumps in the downward direction only. The adjusment screws that set height will set the "absolute floor" for ride-height that the suspension will not allow height to go beneath. When one wheel falls into a rut, that wheel will be allowed to gently follow the rut, and recover to it's original position naturally. The default configuration allows each suspension arm to independently absorb low spots in terrain without the entire body "tilting" or the blades "digging" into the ground. The mower will seem to be "latched" to the ground. This configuration is best suited for relatively smooth lawns.
+
+In the "**Reversed**" ramp insert position, the mower will "**Stay Level**." In this configuration the wheel will travel and absorb bumps in the both the upward and downward directions. The adjusment screws that set height will set the "absolute ceiling" for ride-height that the suspension will not allow height to go above. Due to the spring rate being very low, the result is the suspension will sag somewhere in the middle of it's ride height. This will allow the wheel to travel and absorb bumps in both the upward & downward directions. The adjustment screw effectively sets a middle resting position for the suspension. The reversed configuration allows each suspension arm to independently absorb high spots and low spots in extremely uneven terrain, but with greater risk for the body "tilting" or the blades "digging" into the ground. The mower will seem to be "floating" over the ground. This configuration is best suited for tall grass, uneven terrain, or heavy brush.
 
 The same suspension logic applies to the side attachment suspension assembly. The parts and geometry is all identical, but the "Reversed" is used as the default ramp insert position..
+
+Damping is achieved via friction dampers integrated into the Attachment Adjustment Arm Crossheads. The crossheads bear the load of the suspension from the suspension arm to the adjustment screw. They feature grease pockets, grease galleys, calculated surface area & carefully crafted geometry to optimize load handling & damping characteristics in an especially reliable & cost effective way. 
+
+![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Attachment_Adjustment_Arm_Crosshead_Rev-A1_7-15-2026_1.png)
 
 ## More Screenshots
 
