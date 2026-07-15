@@ -1,30 +1,38 @@
 // Assembly Instructions:
 // 1. Slide an M3 Compression Washer & a Flanged 5x8mm Bearing onto the the Output Shaft of an Output Gear.
-//  1a. The flange of the bearing should be facing the gear.
-//  1b. The small diameter of the Compression Washer should face towards the bearing.
-//  1c. The large diameter of the Compression Washer should face towards the Output Gear.
-// 1. Install one Output Gear into the Differential Housing.
-// 2. Slide the Output Gear through bolt through the housing and output gear, but do not install the nut.
-// 3. Slide the Core Block over the Output Gear through bolt. 
-//  3a. Take care to install the Core Block in the proper orientation.
-// 4. Install the Planet Gears into the housing with two F3-6-2.8M Thrust Bearings per gear, one per side.
-//  4a. Each Planet Gear should have 2 bearings each.
-// 5. Install one M3 Compression Washer on the outside face of the outer F3-6-2.8M thrust bearing on each Planet Gear.
-//  5a. The small diameter of the Compression Washer should face towards the Planet Gear.
-//  5b. The large diameter of the Compression Washer should face towards the bearing.
-// 5. Install flat washers & a tiny amount of liquid thread locker onto the Planet Gear screws.
-// 6. Install each Planet Gear Screw through each Planet Gear. 
-//  6a. Each Planet Gear screws should pass through the Differential Housing, a Compression Washer, a F3-6-2.8M Thrust Bearing, a Planet Gear, a second F3-6-2.8M Thrust Bearing, & finally thread snugly into the Core Block.
-// 11. Slide an M3 Compression Washer & a Flanged 5x8mm Bearing onto the the Output Shaft of an Output Gear.
-//  11a. The flange of the bearing should be facing the gear.
-//  11b. The small diameter of the Compression Washer should face towards the bearing.
-//  11c. The large diameter of the Compression Washer should face towards the Output Gear.
-// 12. Slide the second Output Gear onto the Output Gear bolt.
-// 13. Install the Differential Gear Cover.
-//  13a. The cover rotates to lock into place.
-//  13b. The cover is fully seated & locked into place when all Differential Housing screw holes are fully lined up.
-// 14. Install the Differential Housing into the Center Bracket.
-// 15. Install the Differential Housing mounting screws.
+//  1-A. The flange of the bearing should be facing the gear.
+//  1-B. The small diameter of the Compression Washer should face towards the bearing.
+//  1-C. The large diameter of the Compression Washer should face towards the Output Gear.
+// 2. Install one Output Gear into the Differential Housing.
+// 3. Slide the Output Gear through bolt through the housing and output gear, but do not install the nut.
+// 4. Slide the Core Block over the Output Gear through bolt. 
+//  4-A. Take care to install the Core Block in the proper orientation.
+// 5. Install the Planet Gears into the housing with two F3-6-2.8M Thrust Bearings per gear, one per side.
+//  5-A. Each Planet Gear should have 2 bearings each.
+// 6. Install one M3 Compression Washer on the outside face of the outer F3-6-2.8M thrust bearing on each Planet Gear.
+//  6-A. The small diameter of the Compression Washer should face towards the Planet Gear.
+//  6-B. The large diameter of the Compression Washer should face towards the bearing.
+// 7. Test fit each of the 4 Planet Gear Screws through each Planet Gear.
+//  7-A. Install equal number of flat washers on each side of each planet screw until there is no more slack in the gears.
+//  7-B. Each Planet Gear screws should pass through;
+//   7-B - Differential Housing, 
+//   7-B - Compression Washer, 
+//   7-B - a F3-6-2.8M Thrust Bearing, 
+//   7-B - a Planet Gear, 
+//   7-B - another F3-6-2.8M Thrust Bearing, 
+//   7-B - an equal amount of flat washers on either side of the thrust bearings, 
+//   7-B - and finally thread snugly into the Core Block.
+//  7-C Apply a tiny amount of liquid thread locker onto the Planet Gear screws prior to final assembly.
+// 8. Slide an M3 Compression Washer & a Flanged 5x8mm Bearing onto the the Output Shaft of the remaining Output Gear.
+//  8-A. The flange of the bearing should be facing the gear.
+//  8-B. The small diameter of the Compression Washer should face towards the bearing.
+//  8-C. The large diameter of the Compression Washer should face towards the Output Gear.
+// 9. Slide the second Output Gear onto the Output Gear bolt.
+// 10. Install the Differential Gear Cover.
+//  10-A. The cover rotates to lock into place.
+//  10-B. The cover is fully seated & locked into place when all Differential Housing screw holes are fully lined up.
+// 11. Install the Differential Housing into the Center Bracket.
+// 12. Install the Differential Housing mounting screws.
 
 // Include the specific script requested
 include <Workfiles/Gears.scad>;
@@ -110,24 +118,32 @@ module cross_block_core() {
             
             // 1. Through-hole along Y-Axis (Hardcoded explicit matrix)
             rotate([0, 90, 0])
-                cylinder(h=10, r=1.5, center=true);
+                cylinder(h=10, r=1.43, center=true);
                 
             // 2. Through-hole along X-Axis (Hardcoded explicit matrix)
             rotate([90, 0, 0])
-                cylinder(h=10, r=1.5, center=true);
+                cylinder(h=10, r=1.43, center=true);
                 
             // 3. Through-hole along Z-Axis (Concentric hole for vertical planet pair)
-            cylinder(h=10, r=1.5, center=true);
+            translate([0, 0, 0]) cylinder(h=10, r=1.43, center=true);
+
+
             
-            // Left/Right side recesses for side gear thrust bearings
-            // 6.1mm diameter, increased to 2.0mm deep on both side faces along Y
-            translate([0, 6.36/2 - 2.0, 0])
-                rotate([0, 90, 0])
-                    cylinder(h=2.1, r=6.1/2, center=false);
-                    
-            translate([0, -6.36/2, 0])
-                rotate([0, 90, 0])
-                    cylinder(h=2.1, r=6.1/2, center=false);
+            // 1. Through-hole along Y-Axis (Hardcoded explicit matrix)
+            translate([4, 0, 0]) rotate([0, 90, 0])
+                cylinder(h=2, r=3.02, center=true);
+            translate([-4, 0, 0]) rotate([0, 90, 0])
+                cylinder(h=2, r=3.02, center=true);
+                
+            // 2. Through-hole along X-Axis (Hardcoded explicit matrix)
+            translate([0, 4, 0]) rotate([90, 0, 0])
+                cylinder(h=2, r=3.02, center=true);
+            translate([0, -4, 0]) rotate([90, 0, 0])
+                cylinder(h=2, r=3.02, center=true);
+
+            // 3. Through-hole along Z-Axis (Concentric hole for vertical planet pair)
+            translate([0, 0, 4]) cylinder(h=2, r=3.02, center=true);
+            translate([0, 0, -4]) cylinder(h=2, r=3.02, center=true);
         }
     }
 }
@@ -202,7 +218,7 @@ module planet_bevel_gear() {
     }
 }
 
-module differential_assembly() {
+module Differential_Assembly() {
     // 1. Core Manifold Block (Locks center vacancy)
     cross_block_core();
 
@@ -217,8 +233,8 @@ module differential_assembly() {
             flanged_bearing_5x8x2_5();
             
     // Right Inner Thrust Bearing (Seated 2.0mm inside the block face along Y)
-    translate([0, 3.18 - 2.0, 0])
-        rotate([0, 90, 0]) // Hardcoded explicit matrix
+    translate([0, 2, 0])
+        rotate([0, 90, 90]) // Hardcoded explicit matrix
             f3_6_2_8m_bearing();
 
     // 3. Left Side Gear (Positioned along -Y, pointing toward center)
@@ -232,8 +248,8 @@ module differential_assembly() {
             flanged_bearing_5x8x2_5();
             
     // Left Inner Thrust Bearing (Seated 2.0mm inside the block face along Y)
-    translate([0, -3.18 + 2.0, 0])
-        rotate([0, 90, 0]) // Hardcoded explicit matrix
+    translate([0, -2, 0])
+        rotate([0, 90, -90]) // Hardcoded explicit matrix
             f3_6_2_8m_bearing();
 
     // 4. 4x Cross-Planet Bevel Gears & Bearing Stacks (Arranged in the X-Z plane)
@@ -257,4 +273,21 @@ module differential_assembly() {
 // ====================================================================
 // --- MAIN ASSEMBLY ---
 // ====================================================================
-differential_assembly();
+
+// Render the object for printing.
+// Comment or uncomment as needed.
+// The Bevel Gears.
+//translate([19.5, 4, 0]) rotate([0, 0, 12.5]) planet_bevel_gear();
+//translate([-19.5, 4, 0]) rotate([0, 0, -12.5]) planet_bevel_gear();
+//translate([7.5, 7.5, 0]) planet_bevel_gear();
+//translate([-7.5, 7.5, 0]) planet_bevel_gear();
+// The Output Gears.
+//translate([10, -7.5, gear_h]) rotate([0, 180, 0]) side_gear_with_shaft();
+//translate([-10, -7.5, gear_h]) rotate([0, 180, 0]) side_gear_with_shaft();
+// The Core Block.
+//translate([0, 0, 6.58 / 2]) rotate([0, 0, 45]) cross_block_core();
+
+
+// Render the object.
+// Comment or uncomment as needed.
+Differential_Assembly();
