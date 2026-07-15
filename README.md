@@ -76,8 +76,8 @@ The mower features independant self-leveling suspension on all 4 wheels & side a
 
 The geometry for the suspension is contained in modular "Ramp Inserts" which feature a reversible design. When these inserts are installed into the suspension arms in the "reversed" position, the damping behaviour of the suspension is altered significantly.
 
-![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Attachment_Adjustment_Arm_Assembly_Rev-A1_7-15-2026_1.png)
-![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Attachment_Adjustment_Arm_Assembly_Rev-A1_7-15-2026_2.png)
+![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Attachment_Arm_Assembly_Rev-A1_7-15-2026_1.png)
+![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Attachment_Arm_Assembly_Rev-A1_7-15-2026_2.png)
 
 In the "**Default**" ramp insert position, the mower will "**Follow The Ground**." In this configuration the wheel will primarily travel and absorb bumps in the downward direction only. The adjusment screws that set height will set the "absolute floor" for ride-height that the suspension will not allow height to go beneath. When one wheel falls into a rut, that wheel will be allowed to gently follow the rut, and recover to it's original position naturally. The default configuration allows each suspension arm to independently absorb low spots in terrain without the entire body "tilting" or the blades "digging" into the ground. The mower will seem to be "latched" to the ground. This configuration is best suited for relatively smooth lawns.
 
@@ -87,7 +87,7 @@ The same suspension logic applies to the side attachment suspension assembly. Th
 
 Damping is achieved via friction dampers integrated into the Attachment Adjustment Arm Crossheads. The crossheads bear the load of the suspension from the suspension arm to the adjustment screw. They feature grease pockets, grease galleys, calculated surface area & carefully crafted geometry to optimize load handling & damping characteristics in an especially reliable & cost effective way. 
 
-![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Attachment_Adjustment_Arm_Crosshead_Rev-A1_7-15-2026_1.png)
+![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/AttachmentArm_Crosshead_Rev-A1_7-15-2026_1.png)
 
 ## More Screenshots
 
