@@ -22,7 +22,6 @@
 //    A rudimentary parametric model of a standard R/C hobby servo for use in assemblies.
 //    Dimensions approximate a standard full-size servo (e.g. Futaba S3003 / equivalent).
 //    Not intended for printing — reference/clearance model only.
-//    Key dimensions:
 // FILE NAME: RC_Servo.scad
 // ----------------------------------------------------------------------------------------------------
 
@@ -63,7 +62,6 @@ module RC_Servo_Holes() {
     cylinder($fn=28, r=tab_hole_r, h=tab_t + 2, center=false); }
 
 module RC_Servo() {
-
   // Body dimensions (standard full-size servo, approx Futaba S3003).
   body_l = 40.5; // X - Body length.
   body_w = 20.5; // Y - Body width.
@@ -79,12 +77,12 @@ module RC_Servo() {
   shaft_r = 24; // "Radius" of the arc of the output shaft.
   shaft_h = 2.5; // Height of the arm above boss top.
   shaft_w = 6.5; // Width of the arm above boss top.
-  
+
   // Connector (3-pin, 2.54mm pitch).
   conn_w = 7; // X width of connector block.
   conn_d = 4; // Y depth of connector block.
   conn_h = 4; // Z height of connector block.
-  
+
   difference() {
     union() {
       // Main body block.
@@ -104,8 +102,8 @@ module RC_Servo() {
 
       // Rear connector block.
       translate([body_l, (body_w - conn_w) / 2, (body_h / 5) - conn_h])
-        cube([conn_d, conn_w, conn_h], center=false); } 
-    
+        cube([conn_d, conn_w, conn_h], center=false); }
+
     // Drill the holes through the mounting tabs.
     RC_Servo_Holes(); } }
 
