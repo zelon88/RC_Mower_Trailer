@@ -13,13 +13,13 @@
 // ----------------------------------------------------------------------------------------------------
 // PART INFORMATION
 
-// NAME:  Body Assembly
+// NAME:  Body Half Assembly
 // REVISION:  A1
 // START DATE:  11/22/2021
 // CURRENT VERSION DATE:  5/28/2026
 // AUTHOR:  Justin Grimes (@zelon88)
-// DESCRIPTION:  
-//    Half of the main body assembly for the mower assembly. To aide in rendering.
+// DESCRIPTION:
+//    Half of the main body assembly for the mower assembly. To aid in rendering.
 //    Made from two halves and screwed together around a central gearbox.
 //    This part is two 150mm x 150mm parts, the largest my printer can hold.
 // FILE NAME: Body_Half_Assembly.scad
@@ -50,6 +50,12 @@ include <Workfiles/RC_Servo.scad>;
 include <Workfiles/RC_Batteries.scad>;
 // A module for calling in the Center Bracket.
 include <Center_Bracket.scad>;
+// A module for calling in the Center Differential Gears.
+include <Differential_Gears.scad>;
+// A module for calling in the Center Differential Housing.
+include <Differential_Housing.scad>;
+// A module for calling in the Center Differential Housing Cap.
+include <Differential_Housing_Cap.scad>;
 // A module for calling in the Center Bracket Cover.
 include <Top_Cover.scad>;
 // A module for calling in the Center Bracket Skid Plate.
@@ -57,7 +63,7 @@ include <Center_Bracket_Skid_Plate.scad>;
 // A module for calling in the Center Bracket Support.
 include <Center_Bracket_Support.scad>;
 // A module for calling in half of the Body.
-include <Body_Half.scad>
+include <Body_Half.scad>;
 // A module for calling in the Ball Joint Ball.
 include <Ball_Joint_Ball.scad>;
 // A module for calling in the Ball Joint Receiver.
@@ -106,7 +112,7 @@ include <Hopper_Bracket.scad>;
 include <Hopper_Base.scad>;
 // A module for calling in the Rollover Safety Switch Assembly.
 include <Rollover_Safety_Switch.scad>;
-// A modue for calling in the Clippings Flange Exhaust Header.
+// A module for calling in the Clippings Flange Exhaust Header.
 include <Clippings_Exhaust_Header.scad>;
 // ----------------------------------------------------------------------------------------------------
 
@@ -115,11 +121,19 @@ include <Clippings_Exhaust_Header.scad>;
 
 // The Center Bracket that houses the motors & gearbox.
 Center_Bracket();
+// The Center Bracket Top Cover.
+//Top_Cover();
 // The Center Bracket Skid Plate that protects the bottom of the Center Bracket.
 Center_Bracket_Skid_Plate();
 rotate([0, 0, 180]) Center_Bracket_Skid_Plate();
 // The Dual Electric Motors.
 Motors();
+// The Center Differential Housing.
+Differential_Housing();
+// The Center Differential Housing Cap.
+Differential_Housing_Cap();
+// The Center Differential Gears.
+translate([0, 0, 53]) Differential_Assembly();
 // The Servo Brackets.
 translate([46, 36, 86.65]) rotate([90, 0, 90]) RC_Servo_Bracket_Left();
 translate([46, 36, 68.35]) rotate([180, 270, 0]) RC_Servo_Bracket_Right();
@@ -131,8 +145,8 @@ translate([-68.5, -20.25, 97.75]) rotate([-90, 90, 180]) RC_Servo();
 // The Center Bracket Support.
 rotate([0, 0, 180]) Center_Bracket_Support();
 // The Body that houses the adjustment screws & blade bearings.
-Body_Half ();
-rotate([0, 0, 180]) Body_Half ();
+Body_Half();
+rotate([0, 0, 180]) Body_Half();
 // The Body Stiffeners that attach to the top & bottom of the main body.
 translate([0, 40, 22.25]) rotate([0, 0, 180]) Body_Stiffener_Inner();
 translate([0, 110, 22.25]) Body_Stiffener_Outer();
@@ -147,7 +161,7 @@ translate([0, 107.5, 13.425]) rotate([0, 180, 90]) One_Inch_Flange_Plug();
 // The Body Skirt that screws on beneath the main body.
 Body_Skirt();
 // The Ball Joint Receivers.
-translate([-32.5, 75, 19.5]) rotate([0, 0, 90])  Ball_Joint_Receiver();
+translate([-32.5, 75, 19.5]) rotate([0, 0, 90]) Ball_Joint_Receiver();
 translate([32.5, 75, 19.5]) rotate([0, 0, 90]) Ball_Joint_Receiver();
 translate([0, 107.5, 19.5]) rotate([0, 0, 90]) Ball_Joint_Receiver();
 // The center hub Bearing Carriers.

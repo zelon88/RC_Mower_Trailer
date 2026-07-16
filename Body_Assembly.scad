@@ -18,7 +18,7 @@
 // START DATE:  11/22/2021
 // CURRENT VERSION DATE:  5/25/2026
 // AUTHOR:  Justin Grimes (@zelon88)
-// DESCRIPTION:  
+// DESCRIPTION:
 //    The main body assembly for the mower assembly.
 //    Made from two halves and screwed together around a central gearbox.
 //    This part is two 150mm x 150mm parts, the largest my printer can hold.
@@ -45,7 +45,7 @@
 // A module for creating the Center Bracket for crafting mating surfaces.
 include <Center_Bracket.scad>;
 // A module for calling in both halves of the body & positioning them.
-include <Body_Half.scad>
+include <Body_Half.scad>;
 // A module for calling in the ball joint ball.
 include <Ball_Joint_Ball.scad>;
 // A module for calling in the ball joint receiver.
@@ -60,13 +60,11 @@ include <Bearing_Carrier_Dual.scad>;
 // GEOMETRY
 
 // The two halves of the body, with mating surfaces touching each other.
-rotate([0, 0, 0]) Body_Half ();
-rotate([0, 0, 180]) Body_Half ();
+rotate([0, 0, 0]) Body_Half();
+rotate([0, 0, 180]) Body_Half();
 // The ball joint receivers.
 translate([0, 0, 3]) rotate([0, 0, 90]) translate([75, 32.5, 15]) Ball_Joint_Receiver();
 translate([0, 0, 3]) rotate([0, 0, 90]) translate([75, -32.5, 15]) Ball_Joint_Receiver();
 // The center hub bearing carriers.
 translate([0, 75, 18]) Bearing_Carrier_Dual();
-
-
 // ----------------------------------------------------------------------------------------------------

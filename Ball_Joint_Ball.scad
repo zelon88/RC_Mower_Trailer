@@ -18,8 +18,8 @@
 // START DATE:  5/26/2026
 // CURRENT VERSION DATE:  5/26/2026
 // AUTHOR:  Justin Grimes (@zelon88) & Copilot - Claude 4.5.
-// DESCRIPTION:  
-// A durable, multi-purpose, ball joint or non-marring end-cap for screws.
+// DESCRIPTION:
+//    A durable, multi-purpose ball joint or non-marring end-cap for screws.
 // FILE NAME: Ball_Joint_Ball.scad
 // ----------------------------------------------------------------------------------------------------
 
@@ -35,8 +35,7 @@
 // 2. Install ball joint ball into cup. Then install hardware. Then install cup.
 // 3. Endcap can be shimmed to adjust friction.
 // 4. A Bic "Round Stic" pen can be cut to length & used as a spacer.
-// 5. If using as a ball joint, a stud can be created by securing the screw with 
-//   thread-locker, then cutting off the head of the screw.
+// 5. If using as a ball joint, a stud can be created by securing the screw with thread-locker, then cutting off the head of the screw.
 // 6. After ball & stud installation; use heat-shrink tubing to create a dust boot.
 // ----------------------------------------------------------------------------------------------------
 
@@ -55,7 +54,11 @@ module Ball_Joint_Ball() {
     // Drill a hole into the flat side of the sphere.
     translate([0, 0, 3]) cylinder($fn=28, r=2.495, h=10, center=true); } }
 
-// Render the object. 
+// Render the object.
+// Comment or uncomment as needed.
+//Ball_Joint_Ball();
+
+// Render the object for printing.
 // Comment or uncomment as needed.
 //Ball_Joint_Ball();
 // ----------------------------------------------------------------------------------------------------

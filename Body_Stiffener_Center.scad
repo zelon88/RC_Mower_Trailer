@@ -37,11 +37,6 @@
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
-// MODULES
-
-// ----------------------------------------------------------------------------------------------------
-
-// ----------------------------------------------------------------------------------------------------
 // GEOMETRY
 
 module Body_Stiffener_Center() {
@@ -85,14 +80,12 @@ module Body_Stiffener_Center() {
     translate([-8, 13.75, 0]) cylinder($fn=28, r=1.22, h=10, center=true);
     translate([-8, -13.75, 0]) cylinder($fn=28, r=1.22, h=10, center=true);
     translate([-46.5, 10, 0]) cylinder($fn=28, r=1.22, h=10, center=true);
-    translate([-46.5, -10, 0]) cylinder($fn=28, r=1.22, h=10, center=true); 
-    
+    translate([-46.5, -10, 0]) cylinder($fn=28, r=1.22, h=10, center=true);
+
     // Angled grooves on top.
     for (y_pos = [-90, -85, -80, -75, -70, -65, -60, -55, -50, -45, -40, -35, -30, -25, -20, -15, -10, -5, 0, 5, 10, 15, 20, 25, 30, 35, 40, 45]) {
       translate([-26, y_pos, 2.5]) rotate([0, 0,  45]) cube([300, 1.5, 3], center=true);
-      translate([ 26, y_pos, 2.5]) rotate([0, 0, -45]) cube([300, 1.5, 3], center=true); } 
-    
-    } }
+      translate([ 26, y_pos, 2.5]) rotate([0, 0, -45]) cube([300, 1.5, 3], center=true); } } }
 
 // Render the object.
 // Comment or uncomment as needed.

@@ -104,7 +104,6 @@ module Attachment_Adjustment_Arm_Cover() {
     translate([35.25, -8.75, 5]) cylinder($fn=28, r=1.22, h=10, center=true);
     translate([39.5, -4.5, 5]) cylinder($fn=28, r=1.22, h=10, center=true); } }
 
-// ----------------------------------------------------------------------------------------------------
 // Render the object.
 // Comment or uncomment as needed.
 Attachment_Adjustment_Arm_Cover();

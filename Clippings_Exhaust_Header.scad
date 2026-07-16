@@ -46,7 +46,8 @@
 // ----------------------------------------------------------------------------------------------------
 // MODULES
 
-include <Workfiles/Clippings_Flange_Screw_Holes.scad>
+// A module for creating the Clippings Flange Screw Holes.
+include <Workfiles/Clippings_Flange_Screw_Holes.scad>;
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
@@ -112,7 +113,7 @@ module Clippings_Flange_Exhaust_Header() {
       translate([0, 0, flange_t + tube_h])
       translate([bend_r*(1-cos(bend_angle)), 0, bend_r*sin(bend_angle)])
       rotate([0, 45, 0])
-        cylinder($fn=48, r=tube_od, h=ext_h, center=false);
+        cylinder($fn=48, r=tube_od, h=ext_h + tube_od/sin(bend_angle), center=false);
       // Vertical oval mating flange at pipe exit, facing X to bolt to hopper wall.
       // rotate([0,90,0]) rotates from XY plane to YZ plane so the face points in X.
       // After rotation: scale-X becomes Z semi-axis (major, vertical).
@@ -127,7 +128,14 @@ module Clippings_Flange_Exhaust_Header() {
         scale([oval_a_out, oval_b_out, 1])
           cylinder($fn=96, r=1, h=oval_t, center=true);
         scale([oval_a_in, oval_b_in, 1])
-          cylinder($fn=96, r=1, h=oval_t + 1, center=true); } }
+          cylinder($fn=96, r=1, h=oval_t + 1, center=true);
+        // 10 screw holes evenly spaced at 36deg intervals on the midpoint ellipse.
+        // Mid semi-axes: X=(oval_a_out+oval_a_in)/2=20.6, Y=(oval_b_out+oval_b_in)/2=15.
+        // r=1.22 leaves ~0.78-0.98mm clearance to each edge — as centred as possible.
+        for (i = [0:9]) {
+          translate([(tube_od/cos(bend_angle) + oval_margin + tube_id/cos(bend_angle)) / 2 * cos(i*36),
+                     (tube_od + oval_margin + tube_id) / 2 * sin(i*36), 0])
+            cylinder($fn=28, r=1.22, h=oval_t + 1, center=true); } } }
 
     // Bore through bottom flange and straight tube.
     translate([0, 0, -1]) cylinder($fn=96, r=flange_id, h=flange_t + 2, center=false);
@@ -145,13 +153,13 @@ module Clippings_Flange_Exhaust_Header() {
     translate([0, 0, flange_t + tube_h])
     translate([bend_r*(1-cos(bend_angle)), 0, bend_r*sin(bend_angle)])
     rotate([0, 45, 0])
-      cylinder($fn=48, r=tube_id, h=ext_h + 1, center=false);
-    // Cut pipe end with vertical plane perpendicular to X, positioned past the full pipe wall.
-    // Offset = centerline_X + tube_od*sin(bend_angle) clears the far pipe wall edge,
-    // giving a complete oval cross-section on the cut face rather than a C-shape.
+      cylinder($fn=48, r=tube_id, h=ext_h + tube_od/sin(bend_angle) + 1, center=false);
+    // Cut pipe end with vertical plane at flange centerline X.
+    // Pipe is extended past this cut so the end cap is beyond the cut plane,
+    // giving a complete oval cross-section on the cut face with no C-shape or stub.
     rotate([0, 0, index_angle])
     translate([0, 0, flange_t + tube_h])
-    translate([bend_r*(1-cos(bend_angle)) + ext_h*sin(bend_angle) + tube_od*sin(bend_angle), -200, -200])
+    translate([bend_r*(1-cos(bend_angle)) + ext_h*sin(bend_angle), -200, -200])
       cube([400, 400, 400], center=false);
     // 8x screw holes through bottom flange.
     translate([0, 0, 7.25]) rotate([0, 180, 0]) Clippings_Flange_Screw_Holes(); } }

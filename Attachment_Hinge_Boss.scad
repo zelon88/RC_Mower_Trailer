@@ -53,7 +53,6 @@ include <Workfiles/Attachment_Boss_Screw_Holes.scad>
 // GEOMETRY
 
 module Attachment_Hinge_Boss() {
-
   // Flange dimensions (match mounting pad top face exactly).
   flange_width     = 15;     // X - matches pad cube X dimension.
   flange_height    = 22.5;   // Y - matches pad cube Y dimension.
@@ -121,4 +120,8 @@ module Attachment_Hinge_Boss() {
 // Render the object.
 // Comment or uncomment as needed.
 Attachment_Hinge_Boss();
+
+// Render the object for printing.
+// Comment or uncomment as needed.
+//Attachment_Hinge_Boss();
 // ----------------------------------------------------------------------------------------------------

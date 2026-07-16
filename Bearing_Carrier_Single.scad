@@ -18,7 +18,7 @@
 // START DATE:  5/24/2026
 // CURRENT VERSION DATE:  6/4/2026
 // AUTHOR:  Justin Grimes (@zelon88) & Copilot - Claude Sonnet 4.6.
-// DESCRIPTION:  
+// DESCRIPTION:
 //    A cylindrical cup bearing carrier that houses a 1/4" ID x 1/2" OD x 3/16" Width (R4 Series) ball bearing.
 //    Features a flange with mounting holes and integrated endcaps to retain the bearing.
 // FILE NAME: Bearing_Carrier_Single.scad
@@ -41,8 +41,7 @@
 // ----------------------------------------------------------------------------------------------------
 // GEOMETRY
 
-module Bearing_Carrier_Single () { 
-
+module Bearing_Carrier_Single() {
   // Bearing dimensions (metric conversions).
   bearing_id = 6.35;      // 1/4" ID.
   bearing_od = 12.7;      // 1/2" OD.
@@ -53,21 +52,21 @@ module Bearing_Carrier_Single () {
   flange_thickness = 3;   // 3mm thick.
   cup_depth = 8;          // Cup depth to hold bearing.
 
-  // Cup body with integrated caps.
+  // Create the cup body with integrated caps.
   difference() {
-      union() {
-          // Main cylindrical cup.
-          cylinder($fn=96, r=bearing_od/2 + 1, h=cup_depth);
-          // Integrated cap at top.
-          translate([0, 0, cup_depth]) cylinder($fn=96, r=bearing_od/2 + 1, h=flange_thickness); }
-      // Hollow interior for bearing.
-      translate([0, 0, flange_thickness - 0.5]) cylinder($fn=96, r=bearing_od/2 + 0.1, h=cup_depth - flange_thickness);
-      // Center hole through bottom — must be cut here too, otherwise the cup body
-      // solid (Z=0 to Z=2.5) plugs the flange center hole when the two are unioned.
-      translate([0, 0, -1]) cylinder($fn=96, r=bearing_id/2 + 0.5, h=flange_thickness + 2);
-      // Center hole through top cap for bearing ID clearance.
-      // Starts at cup_depth-1.5 to ensure overlap with hollow interior.
-      translate([0, 0, cup_depth - 1.5]) cylinder($fn=96, r=bearing_id/2 + 0.2, h=flange_thickness + 2); }
+    union() {
+      // Create the main cylindrical cup.
+      cylinder($fn=96, r=bearing_od/2 + 1, h=cup_depth);
+      // Create the integrated cap at the top.
+      translate([0, 0, cup_depth]) cylinder($fn=96, r=bearing_od/2 + 1, h=flange_thickness); }
+    // Hollow out the interior for the bearing.
+    translate([0, 0, flange_thickness - 0.5]) cylinder($fn=96, r=bearing_od/2 + 0.1, h=cup_depth - flange_thickness);
+    // Cut the center hole through the bottom. This must be cut here too, otherwise the cup body
+    // solid (Z=0 to Z=2.5) plugs the flange center hole when the two are unioned.
+    translate([0, 0, -1]) cylinder($fn=96, r=bearing_id/2 + 0.5, h=flange_thickness + 2);
+    // Cut the center hole through the top cap for bearing ID clearance.
+    // Starts at cup_depth - 1.5 to ensure overlap with the hollow interior.
+    translate([0, 0, cup_depth - 1.5]) cylinder($fn=96, r=bearing_id/2 + 0.2, h=flange_thickness + 2); }
 
   // Tapered reinforcement ribs (6x, between screw holes).
   // Each rib spans from the top of the flange to the top of the integrated cap.
@@ -89,17 +88,17 @@ module Bearing_Carrier_Single () {
       translate([cup_r_outer + rib_top_depth/2, 0, cup_depth + flange_thickness])
         cube([rib_top_depth, rib_top_width, 0.01], center=true); } }
 
-  // Flange.
+  // Create the flange.
   difference() {
-      // Main flange plate.
-      translate([0, 0, 0]) cylinder($fn=96, r=flange_od/2, h=flange_thickness);
-      // Center hole for bearing ID clearance.
-      translate([0, 0, -1]) cylinder($fn=96, r=bearing_id/2 + 0.5, h=flange_thickness + 2);
-      // Six mounting holes spaced evenly around flange.
-      for(i = [0:5]) {
-          angle = i * 60;  // 360/6 = 60 degrees.
-          radius = flange_od/2 - 3;  // Holes in middle of flange width.
-          translate([radius * cos(angle), radius * sin(angle), -1]) cylinder($fn=20, r=1.25, h=flange_thickness + 2); } }
+    // Create the main flange plate.
+    translate([0, 0, 0]) cylinder($fn=96, r=flange_od/2, h=flange_thickness);
+    // Cut the center hole for bearing ID clearance.
+    translate([0, 0, -1]) cylinder($fn=96, r=bearing_id/2 + 0.5, h=flange_thickness + 2);
+    // Cut six mounting holes spaced evenly around the flange.
+    for (i = [0:5]) {
+      angle = i * 60;            // 360 / 6 = 60 degrees.
+      radius = flange_od/2 - 3;  // Holes in the middle of the flange width.
+      translate([radius * cos(angle), radius * sin(angle), -1]) cylinder($fn=20, r=1.25, h=flange_thickness + 2); } }
 
   // Add a lip for attaching a dust boot.
   difference() {
@@ -109,7 +108,6 @@ module Bearing_Carrier_Single () {
     translate([0, 0, flange_thickness + cup_depth - 2]) cylinder($fn=96, r1=bearing_od/2, r2=bearing_od/2 + 0.3, h=2.4); } }
 
 module Bearing_Carrier_Single_Cap() {
-
   // Bearing dimensions (metric conversions).
   bearing_id = 6.35;      // 1/4" ID.
   bearing_od = 12.7;      // 1/2" OD.
@@ -121,17 +119,17 @@ module Bearing_Carrier_Single_Cap() {
   cup_depth = 8;          // Cup depth to hold bearing.
 
   difference() {
-    // Cap at bottom.
-    cylinder($fn=96, r=bearing_od/2 + 1, h=flange_thickness); 
-    // Center hole through bottom cap for bearing ID clearance.
+    // Create the cap at the bottom.
+    cylinder($fn=96, r=bearing_od/2 + 1, h=flange_thickness);
+    // Cut the center hole through the bottom cap for bearing ID clearance.
     translate([0, 0, -1]) cylinder($fn=96, r=bearing_id/2 + 0.5, h=flange_thickness + 2); } }
 
-// Render the object. 
+// Render the object.
 // Comment or uncomment as needed.
 //Bearing_Carrier_Single();
 //Bearing_Carrier_Single_Cap();
 
-// Render the object for printing. 
+// Render the object for printing.
 // Comment or uncomment as needed.
 //Bearing_Carrier_Single();
 //translate([30, 0, 0]) Bearing_Carrier_Single_Cap();

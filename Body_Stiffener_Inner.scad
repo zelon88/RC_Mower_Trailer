@@ -39,7 +39,8 @@
 // ----------------------------------------------------------------------------------------------------
 // MODULES
 
-include <Center_Bracket_Support.scad>
+// A module for calling in the Center Bracket Support for crafting mating surfaces.
+include <Center_Bracket_Support.scad>;
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
@@ -50,7 +51,7 @@ module Body_Stiffener_Inner() {
     // Create the main body of the inner stiffener.
     translate([0, 2.5, 0]) cube([27.5, 40, 5], center=true);
     // Cut out a slot for the Center Bracket Support.
-    translate([0,5,0]) cube([5,39,5], center=true);
+    translate([0, 5, 0]) cube([5, 39, 5], center=true);
     // Reinforcement Rail screw hole recesses.
     translate([ 0, 10, 1.5]) cylinder($fn=28, r=2, h=2, center=true);
     translate([ 0, -10, 1.5]) cylinder($fn=28, r=2, h=2, center=true);

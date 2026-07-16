@@ -54,8 +54,8 @@ module Blade_Holder() {
       // The blade with holder is then installed onto the welded nut.
       // Then the entire Blade Axle Assembly is installed into the BOTTOM of the chassis.
       // By installing the axle through the bottom, it becomes almost impossible for the
-      //   blade or axle assembly to fly apart. If anything comes loose, gravity will pull it down
-      //   into the dirt, and the axle being one piece will prevent parts from flying away.
+      // blade or axle assembly to fly apart. If anything comes loose, gravity will pull it down
+      // into the dirt, and the axle being one piece will prevent parts from flying away.
       translate([0, 0, -5]) cylinder($fn=6, r=9.5, h=5, center=true); }
     // Cut out the body of the blade.
     cube([145, 19.05, 3.175], center=true);

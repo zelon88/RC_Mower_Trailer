@@ -13,13 +13,13 @@
 // ----------------------------------------------------------------------------------------------------
 // PART INFORMATION
 
-// NAME:  Body Assembly
+// NAME:  Attachment Adjustment Arm Assembly
 // REVISION:  A1
 // START DATE:  11/22/2021
 // CURRENT VERSION DATE:  6/4/2026
 // AUTHOR:  Justin Grimes (@zelon88)
-// DESCRIPTION:  
-//    One quarter of the attachment assembly. To aide in rendering.
+// DESCRIPTION:
+//    One quarter of the attachment assembly. To aid in rendering.
 // FILE NAME: Attachment_Adjustment_Arm_Assembly.scad
 // ----------------------------------------------------------------------------------------------------
 

@@ -117,7 +117,7 @@ module Attachment_Adjustment_Arm() {
     translate([26.25,  5.5, 6.375]) cube([23.15, 3.53, 5.75], center=true);
     translate([26.25,  -5.5, 6.375]) cube([23.15, 3.53, 5.75], center=true);
     } }
-    
+
 // Render the object.
 // Comment or uncomment as needed.
 Attachment_Adjustment_Arm();

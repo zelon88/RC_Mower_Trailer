@@ -18,7 +18,7 @@
 // START DATE:  5/26/2026
 // CURRENT VERSION DATE:  5/27/2026
 // AUTHOR:  Justin Grimes (@zelon88) & Copilot - Claude Sonnet 4.6.
-// DESCRIPTION:  
+// DESCRIPTION:
 //    A cylindrical cup ball joint receiver that houses a 10mm ball joint.
 //    Features a flange with mounting holes and integrated endcap.
 // FILE NAME: Ball_Joint_Receiver.scad
@@ -36,8 +36,7 @@
 // 2. Install ball joint ball into cup. Then install hardware. Then install cup.
 // 3. Endcap can be shimmed to adjust friction.
 // 4. A Bic "Round Stic" pen can be cut to length & used as a spacer.
-// 5. If using as a ball joint, a stud can be created by securing the screw with 
-//   thread-locker, then cutting off the head of the screw.
+// 5. If using as a ball joint, a stud can be created by securing the screw with thread-locker, then cutting off the head of the screw.
 // 6. After ball & stud installation; use heat-shrink tubing to create a dust boot.
 // ----------------------------------------------------------------------------------------------------
 
@@ -54,8 +53,7 @@ flange_od = 25.4;       // 1" OD.
 flange_thickness = 3;   // 3mm thick.
 cup_depth = 7.5;          // Cup depth to hold bearing.
 
-module Ball_Joint_Receiver () { 
-
+module Ball_Joint_Receiver() {
   // Cup body with integrated caps.
   difference() {
     union() {
@@ -66,7 +64,7 @@ module Ball_Joint_Receiver () {
     // Hollow interior for bearing.
     translate([0, 0, flange_thickness + cup_depth / 2]) sphere($fn=96, r=bearing_width/2);
     // Center hole through top cap for bearing ID clearance.
-    translate([0, 0, cup_depth - 1.5]) cylinder($fn=96, r1=bearing_shaft_id/2, r2=bearing_shaft_id/2 + 2.5, h=flange_thickness + 1.5); 
+    translate([0, 0, cup_depth - 1.5]) cylinder($fn=96, r1=bearing_shaft_id/2, r2=bearing_shaft_id/2 + 2.5, h=flange_thickness + 1.5);
     // Center hole through bottom half of body for bearing ID clearance.
     cylinder($fn=96, r=body_od/2 - 1, h=flange_thickness + cup_depth / 2); }
 
@@ -98,9 +96,9 @@ module Ball_Joint_Receiver () {
     for(i = [0:5]) {
       angle = i * 60;  // 360/6 = 60 degrees.
       radius = flange_od/2 - 3;  // Holes in middle of flange width.
-      translate([radius * cos(angle), radius * sin(angle), -1]) cylinder($fn=20, r=1.25, h=flange_thickness + 2); } 
+      translate([radius * cos(angle), radius * sin(angle), -1]) cylinder($fn=20, r=1.25, h=flange_thickness + 2); }
     // Center hole through bottom half of body for bearing ID clearance.
-    translate([0, 0, 0]) cylinder($fn=96, r=body_od/2 - 1, h=flange_thickness + cup_depth / 2); } 
+    translate([0, 0, 0]) cylinder($fn=96, r=body_od/2 - 1, h=flange_thickness + cup_depth / 2); }
 
   // Add a lip for attaching a boot.
   difference() {
@@ -110,20 +108,19 @@ module Ball_Joint_Receiver () {
     translate([0, 0, flange_thickness  + cup_depth - 2]) cylinder($fn=96, r1=body_od/2, r2=body_od/2 + 0.3, h=2.4); } }
 
 module Ball_Joint_Receiver_Cap() {
-
   difference() {
     // Create the bottom surface of the cap.
     cylinder($fn=96, r=body_od/2 - 1, h=flange_thickness + cup_depth / 2);
     // Cut out the sphere on top.
     translate([0, 0, flange_thickness + cup_depth / 2]) sphere($fn=96, r=bearing_width/2);
     // Cut out a lubrication pocket.
-    translate([0, 0, flange_thickness + cup_depth / 2 - (bearing_width/2)]) cylinder($fn=96, r1=1.25, r2=2, h=0.5); } 
+    translate([0, 0, flange_thickness + cup_depth / 2 - (bearing_width/2)]) cylinder($fn=96, r1=1.25, r2=2, h=0.5); }
   // Add a resting pad in the center of the lubrication pocket.
   // This feature can be sanded or filed smooth to adjust the friction of the joint.
   // Also this can be drilled out and used with a small screw for adjustable tension.
   translate([0, 0, flange_thickness + cup_depth / 2 - (bearing_width/2)]) cylinder($fn=96, r1=0.6, r2=0.5, h=0.2); }
 
-// Render the object. 
+// Render the object.
 // Comment or uncomment as needed.
 //Ball_Joint_Receiver();
 //Ball_Joint_Receiver_Cap();

@@ -28,7 +28,7 @@
 //    Leg slots run along X — fore-aft adjustment.
 //    Z adjustment is achieved via servo linkage arm length.
 //    Slot dimensions allow for servo variation in both X and Y axes.
-// FILE NAME: RC_Servo_Bracket.scad
+// FILE NAME: Servo_Bracket.scad
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
@@ -50,7 +50,7 @@
 // ----------------------------------------------------------------------------------------------------
 // GEOMETRY
 
-// A module for creating the Left Servo Bracket. 
+// A module for creating the Left Servo Bracket.
 // The Right Servo Bracket is a mirror image of this module.
 module RC_Servo_Bracket_Left() {
   // Servo tab reference dimensions (must match RC_Servo.scad).
@@ -109,7 +109,7 @@ module RC_Servo_Bracket_Left() {
       // Rectangular body connecting the two end caps.
       translate([flange_d / 7 + 2, leg_cy, 20])
         cube([4, slot_r * 2, 20], center=true); }
-          
+
     // Leg slots — 2 vertical slots boring through the X surface.
     for (leg_y = [leg_slot_y1, leg_slot_y2]) {
       leg_cy = 15;
@@ -133,17 +133,17 @@ module RC_Servo_Bracket_Left() {
       // Rectangular body connecting the two end caps.
       translate([flange_d / 2, leg_cy, 18.5])
         cube([leg_t + 15, tab_hole_r * 2, 5], center=true); }
-  
-  // Angle the top of the leg supports.
-  translate([0.875, 15, -5]) rotate([0, -25, 0]) cube([30, 30, 50], center=true);
-  translate([0, 15, -5]) rotate([0, -17.5, 0]) cube([30, 30, 50], center=true);
-  // Trim off the excess edges.
-  translate([10, -8, 15]) cube([29.5, 20, 30], center=true);
-  translate([10, 31.25, 15]) cube([29.5, 20, 30], center=true);
-  translate([34, 15, 15]) cube([30, 30, 30], center=true);
-  // Chamfer the large 90 edge along the Z axis.
-  translate([34.25, 24.25, 15]) rotate([0, 0, 43]) cube([30, 30, 30], center=true);
-  translate([32, 29.75, 15]) rotate([0, 0, 63.5]) cube([30, 30, 30], center=true); } }
+
+    // Angle the top of the leg supports.
+    translate([0.875, 15, -5]) rotate([0, -25, 0]) cube([30, 30, 50], center=true);
+    translate([0, 15, -5]) rotate([0, -17.5, 0]) cube([30, 30, 50], center=true);
+    // Trim off the excess edges.
+    translate([10, -8, 15]) cube([29.5, 20, 30], center=true);
+    translate([10, 31.25, 15]) cube([29.5, 20, 30], center=true);
+    translate([34, 15, 15]) cube([30, 30, 30], center=true);
+    // Chamfer the large 90 edge along the Z axis.
+    translate([34.25, 24.25, 15]) rotate([0, 0, 43]) cube([30, 30, 30], center=true);
+    translate([32, 29.75, 15]) rotate([0, 0, 63.5]) cube([30, 30, 30], center=true); } }
 
 // A module for mirroring the Left Servo Bracket to create the Right Servo Bracket.
 module RC_Servo_Bracket_Right() {
@@ -152,13 +152,13 @@ module RC_Servo_Bracket_Right() {
 // A module for cutting left mating holes that align with the three slots in the flange.
 module RC_Servo_Bracket_Mount_Holes_Left() {
   translate([5.25, 5.625, 28]) cylinder(r=1.65, h=25, $fn=28, center=true);
-  translate([5.25, 16.5, 28]) cylinder(r=1.65, h=25, $fn=28, center=true); 
+  translate([5.25, 16.5, 28]) cylinder(r=1.65, h=25, $fn=28, center=true);
   translate([14.625, 5.625, 28]) cylinder(r=1.65, h=25, $fn=28, center=true); }
 
 // A module for cutting right mating holes that align with the three slots in the flange.
 module RC_Servo_Bracket_Mount_Holes_Right() {
   translate([-5.625, -5.25, 28]) cylinder(r=1.65, h=25, $fn=28, center=true);
-  translate([-5.625, -14.625, 28]) cylinder(r=1.65, h=25, $fn=28, center=true); 
+  translate([-5.625, -14.625, 28]) cylinder(r=1.65, h=25, $fn=28, center=true);
   translate([-16.5, -5.25, 28]) cylinder(r=1.65, h=25, $fn=28, center=true); }
 // ----------------------------------------------------------------------------------------------------
 
@@ -171,5 +171,4 @@ module RC_Servo_Bracket_Mount_Holes_Right() {
 // Comment or uncomment as needed.
 //translate([0, 0, 28]) rotate([180, 0, 90]) RC_Servo_Bracket_Left();
 //translate([0, 0, 28]) rotate([180, 0, 0]) RC_Servo_Bracket_Right();
-
 // ----------------------------------------------------------------------------------------------------

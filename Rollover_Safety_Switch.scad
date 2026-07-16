@@ -56,13 +56,13 @@
 // 9.  Adjust the Landing Pad Bolt height to set the desired rollover sensitivity.
 // 10. Lock the bolt position with the locking nuts.
 // 11. Wire input terminals to power source, output terminals to motor controller.
-// 12. Chain two units in series to unsure redundant operation.
+// 12. Chain two units in series to ensure redundant operation.
 // 13. Regularly test, verify, & calibrate this unit carefully to ensure proper operation before use.
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
 // GEOMETRY
-    
+
 module Rollover_Safety_Switch_Screw_Holes() {
   // Mounting screw holes — shared by body, standoffs, and center divider.
   translate([12.5, 5.5, 0]) cylinder(r=1.22, h=25, $fn=28, center=true);
@@ -93,7 +93,7 @@ module Rollover_Safety_Switch_Outer_Body() {
     translate([14.5, -8, 0]) rotate([0, 0, 25]) cube([1.5, 1.5, 8.5], center=true);
     translate([-14.5, 8, 0]) rotate([0, 0, 25]) cube([1.5, 1.5, 8.5], center=true);
     translate([-14.5, -8, 0]) rotate([0, 0, -25]) cube([1.5, 1.5, 8.5], center=true);
-    
+
     // Drill out the screw holes.
     Rollover_Safety_Switch_Screw_Holes(); } }
 
@@ -141,12 +141,12 @@ module Rollover_Safety_Switch_Pin_Hook() {
       cube([1.25, 1.25, 4.67], center=true);
       // Create a flanged edge so that wire can be wound around.
       translate([-0.5, 0, 0]) cube([0.5, 1.75, 6], center=true); }
-     // Cut out the slots so the wire can be run through to the destination.
+    // Cut out the slots so the wire can be run through to the destination.
     translate([-0.5, 0.82, 1.75]) rotate([0, 0, 10]) cube([0.6, 0.5, 1.65], center=true);
-    translate([-0.5, -0.82, 1.75]) rotate([0, 0, -10]) cube([0.6, 0.5, 1.65], center=true);    
+    translate([-0.5, -0.82, 1.75]) rotate([0, 0, -10]) cube([0.6, 0.5, 1.65], center=true);
     translate([-0.5, 0.82, -1.75]) rotate([0, 0, 10]) cube([0.6, 0.5, 1.65], center=true);
     translate([-0.5, -0.82, -1.75]) rotate([0, 0, -10]) cube([0.6, 0.5, 1.65], center=true);
-    
+
     translate([-0.5, 0.805, 1.75]) rotate([0, 0, 20]) cube([0.6, 0.5, 1.65], center=true);
     translate([-0.5, -0.805, 1.75]) rotate([0, 0, -20]) cube([0.6, 0.5, 1.65], center=true);
     translate([-0.5, 0.805, -1.75]) rotate([0, 0, 20]) cube([0.6, 0.5, 1.65], center=true);
@@ -187,10 +187,10 @@ module Rollover_Safety_Switch_Terminals() {
     translate([8, -8.5, 0]) rotate([0, 90, 90]) cylinder(r=1.25, h=5, $fn=28, center=true);
     // Create the bottom left terminal head.
     translate([8, -5.5, 0]) rotate([0, 90, 90]) cylinder(r=2.35, h=1.25, $fn=28, center=true); } }
-    
+
 // The Contact Pin Centering Spring.
 // If needed, this module can produce a spring which can be installed between the top of the body and the top of the Contact Pin to provide additional downward pressure.
-// A very light spring is reccomended.
+// A very light spring is recommended.
 module Rollover_Safety_Switch_Spring() {
   translate([-15, 0, 0]) rotate([0, 90, 0]) linear_extrude(height=5, twist=3600, slices=150, convexity=10) translate([2, 0, 0]) circle(r=0.15, $fn = 48); }
 
@@ -260,29 +260,6 @@ module Rollover_Safety_Switch_Landing_Pad_Bolt() {
     translate([-7, -5, 1.5]) rotate([-45, 65, 110]) cylinder(r=0.5, h=7, $fn=28, center=true);
     translate([-7, -5, -1.5]) rotate([45, -65, 110]) cylinder(r=0.5, h=7, $fn=28, center=true); } }
 
-// A module to render the entire Rollover Safety Switch Assembly.
-// Contains printed & fabricated parts located in their proper places after assembly.
-module Rollover_Safety_Switch_Assembly() {
-  union() {
-    Rollover_Safety_Switch_Body();
-    Rollover_Safety_Switch_Contact_Pin();
-    Rollover_Safety_Switch_Landing_Pad_Bolt();
-    Rollover_Safety_Switch_Terminals();
-    Rollover_Safety_Switch_Spring();
-    Rollover_Safety_Switch_Cover(); } }
-
-// A module to render the entire Rollover Safety Switch Assembly without the cover.
-// Contains printed & fabricated parts located in their proper places after assembly.
-// This one removes the cover to enable seeing inside.
-module Rollover_Safety_Switch_Assembly_Without_Cover() {
-  union() {
-    Rollover_Safety_Switch_Body();
-    Rollover_Safety_Switch_Contact_Pin();
-    Rollover_Safety_Switch_Landing_Pad_Bolt();
-    Rollover_Safety_Switch_Terminals();
-    Rollover_Safety_Switch_Spring();
-    Rollover_Safety_Switch_Cover(); } }
-
 // A module to create the Rollover Safety Switch Cover.
 module Rollover_Safety_Switch_Cover() {
   difference() {
@@ -348,8 +325,6 @@ module Rollover_Safety_Switch_Assembly_Without_Cover() {
     Rollover_Safety_Switch_Landing_Pad_Bolt();
     Rollover_Safety_Switch_Terminals();
     Rollover_Safety_Switch_Spring(); } }
-
-// ----------------------------------------------------------------------------------------------------
 
 // Render the object.
 // Comment or uncomment as needed.
