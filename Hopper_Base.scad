@@ -46,6 +46,8 @@ include <Workfiles/RC_Servo.scad>;
 include <Rollover_Safety_Switch.scad>;
 // A module for calling in the Left & Right Servo Brackets.
 include <Servo_Bracket.scad>;
+// A module for calling in the Clippings Exhaust Flange Mating Surfaces.
+include <Workfiles/Clippings_X_Flange_Screw_Holes.scad>
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
@@ -150,6 +152,8 @@ module Hopper_Base() {
         Hopper_Base_Outer_Body();
         // Hollow out the inner body.
         Hopper_Base_Inner_Body();
+        // Add the mating surface for the Clippings Exhaust Header.
+        translate([30.675, -40.7675, 11.22]) rotate([0, 0, 0]) Clippings_X_Flange_Mating_Cut();
         // Add the mounting holes for the Servo Brackets.
         translate([46, 36, 86.65]) rotate([90, 0, 90]) RC_Servo_Bracket_Mount_Holes_Left();
         translate([46, 36, 68.375]) rotate([180, 270, 0]) RC_Servo_Bracket_Mount_Holes_Right();

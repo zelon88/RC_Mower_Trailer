@@ -215,5 +215,5 @@ translate([-61.75, 47.5, 45]) rotate([0, 90, 0]) Rollover_Safety_Switch_Assembly
 // The Batteries.
 //translate([-85, 0, 150]) rotate([0, 0, 90]) Large_3s_Lipo_Battery();
 //translate([85, 0, 150]) rotate([0, 0, 90]) Large_3s_Lipo_Battery();
-translate([-32, 40, 13.5]) rotate([0, 0, 180]) Clippings_Flange_Exhaust_Header();
+translate([-32, 40, 19.75]) rotate([0, 0, 180]) Clippings_Flange_Exhaust_Header();
 // ----------------------------------------------------------------------------------------------------

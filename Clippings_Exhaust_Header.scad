@@ -16,16 +16,16 @@
 // NAME:  Clippings Exhaust Header
 // REVISION:  A1
 // START DATE:  7/4/2026
-// CURRENT VERSION DATE:  7/14/2026
+// CURRENT VERSION DATE:  7/16/2026
 // AUTHOR:  Justin Grimes (@zelon88) & Copilot - Claude Sonnet 4.6.
 // DESCRIPTION:
-//    A clippings evacuation flange that mates with the landing pad in Body_Half.scad.
-//    Features a 3mm flange plate, 8x screw holes, a 20mm straight tube (ID=13mm),
-//    8x tapered vertical ribs, a 45deg curved elbow indexed between flange screw holes,
-//    a straight extension after the elbow reaching into the rear of the hopper, and
-//    a vertical oval mating flange at the pipe exit facing X to bolt to the hopper wall.
-//    The extension end is cut flush with the Z axis, creating a horizontal oval opening.
-//    Screw holes for the oval flange are added via a separate module.
+//    A clippings evacuation header routing grass clippings from the cutting deck to the hopper.
+//    Features a bottom flange mating to Body_Half, an 8x rib reinforced straight tube, a first
+//    45deg elbow, an extension pipe with an oval intermediate support ring (10x screw holes for
+//    body attachment), a second 45deg elbow bringing the pipe to horizontal, a short horizontal
+//    pipe section, and a terminal circular flange mating flush with the X face of the hopper.
+//    The terminal flange faces world +X. index_angle introduces a small rotation that can be
+//    zeroed to achieve exact X-perpendicular alignment if needed.
 // FILE NAME: Clippings_Exhaust_Header.scad
 // ----------------------------------------------------------------------------------------------------
 
@@ -38,16 +38,18 @@
 // MANUFACTURING INSTRUCTIONS
 
 // 1. Deburr all edges to break sharp edges.
-// 2. Align bottom screw holes with Clippings_Flange_Screw_Holes() on Body_Half.
+// 2. Align bottom flange screw holes with Clippings_Flange_Screw_Holes() on Body_Half.
 // 3. Fasten bottom flange with M2.5 screws.
-// 4. Align oval flange with matching oval hole in hopper wall and bolt together.
+// 4. Fasten oval intermediate ring to nearby body structure for pipe support.
+// 5. Align terminal circular flange with matching hole in hopper X face and bolt together.
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
 // MODULES
 
-// A module for creating the Clippings Flange Screw Holes.
-include <Workfiles/Clippings_Flange_Screw_Holes.scad>;
+include <Workfiles/Clippings_Flange_Screw_Holes.scad>
+// A module for cutting the 8x screw holes in the terminal X-facing circular flange.
+include <Workfiles/Clippings_X_Flange_Screw_Holes.scad>
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
@@ -55,36 +57,37 @@ include <Workfiles/Clippings_Flange_Screw_Holes.scad>;
 
 module Clippings_Flange_Exhaust_Header() {
   // Primary dimensions.
-  flange_r    = 18;    // Bottom flange outer radius.
+  flange_r    = 18;   // Bottom flange outer radius.
   flange_t    = 2.5;  // Bottom flange thickness.
   flange_id   = 13;   // Bottom flange inner bore radius.
-  tube_id     = 13;   // Tube inner radius.
-  tube_od     = 14;   // Tube outer radius — 1mm wall.
-  tube_h      = 40;   // Straight tube height above flange.
-  bend_r      = 14;   // Elbow centerline bend radius.
-  bend_angle  = 45;   // Elbow bend angle from vertical (degrees).
-  index_angle = 7.5;  // Rotation around Z to orient elbow toward hopper.
-  ext_h       = 52.75; // Extension pipe length after elbow.
+  tube_id     = 13;   // Tube inner radius (all sections).
+  tube_od     = 14;   // Tube outer radius — 1mm wall (all sections).
+  tube_h      = 35;   // Straight tube height above bottom flange.
+  bend_r      = 14;   // Centerline bend radius — same for all elbows.
+  bend_angle  = 45;   // First and second elbow bend angle from vertical (degrees).
+  index_angle = 6.5;  // Z rotation orienting the first elbow toward the hopper.
+                      // Set to 0 for exact world +X terminal flange alignment.
+  ext_h       = 15;   // Extension pipe length between first and second elbows.
+  pipe_x_h    = 7;    // Short pipe length in world +X direction after second elbow.
 
   // Rib dimensions.
-  rib_base_d = flange_r - tube_od; // 4mm radial depth at base.
+  rib_base_d = flange_r - tube_od;
   rib_top_d  = 1.5;
   rib_base_w = 2.5;
   rib_top_w  = 1.2;
   rib_h      = 10;
 
-  // Oval flange dimensions.
-  oval_margin  = 3;   // Radial margin beyond pipe wall.
-  oval_t       = 2.5; // Oval flange plate thickness.
-  // Major semi-axis: pipe at 45deg to wall → tube_od/cos(45deg) = tube_od*sqrt(2).
-  oval_a_out   = tube_od / cos(bend_angle) + oval_margin; // ~22.8mm.
-  oval_b_out   = tube_od + oval_margin;                    // 17mm.
-  oval_a_in    = tube_id / cos(bend_angle);                // ~18.4mm bore.
-  oval_b_in    = tube_id;                                  // 13mm bore.
+  // Oval intermediate ring dimensions.
+  oval_margin = 3;
+  oval_t      = 2.5;
+  oval_a_out  = tube_od / cos(bend_angle) + oval_margin;
+  oval_b_out  = tube_od + oval_margin;
+  oval_a_in   = tube_id / cos(bend_angle);
+  oval_b_in   = tube_id;
 
-  // Pipe tip position in tube-top-local space (all computed inline to avoid scope issues).
-  // X (horizontal) = bend_r*(1-cos(bend_angle)) + ext_h*sin(bend_angle).
-  // Z (vertical)   = bend_r*sin(bend_angle)     + ext_h*cos(bend_angle).
+  // Terminal circular flange dimensions (mates with hopper X face).
+  x_flange_r  = 18;    // Terminal flange outer radius.
+  x_flange_t  = 3;   // Flange plate thickness.
 
   difference() {
     union() {
@@ -100,7 +103,7 @@ module Clippings_Flange_Exhaust_Header() {
             cube([rib_base_d, rib_base_w, 0.01], center=true);
           translate([tube_od + rib_top_d/2, 0, flange_t + rib_h])
             cube([rib_top_d, rib_top_w, 0.01], center=true); } }
-      // 45deg curved elbow.
+      // First 45deg elbow (vertical to 45deg tilt).
       rotate([0, 0, index_angle])
       translate([0, 0, flange_t + tube_h])
       translate([bend_r, 0, 0])
@@ -108,39 +111,47 @@ module Clippings_Flange_Exhaust_Header() {
       rotate([90, 0, 0])
       rotate_extrude(angle=bend_angle, $fn=96)
         translate([bend_r, 0]) circle(r=tube_od, $fn=48);
-      // Straight extension after elbow.
+      // Extension pipe.
       rotate([0, 0, index_angle])
       translate([0, 0, flange_t + tube_h])
       translate([bend_r*(1-cos(bend_angle)), 0, bend_r*sin(bend_angle)])
       rotate([0, 45, 0])
-        cylinder($fn=48, r=tube_od, h=ext_h + tube_od/sin(bend_angle), center=false);
-      // Vertical oval mating flange at pipe exit, facing X to bolt to hopper wall.
-      // rotate([0,90,0]) rotates from XY plane to YZ plane so the face points in X.
-      // After rotation: scale-X becomes Z semi-axis (major, vertical).
-      //                 scale-Y becomes Y semi-axis (minor, horizontal).
+        cylinder($fn=48, r=tube_od, h=ext_h + 1, center=false);
+      // Second 45deg elbow (pipe direction to horizontal = world +X approximately).
       rotate([0, 0, index_angle])
       translate([0, 0, flange_t + tube_h])
-      translate([bend_r*(1-cos(bend_angle)) + ext_h*sin(bend_angle),
-                 0,
-                 bend_r*sin(bend_angle) + ext_h*cos(bend_angle)])
-      rotate([0, 90, 0])
-      difference() {
-        scale([oval_a_out, oval_b_out, 1])
-          cylinder($fn=96, r=1, h=oval_t, center=true);
-        scale([oval_a_in, oval_b_in, 1])
-          cylinder($fn=96, r=1, h=oval_t + 1, center=true);
-        // 10 screw holes evenly spaced at 36deg intervals on the midpoint ellipse.
-        // Mid semi-axes: X=(oval_a_out+oval_a_in)/2=20.6, Y=(oval_b_out+oval_b_in)/2=15.
-        // r=1.22 leaves ~0.78-0.98mm clearance to each edge — as centred as possible.
-        for (i = [0:9]) {
-          translate([(tube_od/cos(bend_angle) + oval_margin + tube_id/cos(bend_angle)) / 2 * cos(i*36),
-                     (tube_od + oval_margin + tube_id) / 2 * sin(i*36), 0])
-            cylinder($fn=28, r=1.22, h=oval_t + 1, center=true); } } }
+      translate([bend_r*(1-cos(bend_angle)), 0, bend_r*sin(bend_angle)])
+      rotate([0, 45, 0])
+      translate([0, 0, ext_h])
+      translate([bend_r, 0, 0])
+      rotate([0, 0, 180])
+      rotate([90, 0, 0])
+      rotate_extrude(angle=bend_angle, $fn=96)
+        translate([bend_r, 0]) circle(r=tube_od, $fn=48);
+      // Short pipe in world +X direction.
+      // In pipe local frame, rotate([0,45,0]) aligns the cylinder axis with
+      // local (sin45,0,cos45) = world +X. Terminal face is perpendicular to world +X.
+      rotate([0, 0, index_angle])
+      translate([0, 0, flange_t + tube_h])
+      translate([bend_r*(1-cos(bend_angle)), 0, bend_r*sin(bend_angle)])
+      rotate([0, 45, 0])
+      translate([bend_r*(1-cos(bend_angle)), 0, ext_h + bend_r*sin(bend_angle)])
+      rotate([0, 45, 0])
+        cylinder($fn=48, r=tube_od, h=pipe_x_h, center=false);
+      // Terminal circular flange — face perpendicular to world +X, mates with hopper X face.
+      rotate([0, 0, index_angle])
+      translate([0, 0, flange_t + tube_h])
+      translate([bend_r*(1-cos(bend_angle)), 0, bend_r*sin(bend_angle)])
+      rotate([0, 45, 0])
+      translate([bend_r*(1-cos(bend_angle)), 0, ext_h + bend_r*sin(bend_angle)])
+      rotate([0, 45, 0])
+      translate([0, 0, pipe_x_h])
+        cylinder($fn=96, r=x_flange_r, h=x_flange_t, center=false); }
 
     // Bore through bottom flange and straight tube.
     translate([0, 0, -1]) cylinder($fn=96, r=flange_id, h=flange_t + 2, center=false);
     translate([0, 0, flange_t]) cylinder($fn=96, r=tube_id, h=tube_h + 2, center=false);
-    // Bore through elbow.
+    // Bore through first elbow.
     rotate([0, 0, index_angle])
     translate([0, 0, flange_t + tube_h])
     translate([bend_r, 0, 0])
@@ -153,14 +164,35 @@ module Clippings_Flange_Exhaust_Header() {
     translate([0, 0, flange_t + tube_h])
     translate([bend_r*(1-cos(bend_angle)), 0, bend_r*sin(bend_angle)])
     rotate([0, 45, 0])
-      cylinder($fn=48, r=tube_id, h=ext_h + tube_od/sin(bend_angle) + 1, center=false);
-    // Cut pipe end with vertical plane at flange centerline X.
-    // Pipe is extended past this cut so the end cap is beyond the cut plane,
-    // giving a complete oval cross-section on the cut face with no C-shape or stub.
+      cylinder($fn=48, r=tube_id, h=ext_h + 2, center=false);
+    // Bore through second elbow.
     rotate([0, 0, index_angle])
     translate([0, 0, flange_t + tube_h])
-    translate([bend_r*(1-cos(bend_angle)) + ext_h*sin(bend_angle), -200, -200])
-      cube([400, 400, 400], center=false);
+    translate([bend_r*(1-cos(bend_angle)), 0, bend_r*sin(bend_angle)])
+    rotate([0, 45, 0])
+    translate([0, 0, ext_h])
+    translate([bend_r, 0, 0])
+    rotate([0, 0, 180])
+    rotate([90, 0, 0])
+    rotate_extrude(angle=bend_angle + 1, $fn=96)
+      translate([bend_r, 0]) circle(r=tube_id, $fn=48);
+    // Bore through short X pipe and terminal flange.
+    rotate([0, 0, index_angle])
+    translate([0, 0, flange_t + tube_h])
+    translate([bend_r*(1-cos(bend_angle)), 0, bend_r*sin(bend_angle)])
+    rotate([0, 45, 0])
+    translate([bend_r*(1-cos(bend_angle)), 0, ext_h + bend_r*sin(bend_angle)])
+    rotate([0, 45, 0])
+      cylinder($fn=48, r=tube_id, h=pipe_x_h + x_flange_t + 1, center=false);
+    // 8x screw holes through terminal X-facing flange.
+    rotate([0, 0, index_angle])
+    translate([0, 0, flange_t + tube_h])
+    translate([bend_r*(1-cos(bend_angle)), 0, bend_r*sin(bend_angle)])
+    rotate([0, 45, 0])
+    translate([bend_r*(1-cos(bend_angle)), 0, ext_h + bend_r*sin(bend_angle)])
+    rotate([0, 45, 0])
+    translate([0, 0, pipe_x_h])
+      Clippings_X_Flange_Screw_Holes();
     // 8x screw holes through bottom flange.
     translate([0, 0, 7.25]) rotate([0, 180, 0]) Clippings_Flange_Screw_Holes(); } }
 
