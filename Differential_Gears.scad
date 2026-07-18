@@ -35,29 +35,25 @@
 // ----------------------------------------------------------------------------------------------------
 // MANUFACTURING INSTRUCTIONS
 
-// 1. Slide an M3 Compression Washer and a Flanged 5x8mm Bearing onto the Output Shaft of an Output Gear.
+// 1. Slide an M3 Wave Compression Washer and a Flanged 5x8mm Bearing onto the Output Shaft of an Output Gear.
 //   1-A. The flange of the bearing should be facing the gear.
-//   1-B. The small diameter of the Compression Washer should face towards the bearing.
-//   1-C. The large diameter of the Compression Washer should face towards the Output Gear.
 // 2. Install one Output Gear into the Differential Housing.
 // 3. Slide the Output Gear through bolt through the housing and output gear, but do not install the nut.
 // 4. Slide the Core Block over the Output Gear through bolt.
 //   4-A. Take care to install the Core Block in the proper orientation.
 // 5. Install the Planet Gears into the housing with two F3-6-2.8M Thrust Bearings per gear, one per side.
 //   5-A. Each Planet Gear should have 2 bearings each.
-// 6. Install one M3 Compression Washer on the outside face of the outer F3-6-2.8M thrust bearing on each Planet Gear.
-//   6-A. The small diameter of the Compression Washer should face towards the Planet Gear.
-//   6-B. The large diameter of the Compression Washer should face towards the bearing.
+// 6. Install one M3 Conical Compression Washer on the outside face of the outer F3-6-2.8M thrust bearing on each Planet Gear.
+//   6-A. The small diameter of the Conical Compression Washer should face towards the Planet Gear.
+//   6-B. The large diameter of the Conical Compression Washer should face towards the bearing.
 // 7. Test fit each of the 4 Planet Gear Screws through each Planet Gear.
 //   7-A. Install an equal number of flat washers on each side of each planet screw until there is no more slack in the gears.
-//   7-B. Each Planet Gear screw should pass through the Differential Housing, a Compression Washer, a F3-6-2.8M
+//   7-B. Each Planet Gear screw should pass through the Differential Housing, a Conical Compression Washer, a F3-6-2.8M
 //        Thrust Bearing, a Planet Gear, another F3-6-2.8M Thrust Bearing, an equal amount of flat washers on either
 //        side of the thrust bearings, and finally thread snugly into the Core Block.
 //   7-C. Apply a small amount of liquid thread locker onto the Planet Gear screws prior to final assembly.
-// 8. Slide an M3 Compression Washer and a Flanged 5x8mm Bearing onto the Output Shaft of the remaining Output Gear.
+// 8. Slide an M3 Wave Compression Washer and a Flanged 5x8mm Bearing onto the Output Shaft of the remaining Output Gear.
 //   8-A. The flange of the bearing should be facing the gear.
-//   8-B. The small diameter of the Compression Washer should face towards the bearing.
-//   8-C. The large diameter of the Compression Washer should face towards the Output Gear.
 // 9. Slide the second Output Gear onto the Output Gear bolt.
 // 10. Install the Differential Gear Cover.
 //   10-A. The cover rotates to lock into place.
@@ -107,7 +103,7 @@ planet_teeth = 12;
 mm_per_tooth = 3.0;
 // The total number of Planet Gears.
 num_planets = 4;
-// The width of the flats cut into the Output Shafts, measured in mm.
+// The side length of the square slot cut into the Output Shafts for driveshaft rotational engagement, measured in mm.
 flat_width = 2.50;
 // Expanded addendum calculation to let the tooth shapes grow longer.
 addendum = (mm_per_tooth / 3.14159265) * 1.5;
@@ -129,10 +125,8 @@ side_distance = (planet_pd / 2) + mesh_clearance;
 planet_distance = (side_pd / 2) + mesh_clearance;
 // Dynamic calculation ensuring the shaft fills the main housing boundary and adds the extension specified above.
 total_shaft_len = ((max_width / 2) - side_distance) + shaft_extension;
-// Cap the flat size at 99% of the Output Shaft width to prevent the flat width from exceeding the shaft diameter.
+// Cap the square slot size at 99% of the Output Shaft diameter to prevent it from exceeding the shaft.
 safe_flat_width = min(flat_width, output_shaft_dia * 0.99);
-// Symmetrically tracks the cutting depth to keep the flat footprint matching flat_width cleanly.
-flat_cut_offset = sqrt(pow(output_shaft_dia / 2, 2) - pow(safe_flat_width / 2, 2));
 // Set the rendering resolution for the entire assembly.
 $fn = 128;
 
@@ -168,11 +162,25 @@ module side_gear_with_shaft() {
           // Create the main tapered cone body.
           cylinder(h=gear_h, r1=side_outer_r - 0.6, r2=side_inner_r - 0.6, center=false);
           // Create the output shaft, projecting through the core with an extension beyond it.
-          translate([0, 0, -total_shaft_len]) cylinder(h=total_shaft_len, r=output_shaft_dia/2, center=false); }
+          translate([0, 0, -total_shaft_len]) cylinder(h=total_shaft_len, r=output_shaft_dia/2, center=false);
+          // Shoulder between gear rear face (Z=0) and flanged bearing near face.
+          // bearing_offset positions the FAR face of the bearing at Z=-bearing_offset.
+          // Near (flange) face is at Z=-(bearing_offset - 2.5) — 2.5mm = bearing width.
+          // 1.375mm washer stack budget: flat washer + wave washer + flat washer, tight pre-load.
+          // Shoulder length = bearing_offset - 2.5 - 1.375 = bearing_offset - 3.875.
+          // Sand shoulder face to dial in pre-load — design intentionally runs slightly tight.
+          // r exceeds bearing bore r=2.5mm so the shoulder cannot pass through the bearing,
+          // preventing lateral sliding & loss of planet engagement.
+          translate([0, 0, -(bearing_offset - 3.875)]) cylinder(h=bearing_offset - 3.875, r=output_shaft_dia/2 + 1.5, center=false); }
 
-        // Cut the symmetrical flats using the calculated offset distance.
-        translate([flat_cut_offset + (output_shaft_dia / 2), 0, -total_shaft_len / 2]) cube([output_shaft_dia, output_shaft_dia * 2, total_shaft_len + 2], center=true);
-        translate([-(flat_cut_offset + (output_shaft_dia / 2)), 0, -total_shaft_len / 2]) cube([output_shaft_dia, output_shaft_dia * 2, total_shaft_len + 2], center=true); }
+        // Cut a hexagonal slot through the shaft for driveshaft rotational engagement.
+        // $fn=6 gives 6 engagement faces and seats in any of 6 orientations (60deg apart)
+        // making assembly easy while still providing strong rotational engagement.
+        // Vertices at r=2.0mm from center (shaft r=2.5mm — 0.5mm wall at each tip).
+        // Flat faces (apothem) at r*cos(30deg)=1.732mm — outside bore r=1.5mm.
+        // Increase r toward 2.2mm for more engagement; decrease toward 1.6mm for more wall.
+        translate([0, 0, -total_shaft_len / 2])
+          cylinder($fn=6, r=2.0, h=total_shaft_len + 2, center=true); }
 
       // Create the tapered bevel teeth.
       intersection() {

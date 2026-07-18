@@ -165,7 +165,7 @@ module Differential_Housing() {
 
 // Render the object.
 // Comment or uncomment as needed.
-Differential_Housing();
+//Differential_Housing();
 //translate([0, 0, 53]) Differential_Assembly();
 
 // Render the object for printing.
