@@ -160,9 +160,12 @@ module Hopper_Base() {
         // Add clearance for Servo Bracket hardware on the inside of the Hopper Base.
         translate([84.1, 50.5, 92.3]) rotate([0, 90, 0]) cylinder(r=3, h=5, $fn=28, center=true);
         translate([84.1, 50.5, 62.75]) rotate([0, 90, 0]) cylinder(r=3, h=5, $fn=28, center=true);
-        // Add the mounting holes for the Rollover Safety Switch.
-        translate([61.75, -47.5, 45]) rotate([0, 90, 180]) Rollover_Safety_Switch_Screw_Holes();
-        translate([-61.75, 47.5, 45]) rotate([0, 90, 0]) Rollover_Safety_Switch_Screw_Holes();
+        // Add the clearance for the Clippings Exhaust Header flange screw.
+        translate([79.95, -30.5, 81.875]) rotate([0, 90, 0]) cylinder(r1=22.75, r2=21, h=12, $fn=96, center=true);
+        translate([107, -30.7675, 11.22]) rotate([0, 0, 180]) Clippings_X_Flange_Mating_Cut();
+        // Add clearance for Servo Bracket hardware on the inside of the Hopper Base.
+        translate([84.1, 50.5, 92.3]) rotate([0, 90, 0]) cylinder(r=3, h=5, $fn=28, center=true);
+        translate([84.1, 50.5, 62.75]) rotate([0, 90, 0]) cylinder(r=3, h=5, $fn=28, center=true);
         // Hollow out the middle bottom section of the inside of the hopper to enable screw access.
         // Add support material.
         translate([88.75, 0, 29.25]) cube([50, 35, 12], center=true); } }

@@ -44,11 +44,11 @@ module Attachment_Adjustment_Arm_Insert() {
       // Create the rectangular center block.
       cube([12, 7, 5], center=true);
       // Create the main body of the pin.
-      translate([0, 0, 0]) rotate([90, 0, 0]) cylinder($fn=48, r=1.5, h=13.5, center=true);
+      translate([0, 0, 0]) rotate([90, 0, 0]) cylinder($fn=48, r=1.5, h=11.75, center=true);
       // Create the front chamfer cap.
-      translate([0, 6.75, 0]) rotate([-90, 0, 0]) cylinder($fn=48, r1=1.5, r2=1.25, h=0.1625);
+      translate([0, 5.875, 0]) rotate([-90, 0, 0]) cylinder($fn=48, r1=1.5, r2=1.25, h=0.1625);
       // Create the back chamfer cap.
-      translate([0, -6.75, 0]) rotate([90, 0, 0]) cylinder($fn=48, r1=1.5, r2=1.25, h=0.1625);
+      translate([0, -5.875, 0]) rotate([90, 0, 0]) cylinder($fn=48, r1=1.5, r2=1.25, h=0.1625);
       // Create the center boss.
       translate([0, 0, 4]) cylinder($fn=48, r=2.95, h=4, center=true);
       // Taper the base of the upper portion of the center boss for strength.
@@ -85,7 +85,7 @@ module Attachment_Adjustment_Arm_Insert() {
 
 // Render the object.
 // Comment or uncomment as needed.
-Attachment_Adjustment_Arm_Insert();
+//Attachment_Adjustment_Arm_Insert();
 
 // Render the object for printing.
 // Comment or uncomment as needed.
