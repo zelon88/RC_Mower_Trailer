@@ -35,7 +35,7 @@
 // ----------------------------------------------------------------------------------------------------
 // MANUFACTURING INSTRUCTIONS
 
-// 1. Slide an M3 Wave Compression Washer and a Flanged 5x8mm Bearing onto the Output Shaft of an Output Gear.
+// 1. Slide an M2.5 Wave Compression Washer and a Flanged 5x8mm Bearing onto the Output Shaft of an Output Gear.
 //   1-A. The flange of the bearing should be facing the gear.
 // 2. Install one Output Gear into the Differential Housing.
 // 3. Slide the Output Gear through bolt through the housing and output gear, but do not install the nut.
@@ -43,7 +43,7 @@
 //   4-A. Take care to install the Core Block in the proper orientation.
 // 5. Install the Planet Gears into the housing with two F3-6-2.8M Thrust Bearings per gear, one per side.
 //   5-A. Each Planet Gear should have 2 bearings each.
-// 6. Install one M3 Conical Compression Washer on the outside face of the outer F3-6-2.8M thrust bearing on each Planet Gear.
+// 6. Install one M2.5 Conical Compression Washer on the outside face of the outer F3-6-2.8M thrust bearing on each Planet Gear.
 //   6-A. The small diameter of the Conical Compression Washer should face towards the Planet Gear.
 //   6-B. The large diameter of the Conical Compression Washer should face towards the bearing.
 // 7. Test fit each of the 4 Planet Gear Screws through each Planet Gear.
@@ -52,7 +52,7 @@
 //        Thrust Bearing, a Planet Gear, another F3-6-2.8M Thrust Bearing, an equal amount of flat washers on either
 //        side of the thrust bearings, and finally thread snugly into the Core Block.
 //   7-C. Apply a small amount of liquid thread locker onto the Planet Gear screws prior to final assembly.
-// 8. Slide an M3 Wave Compression Washer and a Flanged 5x8mm Bearing onto the Output Shaft of the remaining Output Gear.
+// 8. Slide an M2.5 Wave Compression Washer and a Flanged 5x8mm Bearing onto the Output Shaft of the remaining Output Gear.
 //   8-A. The flange of the bearing should be facing the gear.
 // 9. Slide the second Output Gear onto the Output Gear bolt.
 // 10. Install the Differential Gear Cover.
@@ -190,7 +190,7 @@ module side_gear_with_shaft() {
             translate([0, 0, -0.5]) gear(number_of_teeth=side_teeth, mm_per_tooth=mm_per_tooth, thickness=2, center=true); } }
 
     // Cut the final master cylindrical bore.
-    translate([0, 0, -(total_shaft_len + gear_h)]) cylinder(h=(total_shaft_len + gear_h) * 2, r=1.5);
+    translate([0, 0, -(total_shaft_len + gear_h)]) cylinder(h=(total_shaft_len + gear_h) * 2, r=1.22);
 
     // Cut a shallow recess into the narrow inside face (Z=gear_h plane) for the Y axis thrust bearing.
     // Kept shallow (0.8mm deep) to preserve strength in the gear hub.
@@ -207,7 +207,7 @@ module planet_bevel_gear() {
         linear_extrude(height=gear_h, twist=0, scale=planet_scale)
           projection(cut=true)
             translate([0, 0, -0.5]) gear(number_of_teeth=planet_teeth, mm_per_tooth=mm_per_tooth, thickness=2, center=true); } }
-    translate([0, 0, -2]) cylinder(h=gear_h + 4, r=1.5);
+    translate([0, 0, -2]) cylinder(h=gear_h + 4, r=1.22);
     translate([0, 0, -0.1]) cylinder(h=1.1, r=6.1/2);
     translate([0, 0, gear_h - 1.0]) cylinder(h=1.1, r=6.1/2); } }
 
@@ -239,7 +239,7 @@ module Differential_Assembly() {
 
 // Render the object.
 // Comment or uncomment as needed.
-//Differential_Assembly();
+Differential_Assembly();
 
 // Render the object for printing.
 // Comment or uncomment as needed.
