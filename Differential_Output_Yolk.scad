@@ -48,6 +48,8 @@
 
 // A module for creating bearings.
 include <Workfiles/Bearings.scad>;
+// A module for creating bearings.
+include <Differential_Output_Yolk_Cover.scad>;
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
@@ -124,6 +126,17 @@ module Differential_Output_Yolk() {
       cylinder($fn=96, r=0.99, h=15, center=true);
     translate([-5.25, 0, 5])
       cylinder($fn=96, r=0.99, h=15, center=true);
+    // Roller bearing inner race — partial frustum groove in yolk OD, 2mm from open end.
+    // Frustum matches roller taper: r1=0.875 end at Z=2, r2=1 end at Z=5.375.
+    // Depth: 0.25mm at small end, 0.3mm at large end — partial cut into yolk OD.
+    translate([0, 0, 4])
+      difference() {
+        cylinder($fn=96, r=flange_r + 0.1, h=3.375 + 0.2, center=false);
+        cylinder($fn=96, r1=flange_r - 0.30, r2=flange_r - 0.35, h=3.375 + 0.4, center=false); }
+    // The installation notch.
+    rotate([0, 0, 110])
+      translate([flange_r + 0.725, 0, 2.75])
+        cylinder($fn=28, r=1.025, h=5.5, center=true);
 
     // Screw recesses in bottom face for cover.
     translate([5.25, 0, (flange_h + 1.125)])
@@ -158,6 +171,16 @@ translate([0, 0, 5]) bearing_3x5x2_5();
 // Outer bearing that mounts into the Center Bracket.
 translate([0, 0, 14.5]) rotate([0, 180, 0]) flanged_bearing_5x8x2_5();
 translate([0, 0, 14.5]) bearing_5x8x2_5();
+
+// USE THIS FOR DIMENSIONAL REFERENCE!!!
+// Add the Output Yolk Cover.
+translate([0, 0, 9.9875]) rotate([0, 180, 0]) Differential_Output_Yolk_Cover();
+
+// THIS IS FOR VISUAL REFERENCE ONLY!!!
+// DO NOT USE THIS AS AN ASSEMBLY DIAGRAM!!!
+// DO NOT USE THIS FOR DIMENSIONAL REFERENCE!!!
+// Check alignment of the internal damper parts by layering the Output Yolk and Output Cover over each other with open ends facing the same direction.
+//translate([0, 0, 0]) rotate([0, 0, 180]) Differential_Output_Yolk_Cover();
 
 // Render the object for printing.
 // Comment or uncomment as needed.

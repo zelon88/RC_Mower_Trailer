@@ -16,8 +16,8 @@
 // NAME:  Differential Output Yolk Cover
 // REVISION:  A1
 // START DATE:  7/20/2026
-// CURRENT VERSION DATE:  7/20/2026
-// AUTHOR:  Justin Grimes (@zelon88)
+// CURRENT VERSION DATE:  7/26/2026
+// AUTHOR:  Justin Grimes (@zelon88) & Claude Sonnet 5.
 // DESCRIPTION:
 //    The rotating cover that mates with the Differential_Output_Yolk drum.
 //    Slips over the open face of the drum with 0.2mm radial clearance.
@@ -46,53 +46,144 @@
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
+// MODULES
+
+// A module for creating bearings.
+include <Workfiles/Bearings.scad>;
+// ----------------------------------------------------------------------------------------------------
+
+// ----------------------------------------------------------------------------------------------------
 // GEOMETRY
 
 module Differential_Output_Yolk_Cover() {
   // Drum dimensions — must match Differential_Output_Yolk.scad.
   drum_r  = 8.5;   // Drum outer radius.
-  drum_h  = 10;    // Drum height.
+  drum_h  = 9;    // Drum height.
 
   // Cover dimensions.
   clearance     = 0.2;                     // Radial slip fit clearance over drum.
   cover_inner_r = drum_r + clearance;      // 8.7mm — clears drum OD.
   cover_outer_r = drum_r + 2.5;            // 11.0mm — 2.5mm larger than drum OD.
-  cover_h       = drum_h;                  // Matches drum height.
+  outer_face_h  = 2;                       // Chamfer/outer hub height — must match yolk's outer_face_h.
+  cover_h       = drum_h + outer_face_h;   // 12mm — matches yolk total height (drum + outer hub).
 
   // Central support pin — slides into triple-stacked 3x5x2.5 bearings in the yolk drum.
   // Pin is added outside the main difference() so the inner bore does not subtract it.
   // The cover is flipped for installation; the Z=2 tip becomes the leading entry end.
   pin_r       = 1.5;   // Matches 3x5x2.5 bearing inner race ID.
-  pin_h       = 7.5;   // Spans triple stacked bearings (3 x 2.5mm).
-  pin_z       = 2;     // Z offset of pin base from cover bottom face.
+  pin_h       = cover_h - 1;  // Reaches cap inner face — bore stops at Z=cover_h-1=9.
+  pin_z       = 0;     // Pin starts at open face — engages bearing hub immediately on assembly.
   chamfer_h   = 0.5;   // Chamfer height on pin entry tip.
+  shoulder_r = pin_r + 0.375;
+  shoulder_h = 0.1;
 
-  // Cover shell — bore subtraction hollows the interior.
+  // Arc slot parameters — matched to yolk cover screw positions.
+  r_screw  = 5.25;  // Radial position — matches yolk screws at X=±5.25, Y=0.
+  slot_r   = 1.22;  // Slot minor radius — project standard clearance hole.
+  arc_half = 15;    // ±15deg gives 30deg total travel, centered on neutral position.
+
+  // Cover shell.
+  // The chamfer at the open end (Z=0) is built via intersection rather than
+  // subtracting a centered cone — a subtracted cone only ever widens the bore
+  // from the inside and can't reduce the OD, and the previous attempt left the
+  // rim feathered to a zero-thickness knife edge instead of a real bevel.
   difference() {
-    cylinder($fn=96, r=cover_outer_r, h=cover_h, center=false);
-    // Inner bore — open at Z=0 (entry side), leaves 1mm solid cap at Z=9 to Z=10.
+    intersection() {
+      // Raw stock — defines the true OD everywhere.
+      cylinder($fn=96, r=cover_outer_r, h=cover_h, center=false);
+      union() {
+        // Full OD for everything above the chamfer zone.
+        translate([0, 0, outer_face_h])
+          cylinder($fn=96, r=cover_outer_r + 1, h=cover_h, center=false);
+        // Chamfer at open end of cover drum — mirrors yolk outer hub chamfer.
+        // OD tapers from cover_outer_r-outer_face_h at Z=0 (open tip) up to the
+        // full cover_outer_r by Z=outer_face_h — reduced at the free end, full
+        // diameter toward the main body, matching the yolk's taper direction.
+        cylinder($fn=96, r1=cover_outer_r - outer_face_h, r2=cover_outer_r, h=outer_face_h, center=false);
+      }
+    }
+    // Inner bore — open at Z=0 (entry side), leaves 1mm solid cap at Z=cover_h-1 to Z=cover_h.
     translate([0, 0, -1])
-      cylinder($fn=96, r=cover_inner_r, h=cover_h, center=false); }
+      cylinder($fn=96, r=cover_inner_r, h=cover_h, center=false);
 
-  // Opposing trapezoid spring perch — outside difference() to prevent bore from removing it.
-  // rotate([0,90,0]) maps local Z → world X so the hull extends radially outward.
-  // Far cube at local Z=6.3 → far edge at world X=7.3mm (0.2mm inside drum inner wall r=7.5mm).
-  translate([0, 0, (cover_h / 2) - 0.5])
-    rotate([0, 90, 0])
+    // Roller bearing outer race — 2mm from open end (Z=0), h=3.375mm matches roller height.
+    // Frustum matches roller taper: r1 at Z=2 (roller small end r=0.875), r2 at Z=5.375 (r=1).
+    // Depth 1.3mm at small end, 1.5mm at large end — primarily in cover wall (2.3mm total).
+    // Leaves 0.8-1.0mm of cover wall outside the race.
+    translate([0, 0, 3])
+      cylinder($fn=96, r1=cover_inner_r + 1.35, r2=cover_inner_r + 1.55, h=3.375, center=false);
+    // Roller bearing installation hole through cap — for inserting rollers into race.
+    // Hole radius = (roller_r2*2 + 0.05) / 2 = 1.025mm — just clears large end of roller.
+    rotate([0, 0, 90])
+      translate([9.225, 0, cover_h - 2.25])
+        cylinder($fn=28, r=1.025, h=4.75, center=true);
+    // Arc slot through cap at 180° — mates with yolk screw at X=-5.25, Y=0.
+    // hull() of spheres at 2deg intervals traces the arc. Single sphere row at cap Z=9.5.
     hull() {
-      cube([cover_h - 1, 1, 2], center=true);
-      translate([0, 0, 6.3])
-        cube([cover_h - 1, 7, 2], center=true); }
+      for (a = [-arc_half : 2 : arc_half]) {
+        rotate([0, 0, 180 + a]) translate([r_screw, 0, cover_h - 0.5])
+          sphere(r=slot_r, $fn=28); } }
+    // Trapezoid slot also cuts through cap at 0° — continuous path with trapezoid cut below.
+    hull() {
+      for (a = [-arc_half : 2 : arc_half]) {
+        rotate([0, 0, a]) translate([r_screw, 0, cover_h - 0.5])
+          sphere(r=slot_r, $fn=28); } } }
+
+  // Opposing trapezoid spring perch — outside main difference() to prevent bore removal.
+  // Wrapped in its own difference() to trim corners using yolk drum inner geometry.
+  // The hull far cube corners reach r≈8.09mm (X=7.3, Y=±3.5), which protrudes into
+  // the yolk drum wall (inner r=7.5mm). Cookie cutter centered at Z=0 with center=true
+  // spans the full trapezoid height (Z=0 to Z=9), removing the step from the previous
+  // partial-coverage translate.
+  difference() {
+    translate([0, 0, (cover_h / 2) + 0.5])
+      rotate([0, 90, 0])
+      hull() {
+        cube([cover_h - 1, 1, 2], center=true);
+        translate([0, 0, 6.7])
+          cube([cover_h - 1, 7, 2], center=true); }
+
+    // Upper Spring perch recesses.
+    translate([4.5, 2.825, 3.25]) rotate([0, 90, -65])
+      cylinder($fn=96, r=2.02, h=0.325, center=true);
+    translate([4.5, -2.825, 3.25]) rotate([0, 90, 65])
+      cylinder($fn=96, r=2.02, h=0.325, center=true);
+    // Lower Spring perch recesses.
+    translate([4.5, 2.825, 7.375]) rotate([0, 90, -65])
+      cylinder($fn=96, r=2.02, h=0.325, center=true);
+    translate([4.5, -2.825, 7.375]) rotate([0, 90, 65])
+      cylinder($fn=96, r=2.02, h=0.325, center=true);
+
+    // Cookie cutter — centered at Z=0 with center=true spans full cover height.
+    // Outer corners of wide cube reach r≈8.09mm (X=7.7, Y=±3.5) — cookie cutter
+    // at drum_inner_r - 0.1 = 7.4mm trims them cleanly, matching yolk corner treatment.
+    difference() {
+      cube([400, 400, cover_h * 3], center=true);
+      cylinder($fn=96, r=drum_r - 1 - 0.1, h=cover_h * 3 + 2, center=true); }
+    // Relief on narrow (inner) face — clears pin (r=1.5mm) and bearing hub wall.
+    // Bearing OD=5mm (r=2.5mm) + ~1mm hub wall = hub outer r≈3.5mm. Relief at 3.6mm.
+    // translate([0,0,-1]) with center=false spans Z=-1 to Z=11 — covers full trapezoid height.
+    translate([0, 0, -1])
+      cylinder($fn=48, r=3.375, h=cover_h + 1, center=false);
+    // Arc slot through trapezoid and cap at 0° — 1deg step cylinders create continuous curved slot.
+    // Cylinders at r=slot_r overlap at every step (chord=0.09mm < slot_r=1.22mm).
+    // Full height h=cover_h+1 cuts through trapezoid AND cap in one pass.
+    for (a = [-arc_half : 1 : arc_half]) {
+      rotate([0, 0, a]) translate([r_screw, 0, -1])
+        cylinder($fn=28, r=slot_r, h=cover_h + 1, center=false); } }
 
   // Central support pin with chamfered entry tip.
+  // pin_z=0 so the pin starts at the open face and engages the bearing hub immediately.
   // Built as cone (lead-in) + cylinder (body) — no subtraction needed.
-  // When cover is flipped for installation, Z=pin_z becomes the leading tip.
   translate([0, 0, pin_z]) {
     // Lead-in chamfer — tapers from point at tip to full pin radius at chamfer_h.
     cylinder($fn=48, r1=0, r2=pin_r, h=chamfer_h, center=false);
     // Pin body — full radius from chamfer_h up to cap.
     translate([0, 0, chamfer_h])
-      cylinder($fn=48, r=pin_r, h=pin_h - chamfer_h, center=false); } }
+      cylinder($fn=48, r=pin_r, h=pin_h - chamfer_h, center=false);
+    // Small shoulder for spacing the Cover away from the edge of the Output Yolk.
+    translate([0, 0, pin_z - (-pin_h + shoulder_h)])
+      cylinder($fn=48, r=shoulder_r, h=shoulder_h, center=false); } }
 
 // Render the object.
 // Comment or uncomment as needed.
@@ -100,5 +191,5 @@ module Differential_Output_Yolk_Cover() {
 
 // Render the object for printing.
 // Comment or uncomment as needed.
-Differential_Output_Yolk_Cover();
+//Differential_Output_Yolk_Cover();
 // ----------------------------------------------------------------------------------------------------
