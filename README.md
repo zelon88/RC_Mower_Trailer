@@ -53,6 +53,22 @@ The differential itself is a modular 3D printable planetary unit measuring 21mm 
 
 To compare; in systems with fully separate blade drive systems the energy contained within any blade is only equal to that of the mass of one blade. In our system; each blade contains the full potential energy of both rotating blades. When our system impacts heavy debris our blades keep more of their velocity and stability.
 
+### Inertia Dampened Drivetrain
+
+The drivetrain features dual Inertia Dampers located on either side of the center differential. The inertia dampers are designed to absorb, store, and redistribute kinetic energy from large impacts back into the drivetrain evenly over time. The compact dampers are integrated inside the pulley system which drives the blades. Each damper features quad centering springs which provide 15 degrees of deflection in both clockwise & counter-clockwise directions for 30 degrees of total deflection.
+
+![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Output_Yolk_Assembly_Rev-A1_7-26-2026_1.png)
+
+Each damper is designed in two main parts; a yolk & a cover. Both the cover & the yolk are open-ended interlocking drums. The drums arecan rotate independantly up to 15 degrees clockwise or counter-clockwise away off-center from one another via 3x internal ball bearings and a massive 10mm x 3.6mm tapered roller bearing integrated into the bodies of the two drums. Although the drums can rotate up to 15 degrees off-center from one another, they are pre-loaded to stay centered with each other via 4x internal springs. The internal springs act to keep the two drums centered, but will allow separation by up to 15 degrees clockwise or counter-clockwise to absorb sudden drastic changes in load.
+
+![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Output_Yolk_Assembly_Rev-A1_7-26-2026_2.png)
+
+It is important to note that the motors are not protected by the inertial damper. The dampers exist to protect the differential gears from exposure to overwhelming force by spreading that force over a longer duration of time. The motors rotate the cover of the inertial damper, and the center differential is attached to the center yolk. When a blade decelerates due to impacted debris; the motor is also slowed instantly. Because the motor is located outside the protection of the damper, it's acceleration torque actually helps the inertial damper recover sooner. Additionally, the energy stored by the spring in the damper is redirected back into the motor as additional torque during re-acceleration. 
+
+![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Output_Yolk_Assembly_Rev-A1_7-26-2026_3.png)
+
+Everything about our blade drive system is designed to control, absorb, store, & distribute kinetic energy in the most stable & efficient way possible.
+
 ### Steel Reinforced Chassis
 
 Every design element has been carefully selected with heavy consideration towards containing debris, managing vibration, surviving impact, & providing durability.
@@ -73,7 +89,7 @@ Due to the length of the bolt being greater than the clearance from the blade to
 
 ### Redundant Rollover Protection
 
-The mower features blueprints & instructions for building dual "Rollover Protection Switches" which disable the mower automatically in the event that it tips over. The adjustable switches will prevent the blade motors and blades from spinning while the mower is inverted. The switches self-reset once the mower has been placed upright again.
+The mower features blueprints & instructions for building dual Rollover Protection Switches which disable the mower automatically in the event that it tips over. The adjustable switches will prevent the blade motors and blades from spinning while the mower is inverted. The switches self-reset once the mower has been placed upright again.
 
 ![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Rollover_Safety_Assembly_Rev-A1_7-8-2026_1.png)
 
