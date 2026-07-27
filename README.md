@@ -59,7 +59,7 @@ The drivetrain features dual Inertia Dampers located on either side of the cente
 
 ![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Output_Yolk_Assembly_Rev-A1_7-26-2026_1.png)
 
-Each damper is designed in two main parts; a yolk & a cover. Both the cover & the yolk are open-ended interlocking drums. The drums arecan rotate independantly up to 15 degrees clockwise or counter-clockwise away off-center from one another via 3x internal ball bearings and a massive 10mm x 3.6mm tapered roller bearing integrated into the bodies of the two drums. Although the drums can rotate up to 15 degrees off-center from one another, they are pre-loaded to stay centered with each other via 4x internal springs. The internal springs act to keep the two drums centered, but will allow separation by up to 15 degrees clockwise or counter-clockwise to absorb sudden drastic changes in load.
+Each damper is designed in two main parts; a yolk & a cover. Both the cover & the yolk are open-ended interlocking drums. The drums can rotate independantly clockwise or counter-clockwise from one another via 3x internal ball bearings and a massive 10mm x 3.6mm tapered roller bearing integrated into the body of the two drums. Although the drums can rotate up to 15 degrees off-center from one another, they are pre-loaded to stay centered via 4x internal springs. The internal springs act to keep the drums centered, but will allow separation up to 15 degrees clockwise or counter-clockwise to absorb sudden drastic changes in load.
 
 ![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Output_Yolk_Assembly_Rev-A1_7-26-2026_2.png)
 
