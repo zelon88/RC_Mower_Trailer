@@ -84,7 +84,7 @@ module f3_6_2_8m_bearing() {
   cage_h = 1.0;
   color("Silver") {
     difference() {
-      cylinder(h=washer_h, r=6.0/2, center=false);
+      cylinder(h=washer_h, r=6.0/2, center=false, $fn=96);
       translate([0, 0, -0.5]) cylinder(h=washer_h + 1.0, r=3.0/2, $fn=96); }
     translate([0, 0, washer_h]) difference() {
       cylinder(h=cage_h, r=5.8/2, center=false, $fn=96);
