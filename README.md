@@ -45,11 +45,11 @@ The cutting blades are powered in opposite directions by a pair of "Silver Can" 
 
 The rotation of the motors is joined via a Center Differential. This linked-rotation configuration allows for the equalization of impacts or over-torque events between both blades & both motors. The rotation of the blades being linked together means one blade acts as a flywheel & inertial damper for the other. It also means faster blade speed recovery after an impact, as each blade has torque from both motors. Finally, when our system impacts heavy debris; not all energy is lost like in separate blade systems. In our system, the impact energy is transferred to the opposite blade, actually increasing its velocity. This temporary over-speed condition acts as an inertial "capacitor" that stores energy to be distributed back to the slower blade via the center differential.
 
-![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Differential_Assembly_Rev-A1_7-15-2026_1.png)
+![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Differential_Assembly_Rev-A1_7-26-2026_1.png)
 
 The differential itself is a modular 3D printable planetary unit measuring 21mm x 21mm x 21mm. Its assembly consists of 2 output gears, 4 planet gears, & a core block. The assembly is supported by 10× thrust ball bearings & 2× flanged ball bearings. Great care has been taken during design to ensure the differential assembly is isolated from shock, over-torque conditions, or unsupported side-loads.
 
-![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Differential_Assembly_Rev-A1_7-26-2026_1.png)
+![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Differential_Assembly_Rev-A1_7-15-2026_2.png)
 
 To compare; in systems with fully separate blade drive systems the energy contained within any blade is only equal to that of the mass of one blade. In our system; each blade contains the full potential energy of both rotating blades. When our system impacts heavy debris our blades keep more of their velocity and stability.
 
