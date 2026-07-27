@@ -49,7 +49,7 @@ The rotation of the motors is joined via a Center Differential. This linked-rota
 
 The differential itself is a modular 3D printable planetary unit measuring 21mm x 21mm x 21mm. Its assembly consists of 2 output gears, 4 planet gears, & a core block. The assembly is supported by 10× thrust ball bearings & 2× flanged ball bearings. Great care has been taken during design to ensure the differential assembly is isolated from shock, over-torque conditions, or unsupported side-loads.
 
-![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Differential_Assembly_Rev-A1_7-15-2026_2.png)
+![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Differential_Assembly_Rev-A1_7-26-2026_1.png)
 
 To compare; in systems with fully separate blade drive systems the energy contained within any blade is only equal to that of the mass of one blade. In our system; each blade contains the full potential energy of both rotating blades. When our system impacts heavy debris our blades keep more of their velocity and stability.
 
