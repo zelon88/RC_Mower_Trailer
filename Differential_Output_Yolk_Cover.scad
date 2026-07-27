@@ -14,7 +14,7 @@
 // PART INFORMATION
 
 // NAME:  Differential Output Yolk Cover
-// REVISION:  A1
+// REVISION:  A2
 // START DATE:  7/20/2026
 // CURRENT VERSION DATE:  7/26/2026
 // AUTHOR:  Justin Grimes (@zelon88) & Claude Sonnet 5.
@@ -50,6 +50,8 @@
 
 // A module for creating bearings.
 include <Workfiles/Bearings.scad>;
+// Shared frustum-with-radiused-large-end profile — also used by the roller and yolk race cut.
+include <Workfiles/Filleted_Frustum.scad>;
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
@@ -109,9 +111,11 @@ module Differential_Output_Yolk_Cover() {
     // Roller bearing outer race — 2mm from open end (Z=0), h=3.375mm matches roller height.
     // Frustum matches roller taper: r1 at Z=2 (roller small end r=0.875), r2 at Z=5.375 (r=1).
     // Depth 1.3mm at small end, 1.5mm at large end — primarily in cover wall (2.3mm total).
-    // Leaves 0.8-1.0mm of cover wall outside the race.
+    // Leaves 0.8-1.0mm of cover wall outside the race. r2 corner radiused to fillet_r to
+    // match the roller's own radiused large end — no extra_h needed, this cut goes
+    // straight into solid material rather than clearing a separate clipping shell.
     translate([0, 0, 3])
-      cylinder($fn=96, r1=cover_inner_r + 1.35, r2=cover_inner_r + 1.55, h=3.375, center=false);
+      Filleted_Frustum(r1=cover_inner_r + 1.35, r2=cover_inner_r + 1.55, h=3.375, fillet_r=0.15, fn=96);
     // Roller bearing installation hole through cap — for inserting rollers into race.
     // Hole radius = (roller_r2*2 + 0.05) / 2 = 1.025mm — just clears large end of roller.
     rotate([0, 0, 90])

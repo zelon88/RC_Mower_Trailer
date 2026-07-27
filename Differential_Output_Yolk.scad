@@ -14,10 +14,10 @@
 // PART INFORMATION
 
 // NAME:  Differential Output Yolk
-// REVISION:  A1
+// REVISION:  A4
 // START DATE:  7/18/2026
-// CURRENT VERSION DATE:  7/18/2026
-// AUTHOR:  Justin Grimes (@zelon88)
+// CURRENT VERSION DATE:  7/26/2026
+// AUTHOR:  Justin Grimes (@zelon88) & Claude Sonnet 5.
 // DESCRIPTION:
 //    A driveshaft yoke that couples the Differential Output Gear to the driveshaft.
 //    The hexagonal boss ($fn=6, r=2.0) slides into the matching hex cut in the output
@@ -50,6 +50,8 @@
 include <Workfiles/Bearings.scad>;
 // A module for creating bearings.
 include <Differential_Output_Yolk_Cover.scad>;
+// Shared frustum-with-radiused-large-end profile — also used by the roller and cover race cut.
+include <Workfiles/Filleted_Frustum.scad>;
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
@@ -127,12 +129,27 @@ module Differential_Output_Yolk() {
     translate([-5.25, 0, 5])
       cylinder($fn=96, r=0.99, h=15, center=true);
     // Roller bearing inner race — partial frustum groove in yolk OD, 2mm from open end.
-    // Frustum matches roller taper: r1=0.875 end at Z=2, r2=1 end at Z=5.375.
-    // Depth: 0.25mm at small end, 0.3mm at large end — partial cut into yolk OD.
+    // Frustum matches roller taper: deep cut (large-end match) at the bottom of this
+    // block (Z=4, world), shallow cut (small-end match) at the top (Z=7.375, world) —
+    // confirmed against the cover's assembly transform: the cover's own race puts the
+    // roller's large end at the LOWER world Z and small end at the HIGHER world Z, so
+    // the yolk's cut must follow the same sense.
+    // r1=flange_r-0.35 (deep, large-end match) sits at Z=0 and gets the fillet via
+    // fillet_end="r1" — a direct tangent-circle derivation for that corner, not a
+    // mirrored copy of the r2 case. (An earlier attempt built this by mirroring the
+    // standard r2-end shape onto Z=0; mirror() reflects the mesh, which flips face
+    // winding/normals and rendered the round-over as a concave notch instead of a
+    // proper fillet.) r2=flange_r-0.30 (shallow, small-end match) stays sharp at
+    // Z=3.375, with extra_h=0.4 continuing flat to clear the outer clipping shell —
+    // same total reach (3.775) as before.
     translate([0, 0, 4])
       difference() {
         cylinder($fn=96, r=flange_r + 0.1, h=3.375 + 0.2, center=false);
-        cylinder($fn=96, r1=flange_r - 0.30, r2=flange_r - 0.35, h=3.375 + 0.4, center=false); }
+        Filleted_Frustum(r1=flange_r - 0.35, r2=flange_r - 0.30, h=3.375, fillet_r=0.15, extra_h=0.4, fillet_end="r1", fn=96);
+
+ }
+
+
     // The installation notch.
     rotate([0, 0, 110])
       translate([flange_r + 0.725, 0, 2.75])
