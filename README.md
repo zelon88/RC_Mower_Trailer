@@ -81,7 +81,7 @@ The mower chassis is comprised of a steel frame with a thickness between 3.175mm
 
 ### Captured Blade Carrier Design
 
-The cutting blades are made from 3.625mm thick steel flat bar. The blades rotate in opposite directions to minimize vibration and prevent build-up of gyroscopic forces that could destabilize the mower. The blades are installed via a very long grade 8 bolt which traverses a through hole in the center of the blade. This bolt is then installed into the chassis from the bottom-up through three stages of ball bearings.
+The cutting blades are made from 3.175mm thick steel flat bar. The blades rotate in opposite directions to minimize vibration and prevent build-up of gyroscopic forces that could destabilize the mower. The blades are installed via a very long grade 8 bolt which traverses a through hole in the center of the blade. This bolt is then installed into the chassis from the bottom-up through three stages of ball bearings.
 
 ![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Blade_Assembly_Rev-A1_7-8-2026_1.png)
 
