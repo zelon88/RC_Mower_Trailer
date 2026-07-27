@@ -14,20 +14,22 @@
 // PART INFORMATION
 
 // NAME:  Differential Output Yolk Roller Bearing
-// REVISION:  A2
+// REVISION:  A3
 // START DATE:  7/21/2026
-// CURRENT VERSION DATE:  7/26/2026
-// AUTHOR:  Justin Grimes (@zelon88) & Claude Sonnet 5.
+// CURRENT VERSION DATE:  7/27/2026
+// AUTHOR:  Justin Grimes (@zelon88) & Claude Opus 5.
 // DESCRIPTION:
 //    A frustum-shaped roller bearing for the Differential Output Yolk assembly.
 //    Rides in a matching race cut into the ID of the cover drum and partially into
-//    the OD of the yolk drum. The frustum profile (r1=0.875, r2=1) orients with
-//    r1 at the open end of the assembly (Z=2 race position) and r2 inward.
-//    Multiple rollers are distributed around the bearing circumference. The r2
-//    (large) end corner is radiused to fillet_r — matches the radius cut into
-//    the yolk and cover race grooves so the roller seats without a sharp-edge
-//    interference. OAL is unchanged at h=3.375; the fillet is built inward from
-//    the existing corner, not added onto the length.
+//    the OD of the yolk drum. The frustum profile (r1=0.875, r2=1) seats with the
+//    large end toward the fat end of the race, which is the end the installation
+//    hole and notch both open onto, so a roller dropped through lands in the widest
+//    section. Multiple rollers are distributed around the bearing circumference.
+//    Both end corners are broken to fillet_r to match the radius in the yolk and
+//    cover race grooves, so the roller seats without a sharp-edge interference and
+//    crosses the partially uncovered installation openings without catching a lip.
+//    OAL is unchanged at h=3.375; the corners are broken inward from the existing
+//    profile rather than added onto the length.
 // FILE NAME: Differential_Output_Yolk_Roller_Bearing.scad
 // ----------------------------------------------------------------------------------------------------
 
@@ -57,9 +59,12 @@ include <Workfiles/Filleted_Frustum.scad>;
 module Output_Yolk_Roller_Bearing() {
   // Frustum roller — small end (r1=0.875) at Z=0, large end (r2=1) at Z=h.
   // Matches the frustum race cut in the cover ID and yolk OD.
-  // r2 corner radiused to fillet_r — must match the yolk/cover race fillet_r.
+  // Both end corners are broken to fillet_r, which must match the race fillet_r so the
+  // roller seats into the rounded groove roots rather than bearing on a sharp corner.
+  // Rounding a corner only takes material off the roller, so neither the taper, the
+  // 3.375mm OAL, nor either race dimension changes on account of it.
   fillet_r = 0.15;
-  Filleted_Frustum(r1=0.875, r2=1, h=3.375, fillet_r=fillet_r, fn=96); }
+  Filleted_Frustum(r1=0.875, r2=1, h=3.375, fillet_r=fillet_r, fillet_end="both", fn=96); }
 
 // Render the object.
 // Comment or uncomment as needed.

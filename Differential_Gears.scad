@@ -239,7 +239,7 @@ module Differential_Assembly() {
 
 // Render the object.
 // Comment or uncomment as needed.
-Differential_Assembly();
+//Differential_Assembly();
 
 // Render the object for printing.
 // Comment or uncomment as needed.

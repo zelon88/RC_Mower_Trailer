@@ -79,7 +79,7 @@ module Center_Bracket() {
     // Recessed hole, motor.
     translate([-28, 12, 40]) rotate([90, 0, 0]) cylinder($fn=128, r=18.055, h=2.5);
     // Hole, center shaft.
-    translate([0, 18, 53]) rotate([90, 0, 0]) cylinder($fn=48, r=5.055, h=36);
+    translate([0, 18, 53]) rotate([90, 0, 0]) cylinder($fn=48, r=4.01, h=36);
     // Screw holes, differential.
     translate([8, 18, 53]) rotate([90, 0, 0]) cylinder($fn=28, r=1.22, h=36);
     translate([-8, 18, 53]) rotate([90, 0, 0]) cylinder($fn=28, r=1.22, h=36);
@@ -132,7 +132,7 @@ module Center_Bracket() {
     // Recessed hole for motor.
     translate([28, -9.5, 40]) rotate([90, 0, 0]) cylinder($fn=128, r=18.055, h=2.5);
     // Hole for center shaft.
-    translate([0, 1, 53]) rotate([90, 0, 0]) cylinder($fn=48, r=5.055, h=36);
+    translate([0, 1, 53]) rotate([90, 0, 0]) cylinder($fn=48, r=4.01, h=36);
     // Screw holes for differential.
     translate([8, 18, 53]) rotate([90, 0, 0]) cylinder($fn=28, r=1.22, h=36);
     translate([-8, 18, 53]) rotate([90, 0, 0]) cylinder($fn=28, r=1.22, h=36);

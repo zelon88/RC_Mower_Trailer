@@ -106,7 +106,7 @@ module Attachment_Adjustment_Arm_Cover() {
 
 // Render the object.
 // Comment or uncomment as needed.
-Attachment_Adjustment_Arm_Cover();
+//Attachment_Adjustment_Arm_Cover();
 
 // Render the object for printing.
 // Comment or uncomment as needed.

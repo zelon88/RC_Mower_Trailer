@@ -14,10 +14,10 @@
 // PART INFORMATION
 
 // NAME:  Differential Output Yolk
-// REVISION:  A4
+// REVISION:  A7
 // START DATE:  7/18/2026
-// CURRENT VERSION DATE:  7/26/2026
-// AUTHOR:  Justin Grimes (@zelon88) & Claude Sonnet 5.
+// CURRENT VERSION DATE:  7/27/2026
+// AUTHOR:  Justin Grimes (@zelon88) & Claude Opus 5.
 // DESCRIPTION:
 //    A driveshaft yoke that couples the Differential Output Gear to the driveshaft.
 //    The hexagonal boss ($fn=6, r=2.0) slides into the matching hex cut in the output
@@ -48,10 +48,14 @@
 
 // A module for creating bearings.
 include <Workfiles/Bearings.scad>;
-// A module for creating bearings.
+// A module for creating the Output Yolk Cover.
 include <Differential_Output_Yolk_Cover.scad>;
-// Shared frustum-with-radiused-large-end profile — also used by the roller and cover race cut.
+// Shared roller and race profiles, held in common with the cover so both halves agree.
 include <Workfiles/Filleted_Frustum.scad>;
+// The roller that rides in the race, for the assembly reference at the bottom of this file.
+// Imported with use rather than include because that file renders itself when loaded, and
+// include would execute that render and leave a stray roller sitting at the origin.
+use <Differential_Output_Yolk_Roller_Bearing.scad>;
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
@@ -128,32 +132,21 @@ module Differential_Output_Yolk() {
       cylinder($fn=96, r=0.99, h=15, center=true);
     translate([-5.25, 0, 5])
       cylinder($fn=96, r=0.99, h=15, center=true);
-    // Roller bearing inner race — partial frustum groove in yolk OD, 2mm from open end.
-    // Frustum matches roller taper: deep cut (large-end match) at the bottom of this
-    // block (Z=4, world), shallow cut (small-end match) at the top (Z=7.375, world) —
-    // confirmed against the cover's assembly transform: the cover's own race puts the
-    // roller's large end at the LOWER world Z and small end at the HIGHER world Z, so
-    // the yolk's cut must follow the same sense.
-    // r1=flange_r-0.35 (deep, large-end match) sits at Z=0 and gets the fillet via
-    // fillet_end="r1" — a direct tangent-circle derivation for that corner, not a
-    // mirrored copy of the r2 case. (An earlier attempt built this by mirroring the
-    // standard r2-end shape onto Z=0; mirror() reflects the mesh, which flips face
-    // winding/normals and rendered the round-over as a concave notch instead of a
-    // proper fillet.) r2=flange_r-0.30 (shallow, small-end match) stays sharp at
-    // Z=3.375, with extra_h=0.4 continuing flat to clear the outer clipping shell —
-    // same total reach (3.775) as before.
+    // Roller bearing inner race. The frustum's fat end sits at Z=4, the same end the
+    // installation notch opens onto, so a roller entering through the notch meets the
+    // widest section of the race first and never has to climb the taper to seat.
+    // Cut depth is 0.35mm at the fat end against 0.30mm at the thin end. Read together
+    // with the cover's 1.55mm and 1.35mm outer race, that leaves the roller 0.10mm
+    // diametric clearance at both ends, which is comfortably above the 0.08mm the
+    // machine holds and still tight enough to keep the roller from skewing in the race.
+    // race_h runs 0.2mm longer than the 3.375mm roller so the roller has axial float
+    // and cannot be pinched between the two groove roots.
     translate([0, 0, 4])
-      difference() {
-        cylinder($fn=96, r=flange_r + 0.1, h=3.375 + 0.2, center=false);
-        Filleted_Frustum(r1=flange_r - 0.35, r2=flange_r - 0.30, h=3.375, fillet_r=0.15, extra_h=0.4, fillet_end="r1", fn=96);
-
- }
-
-
+      Race_Groove(base_r=flange_r, fat_r=flange_r - 0.35, thin_r=flange_r - 0.30, race_h=3.575, ramp_h=1, run_h=1, back_r=flange_r + 1, fillet_r=0.15, fn=96);
     // The installation notch.
     rotate([0, 0, 110])
       translate([flange_r + 0.725, 0, 2.75])
-        cylinder($fn=28, r=1.025, h=5.5, center=true);
+        cylinder($fn=96, r=1.025, h=5.5, center=true);
 
     // Screw recesses in bottom face for cover.
     translate([5.25, 0, (flange_h + 1.125)])
@@ -180,18 +173,34 @@ module Differential_Output_Yolk() {
 
 // Render the object.
 // Comment or uncomment as needed.
-Differential_Output_Yolk();
+//Differential_Output_Yolk();
 // Create the triple stacked 5x8 bearings that support independant rotation of the cover.
-translate([0, 0, 0])bearing_3x5x2_5();
-translate([0, 0, 2.5])bearing_3x5x2_5();
-translate([0, 0, 5]) bearing_3x5x2_5();
+//translate([0, 0, 0])bearing_3x5x2_5();
+//translate([0, 0, 2.5])bearing_3x5x2_5();
+//translate([0, 0, 5]) bearing_3x5x2_5();
 // Outer bearing that mounts into the Center Bracket.
-translate([0, 0, 14.5]) rotate([0, 180, 0]) flanged_bearing_5x8x2_5();
-translate([0, 0, 14.5]) bearing_5x8x2_5();
+//translate([0, 0, 14.5]) rotate([0, 180, 0]) flanged_bearing_5x8x2_5();
+//translate([0, 0, 14.5]) bearing_5x8x2_5();
 
 // USE THIS FOR DIMENSIONAL REFERENCE!!!
 // Add the Output Yolk Cover.
-translate([0, 0, 9.9875]) rotate([0, 180, 0]) Differential_Output_Yolk_Cover();
+//translate([0, 0, 9.9875]) rotate([0, 180, 0]) Differential_Output_Yolk_Cover();
+
+// Add the roller bearings seated in the race.
+// Pitch radius 9.1625 is the midpoint between the two race surfaces taken at the roller's
+// own mid height, so the roller carries roughly 0.05mm of radial clearance on each side.
+// Z=7.475 puts the roller's small end at the top of the race and its large end at Z=4.1,
+// which centers the 3.375mm roller in the 3.575mm race with 0.1mm of axial float at each end.
+// Each roller is turned large end down so its radiused end faces the fat end of the race at
+// Z=4, which is the end both the yolk notch and the cover installation hole open onto.
+// The seated axis actually leans about 1.2 degrees, because the inner race rises 0.05mm
+// across the race while the outer race falls 0.20mm. These are drawn upright at the mean
+// pitch radius instead, which stays inside the roller's clearance at both ends and keeps
+// the reference readable. Raise roller_qty to check crowding; 28 is where they touch.
+//roller_qty = 14;
+//for (i = [0 : roller_qty - 1])
+//  rotate([0, 0, i * 360 / roller_qty]) translate([9.1625, 0, 7.475]) rotate([180, 0, 0])
+//    Output_Yolk_Roller_Bearing();
 
 // THIS IS FOR VISUAL REFERENCE ONLY!!!
 // DO NOT USE THIS AS AN ASSEMBLY DIAGRAM!!!

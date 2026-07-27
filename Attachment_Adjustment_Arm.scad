@@ -120,7 +120,7 @@ module Attachment_Adjustment_Arm() {
 
 // Render the object.
 // Comment or uncomment as needed.
-Attachment_Adjustment_Arm();
+//Attachment_Adjustment_Arm();
 //translate([0, 0, 4.75]) Attachment_Adjustment_Arm_Cover();
 
 // Render the object for printing.

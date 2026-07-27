@@ -14,10 +14,10 @@
 // PART INFORMATION
 
 // NAME:  Differential Output Yolk Cover
-// REVISION:  A2
+// REVISION:  A6
 // START DATE:  7/20/2026
-// CURRENT VERSION DATE:  7/26/2026
-// AUTHOR:  Justin Grimes (@zelon88) & Claude Sonnet 5.
+// CURRENT VERSION DATE:  7/27/2026
+// AUTHOR:  Justin Grimes (@zelon88) & Claude Opus 5.
 // DESCRIPTION:
 //    The rotating cover that mates with the Differential_Output_Yolk drum.
 //    Slips over the open face of the drum with 0.2mm radial clearance.
@@ -50,7 +50,7 @@
 
 // A module for creating bearings.
 include <Workfiles/Bearings.scad>;
-// Shared frustum-with-radiused-large-end profile — also used by the roller and yolk race cut.
+// Shared roller and race profiles, held in common with the yolk so both halves agree.
 include <Workfiles/Filleted_Frustum.scad>;
 // ----------------------------------------------------------------------------------------------------
 
@@ -108,19 +108,29 @@ module Differential_Output_Yolk_Cover() {
     translate([0, 0, -1])
       cylinder($fn=96, r=cover_inner_r, h=cover_h, center=false);
 
-    // Roller bearing outer race — 2mm from open end (Z=0), h=3.375mm matches roller height.
-    // Frustum matches roller taper: r1 at Z=2 (roller small end r=0.875), r2 at Z=5.375 (r=1).
-    // Depth 1.3mm at small end, 1.5mm at large end — primarily in cover wall (2.3mm total).
-    // Leaves 0.8-1.0mm of cover wall outside the race. r2 corner radiused to fillet_r to
-    // match the roller's own radiused large end — no extra_h needed, this cut goes
-    // straight into solid material rather than clearing a separate clipping shell.
-    translate([0, 0, 3])
-      Filleted_Frustum(r1=cover_inner_r + 1.35, r2=cover_inner_r + 1.55, h=3.375, fillet_r=0.15, fn=96);
+    // Roller bearing outer race, the outer half of the race the yolk cuts the inner
+    // half of. The frustum's fat end sits at Z=5.9875, which places it at world Z=4.0
+    // once the cover is flipped onto the drum, coincident with the yolk's fat end so
+    // the two halves of the race register against each other and the roller sits square.
+    // That is also the end the installation hole feeds, and the end the yolk's notch
+    // opens onto, so a roller dropped down the hole lands in the widest section.
+    // Cut depth is 1.55mm at the fat end against 1.35mm at the thin end, leaving at
+    // least 0.75mm of the 2.3mm cover wall standing outboard of the race.
+    // The tool is turned end for end with rotate rather than mirror, because a
+    // reflection inverts the profile's winding.
+    // ramp_h is longer here than on the yolk's race to hold a similar mouth angle
+    // against a cut roughly four times as deep.
+    translate([0, 0, 5.9875]) rotate([180, 0, 0])
+      Race_Groove(base_r=cover_inner_r, fat_r=cover_inner_r + 1.55, thin_r=cover_inner_r + 1.35, race_h=3.575, ramp_h=1.5, run_h=1, back_r=cover_inner_r - 1, fillet_r=0.15, fn=96);
     // Roller bearing installation hole through cap — for inserting rollers into race.
     // Hole radius = (roller_r2*2 + 0.05) / 2 = 1.025mm — just clears large end of roller.
+    // Height is set so the hole bottoms out level with the race mouth at Z=5.9875,
+    // leaving no blind ledge for a roller to hang up on partway down. Holding the
+    // center fixed means the height gains twice the depth added at the bottom, and
+    // the surplus simply overshoots the cap face for a clean boolean.
     rotate([0, 0, 90])
       translate([9.225, 0, cover_h - 2.25])
-        cylinder($fn=28, r=1.025, h=4.75, center=true);
+        cylinder($fn=96, r=1.025, h=5.525, center=true);
     // Arc slot through cap at 180° — mates with yolk screw at X=-5.25, Y=0.
     // hull() of spheres at 2deg intervals traces the arc. Single sphere row at cap Z=9.5.
     hull() {

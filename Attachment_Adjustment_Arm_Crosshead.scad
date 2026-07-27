@@ -123,7 +123,7 @@ module Attachment_Adjustment_Arm_Crosshead() {
 
 // Render the object.
 // Comment or uncomment as needed.
-Attachment_Adjustment_Arm_Crosshead();
+//Attachment_Adjustment_Arm_Crosshead();
 
 // Render the object for printing.
 // Comment or uncomment as needed.

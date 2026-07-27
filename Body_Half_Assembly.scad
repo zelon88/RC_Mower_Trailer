@@ -114,6 +114,10 @@ include <Hopper_Base.scad>;
 include <Rollover_Safety_Switch.scad>;
 // A module for calling in the Clippings Flange Exhaust Header.
 include <Clippings_Exhaust_Header.scad>;
+// A module for calling in the Differential Output Yolk.
+include <Differential_Output_Yolk.scad>;
+// A module for calling in the Differential Output Yolk Assembly.
+include <Differential_Output_Yolk_Assembly.scad>;
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
@@ -215,5 +219,9 @@ translate([-61.75, 47.5, 45]) rotate([0, 90, 0]) Rollover_Safety_Switch_Assembly
 // The Batteries.
 //translate([-85, 0, 150]) rotate([0, 0, 90]) Large_3s_Lipo_Battery();
 //translate([85, 0, 150]) rotate([0, 0, 90]) Large_3s_Lipo_Battery();
+// The Clippings Flange Exhaust Header.
 translate([-32, 40, 19.75]) rotate([0, 0, 180]) Clippings_Flange_Exhaust_Header();
+// The Differential Output Yolk Assemblies.
+translate([0, -30, 53]) rotate([-90, 0, 0]) Differential_Output_Yolk_Assembly();
+translate([0, 30, 53]) rotate([90, 0, 0]) Differential_Output_Yolk_Assembly();
 // ----------------------------------------------------------------------------------------------------
