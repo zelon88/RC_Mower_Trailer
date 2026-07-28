@@ -14,7 +14,7 @@
 // PART INFORMATION
 
 // NAME:  Differential Output Yolk
-// REVISION:  A7
+// REVISION:  B1
 // START DATE:  7/18/2026
 // CURRENT VERSION DATE:  7/27/2026
 // AUTHOR:  Justin Grimes (@zelon88) & Claude Opus 5.
@@ -48,7 +48,7 @@
 
 // A module for creating bearings.
 include <Workfiles/Bearings.scad>;
-// A module for creating the Output Yolk Cover.
+// A module for creating bearings.
 include <Differential_Output_Yolk_Cover.scad>;
 // Shared roller and race profiles, held in common with the cover so both halves agree.
 include <Workfiles/Filleted_Frustum.scad>;
@@ -95,12 +95,24 @@ module Differential_Output_Yolk() {
         cylinder($fn=96, r=flange_r, h=flange_h, center=false);
         // Hollow out the flange to create a drum.
         cylinder($fn=96, r=flange_r - 1, h=flange_h - 1.5, center=false); }
-      // The upper trapezoid spring perch.
-      translate([0, 0, (flange_h / 2) - 0.5]) rotate([0, 90, 0]) hull() {
-        translate([0, 0, 0]) 
-          cube([flange_h - 1, 1, 2], center = true); 
-        translate([0, 0, 6.7]) 
-          cube([flange_h - 1, 7, 2], center = true); }
+      // The upper trapezoid spring perch. Both cubes are widened by the same 1.5mm over
+      // the original 1 and 7, which keeps the sloped face at its original angle and simply
+      // moves it 0.75mm outboard. Holding the angle matters because the spring perch
+      // recesses are cut normal to that face; had only the wide end grown, the face would
+      // have steepened and the recesses would have ended up buried inside the material
+      // rather than dished into its surface.
+      // The extra width recovers what the widened cover arc slot takes out of the
+      // opposing perch, which at slot_r=1.72 was breaking clean through the face.
+      // Widening pushes the far corners past the 8.5 drum OD, so the result is trimmed
+      // back to flange_r. Previously the corners landed at r=8.458 and stayed inside on
+      // their own, which is why no trim was needed before.
+      intersection() {
+        translate([0, 0, (flange_h / 2) - 0.5]) rotate([0, 90, 0]) hull() {
+          translate([0, 0, 0]) 
+            cube([flange_h - 1, 2.5, 2], center = true); 
+          translate([0, 0, 6.7]) 
+            cube([flange_h - 1, 8.5, 2], center = true); }
+        cylinder($fn=96, r=flange_r, h=flange_h + 1, center=false); }
       // Add the hub material to the inside of the drum.
       cylinder($fn=96, r=bearing_recess_r + 0.75, h=flange_h, center=false);
       // Outer hub to ensure cover mounting hardware clearance.
@@ -115,6 +127,19 @@ module Differential_Output_Yolk() {
       // $fn=6 matches the output shaft cut exactly. All 6 orientations are identical.
       translate([0, 0, flange_h])
         cylinder($fn=6, r=boss_r, h=boss_h, center=false); 
+      // Screw boss standoffs. These run from the drum floor at Z=8.5 down through the
+      // cover's arc slots and stand 0.05mm proud of the cover cap's outer face, so the
+      // washer and lock nut land on the boss rather than on the cap. The cap is then
+      // located axially without being clamped, and is free to rotate through the slot's
+      // travel. Boss length is what sets the drums' separation, and through the cone that
+      // sets roller preload directly — 1mm of boss length moves the races 0.058mm
+      // radially, so preload is set by geometry rather than by how hard anyone pulls.
+      // OD 1.65 against the 0.85 screw hole leaves a 0.80mm wall, which is two perimeters
+      // at a 0.4mm nozzle. That wall is the whole reason for dropping to M1.6.
+      translate([5.25, 0, -1.0625])
+        cylinder($fn=96, r=1.65, h=9.5625, center=false);
+      translate([-5.25, 0, -1.0625])
+        cylinder($fn=96, r=1.65, h=9.5625, center=false); 
       
 
 }
@@ -127,26 +152,37 @@ module Differential_Output_Yolk() {
     // Bearing recess on bottom face — allows bearing to sit flush.
     translate([0, 0, -1])
       cylinder($fn=96, r=bearing_recess_r, h=bearing_recess_h + 1, center=false); 
-    // Screw holes for cover.
+    // Screw holes for cover. r=0.85 is a close clearance fit on M1.6. Dropping a screw
+    // size from M2 is what funds a printable wall on the standoff boss: the boss carries
+    // the clamping compression, so the fastener itself does comparatively little work.
     translate([5.25, 0, 5])
-      cylinder($fn=96, r=0.99, h=15, center=true);
+      cylinder($fn=96, r=0.85, h=15, center=true);
     translate([-5.25, 0, 5])
-      cylinder($fn=96, r=0.99, h=15, center=true);
-    // Roller bearing inner race. The frustum's fat end sits at Z=4, the same end the
-    // installation notch opens onto, so a roller entering through the notch meets the
-    // widest section of the race first and never has to climb the taper to seat.
-    // Cut depth is 0.35mm at the fat end against 0.30mm at the thin end. Read together
-    // with the cover's 1.55mm and 1.35mm outer race, that leaves the roller 0.10mm
-    // diametric clearance at both ends, which is comfortably above the 0.08mm the
-    // machine holds and still tight enough to keep the roller from skewing in the race.
-    // race_h runs 0.2mm longer than the 3.375mm roller so the roller has axial float
-    // and cannot be pinched between the two groove roots.
+      cylinder($fn=96, r=0.85, h=15, center=true);
+    // Roller bearing inner race. A cone sharing one apex on the drum axis with the
+    // cover's outer race, which is the condition that makes this a true conical roller
+    // bearing and lets the rollers roll without scrubbing along the contact line.
+    // The apex lies far BELOW the part, so both races widen going up and the gap between
+    // them widens with them. Drawing the cover upward therefore narrows the gap and seats
+    // the rollers, which is the direction the clamping screws pull. Apex above would have
+    // meant tightening the screws unloaded the bearing instead.
+    // The roller's fat end consequently sits at the top, at Z=7.575.
+    // Cut depth runs 0.2549mm at Z=4 to 0.0826mm at Z=7.575, leaving 0.745mm of the
+    // 1.0mm drum wall standing. Separation is resisted by the fasteners rather than by
+    // the cone, which is the conventional arrangement for a preloaded single row.
     translate([0, 0, 4])
-      Race_Groove(base_r=flange_r, fat_r=flange_r - 0.35, thin_r=flange_r - 0.30, race_h=3.575, ramp_h=1, run_h=1, back_r=flange_r + 1, fillet_r=0.15, fn=96);
-    // The installation notch.
+      Race_Groove(base_r=flange_r, r_start=8.24506, r_end=8.41744, race_h=3.575, ramp_h=1, run_h=1, back_r=flange_r + 1, fillet_r=0.15, fn=96);
+    // The installation notch. Collinear with a seated roller, so it leans 3.037 degrees
+    // out from the drum axis the way the rollers do. With the apex below, a roller runs
+    // toward the drum axis as it descends, so this notch leans the opposite way to the
+    // cone's previous sense and has to cut deeper into the drum wall on the approach.
+    // Radius matches the cover's installation hole.
+    // It stays 20 degrees off the cover hole so the two only line up when the drums are
+    // rotated to the install position, outside the springs' working travel.
     rotate([0, 0, 110])
-      translate([flange_r + 0.725, 0, 2.75])
-        cylinder($fn=96, r=1.025, h=5.5, center=true);
+      translate([8.859785, 0, 0])
+        rotate([0, 3.03675, 0])
+          cylinder($fn=96, r=0.87375, h=5.5, center=false);
 
     // Screw recesses in bottom face for cover.
     translate([5.25, 0, (flange_h + 1.125)])
@@ -155,14 +191,14 @@ module Differential_Output_Yolk() {
       cylinder($fn=96, r=1.75, h=3, center=true);
 
     // Upper Spring perch recesses.
-    translate([4.5, 2.825, 2.25]) rotate([0, 90, -65])
+    translate([4, 3.575, 2.25]) rotate([0, 90, -65])
       cylinder($fn=96, r=2.02, h=0.325, center=true);
-    translate([4.5, -2.825, 2.25]) rotate([0, 90, 65])
+    translate([4, -3.575, 2.25]) rotate([0, 90, 65])
       cylinder($fn=96, r=2.02, h=0.325, center=true);
     // Lower Spring perch recesses.
-    translate([4.5, 2.825, 6.375]) rotate([0, 90, -65])
+    translate([4, 3.575, 6.375]) rotate([0, 90, -65])
       cylinder($fn=96, r=2.02, h=0.325, center=true);
-    translate([4.5, -2.825, 6.375]) rotate([0, 90, 65])
+    translate([4, -3.575, 6.375]) rotate([0, 90, 65])
       cylinder($fn=96, r=2.02, h=0.325, center=true);
 
 } 
@@ -187,20 +223,26 @@ module Differential_Output_Yolk() {
 //translate([0, 0, 9.9875]) rotate([0, 180, 0]) Differential_Output_Yolk_Cover();
 
 // Add the roller bearings seated in the race.
-// Pitch radius 9.1625 is the midpoint between the two race surfaces taken at the roller's
-// own mid height, so the roller carries roughly 0.05mm of radial clearance on each side.
-// Z=7.475 puts the roller's small end at the top of the race and its large end at Z=4.1,
-// which centers the 3.375mm roller in the 3.575mm race with 0.1mm of axial float at each end.
-// Each roller is turned large end down so its radiused end faces the fat end of the race at
-// Z=4, which is the end both the yolk notch and the cover installation hole open onto.
-// The seated axis actually leans about 1.2 degrees, because the inner race rises 0.05mm
-// across the race while the outer race falls 0.20mm. These are drawn upright at the mean
-// pitch radius instead, which stays inside the roller's clearance at both ends and keeps
-// the reference readable. Raise roller_qty to check crowding; 28 is where they touch.
-//roller_qty = 14;
+// Each roller leans 3.037 degrees out from the drum axis, in the plane containing that
+// axis. That lean is not a styling choice: it is what puts the roller's own cone apex
+// on the drum axis alongside the two race apexes, which is the condition for the roller
+// to roll rather than scrub. The rollers are consequently no longer surfaces of
+// revolution about the drum axis, so each one is placed individually rather than being
+// swept around it.
+// With the apex below, the gap between the race cones is widest at the top, so the
+// roller sits fat end up and needs no end for end flip: the module already runs thin at
+// its Z=0 and fat at its Z=h.
+// Placement is about the roller's own midpoint at r=9.16685, Z=5.7875, the midpoint of
+// the pitch line running from r=9.07745 at the thin end to r=9.25625 at the fat end.
+// Seated this way the roller exactly fills the gap at every station along its length,
+// since nominal clearance is zero for preload.
+//roller_qty = 30;
 //for (i = [0 : roller_qty - 1])
-//  rotate([0, 0, i * 360 / roller_qty]) translate([9.1625, 0, 7.475]) rotate([180, 0, 0])
-//    Output_Yolk_Roller_Bearing();
+  //rotate([0, 0, i * 360 / roller_qty])
+    //translate([9.16685, 0, 5.7875])
+      //rotate([0, 3.03675, 0])
+        //translate([0, 0, -3.375 / 2])
+          //Output_Yolk_Roller_Bearing();
 
 // THIS IS FOR VISUAL REFERENCE ONLY!!!
 // DO NOT USE THIS AS AN ASSEMBLY DIAGRAM!!!

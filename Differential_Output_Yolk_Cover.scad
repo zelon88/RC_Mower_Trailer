@@ -14,7 +14,7 @@
 // PART INFORMATION
 
 // NAME:  Differential Output Yolk Cover
-// REVISION:  A6
+// REVISION:  A9
 // START DATE:  7/20/2026
 // CURRENT VERSION DATE:  7/27/2026
 // AUTHOR:  Justin Grimes (@zelon88) & Claude Opus 5.
@@ -60,13 +60,13 @@ include <Workfiles/Filleted_Frustum.scad>;
 module Differential_Output_Yolk_Cover() {
   // Drum dimensions — must match Differential_Output_Yolk.scad.
   drum_r  = 8.5;   // Drum outer radius.
-  drum_h  = 9;    // Drum height.
+  drum_h  = 10.5;    // Drum height.
 
   // Cover dimensions.
   clearance     = 0.2;                     // Radial slip fit clearance over drum.
   cover_inner_r = drum_r + clearance;      // 8.7mm — clears drum OD.
   cover_outer_r = drum_r + 2.5;            // 11.0mm — 2.5mm larger than drum OD.
-  outer_face_h  = 2;                       // Chamfer/outer hub height — must match yolk's outer_face_h.
+  outer_face_h  = 0.5;                       // Chamfer/outer hub height — must match yolk's outer_face_h.
   cover_h       = drum_h + outer_face_h;   // 12mm — matches yolk total height (drum + outer hub).
 
   // Central support pin — slides into triple-stacked 3x5x2.5 bearings in the yolk drum.
@@ -81,7 +81,7 @@ module Differential_Output_Yolk_Cover() {
 
   // Arc slot parameters — matched to yolk cover screw positions.
   r_screw  = 5.25;  // Radial position — matches yolk screws at X=±5.25, Y=0.
-  slot_r   = 1.22;  // Slot minor radius — project standard clearance hole.
+  slot_r   = 1.72;  // Slot minor radius — yolk boss OD 1.65 plus 0.07 running clearance.
   arc_half = 15;    // ±15deg gives 30deg total travel, centered on neutral position.
 
   // Cover shell.
@@ -108,40 +108,48 @@ module Differential_Output_Yolk_Cover() {
     translate([0, 0, -1])
       cylinder($fn=96, r=cover_inner_r, h=cover_h, center=false);
 
-    // Roller bearing outer race, the outer half of the race the yolk cuts the inner
-    // half of. The frustum's fat end sits at Z=5.9875, which places it at world Z=4.0
-    // once the cover is flipped onto the drum, coincident with the yolk's fat end so
-    // the two halves of the race register against each other and the roller sits square.
-    // That is also the end the installation hole feeds, and the end the yolk's notch
-    // opens onto, so a roller dropped down the hole lands in the widest section.
-    // Cut depth is 1.55mm at the fat end against 1.35mm at the thin end, leaving at
-    // least 0.75mm of the 2.3mm cover wall standing outboard of the race.
+    // Roller bearing outer race. A cone sharing one apex on the drum axis with the yolk's
+    // inner race, which is what makes the pair a true conical roller bearing. Z=5.9875
+    // places the race's start at world Z=4 once the cover is flipped onto the drum, so
+    // both halves of the race register against each other along their whole length.
+    // The apex sits below the assembly, so the gap widens toward world Z=7.575 and this
+    // cover is preloaded by being drawn upward — the direction the clamping screws pull
+    // against the yolk's standoff bosses.
+    // Cut depth runs 1.1990mm at that end to 1.4059mm at the far end, leaving at least
+    // 0.894mm of the 2.3mm cover wall standing outboard of the race.
+    // Nominal clearance against the roller is zero. Print tolerance is taken up by boss
+    // length rather than a designed-in gap, so the cover must be backed off before the
+    // rollers will pass through the installation hole.
     // The tool is turned end for end with rotate rather than mirror, because a
     // reflection inverts the profile's winding.
     // ramp_h is longer here than on the yolk's race to hold a similar mouth angle
-    // against a cut roughly four times as deep.
+    // against a cut roughly six times as deep.
     translate([0, 0, 5.9875]) rotate([180, 0, 0])
-      Race_Groove(base_r=cover_inner_r, fat_r=cover_inner_r + 1.55, thin_r=cover_inner_r + 1.35, race_h=3.575, ramp_h=1.5, run_h=1, back_r=cover_inner_r - 1, fillet_r=0.15, fn=96);
-    // Roller bearing installation hole through cap — for inserting rollers into race.
-    // Hole radius = (roller_r2*2 + 0.05) / 2 = 1.025mm — just clears large end of roller.
-    // Height is set so the hole bottoms out level with the race mouth at Z=5.9875,
-    // leaving no blind ledge for a roller to hang up on partway down. Holding the
-    // center fixed means the height gains twice the depth added at the bottom, and
-    // the surplus simply overshoots the cap face for a clean boolean.
+      Race_Groove(base_r=cover_inner_r, r_start=9.89897, r_end=10.10593, race_h=3.575, ramp_h=1.5, run_h=1, back_r=cover_inner_r - 1, fillet_r=0.15, fn=96);
+    // Roller bearing installation hole through cap, for inserting rollers into the race.
+    // Collinear with a seated roller, so it leans 3.037 degrees out from the drum axis
+    // exactly as the rollers do. A hole left parallel to the drum axis would jam the
+    // roller partway in, because a roller enters along its own leaning axis.
+    // It starts at Z=5.9875, level with the race mouth, so a roller runs straight out of
+    // the hole and onto the race with no blind ledge to hang up on. Length overshoots the
+    // cap face for a clean boolean.
+    // Radius is the roller's fat end (0.84375) plus 0.03 clearance.
     rotate([0, 0, 90])
-      translate([9.225, 0, cover_h - 2.25])
-        cylinder($fn=96, r=1.025, h=5.525, center=true);
-    // Arc slot through cap at 180° — mates with yolk screw at X=-5.25, Y=0.
-    // hull() of spheres at 2deg intervals traces the arc. Single sphere row at cap Z=9.5.
-    hull() {
-      for (a = [-arc_half : 2 : arc_half]) {
-        rotate([0, 0, 180 + a]) translate([r_screw, 0, cover_h - 0.5])
-          sphere(r=slot_r, $fn=28); } }
-    // Trapezoid slot also cuts through cap at 0° — continuous path with trapezoid cut below.
-    hull() {
-      for (a = [-arc_half : 2 : arc_half]) {
-        rotate([0, 0, a]) translate([r_screw, 0, cover_h - 0.5])
-          sphere(r=slot_r, $fn=28); } } }
+      translate([9.072018, 0, 5.9875])
+        rotate([0, -3.03675, 0])
+          cylinder($fn=96, r=0.87375, h=6, center=false);
+    // Arc slots through the cap at 0 and 180 degrees, mating with the yolk bosses at
+    // X=±5.25. Swept cylinders at 1 degree steps rather than a hull of spheres: a sphere
+    // hull is a lens in section, so its width falls off toward each cap face and it
+    // cannot pass a straight boss. A swept cylinder holds full width through the whole
+    // cap thickness, which is what a boss sliding in the slot requires.
+    // Full height means the sweep also clears anything at these angles further down the
+    // bore, where the cover is hollow anyway, so nothing is lost by running it through.
+    for (a = [-arc_half : 1 : arc_half]) {
+      rotate([0, 0, a]) translate([r_screw, 0, -1])
+        cylinder($fn=96, r=slot_r, h=cover_h + 2, center=false);
+      rotate([0, 0, 180 + a]) translate([r_screw, 0, -1])
+        cylinder($fn=96, r=slot_r, h=cover_h + 2, center=false); } }
 
   // Opposing trapezoid spring perch — outside main difference() to prevent bore removal.
   // Wrapped in its own difference() to trim corners using yolk drum inner geometry.
@@ -153,19 +161,19 @@ module Differential_Output_Yolk_Cover() {
     translate([0, 0, (cover_h / 2) + 0.5])
       rotate([0, 90, 0])
       hull() {
-        cube([cover_h - 1, 1, 2], center=true);
+        cube([cover_h - 1, 2.5, 2], center=true);
         translate([0, 0, 6.7])
-          cube([cover_h - 1, 7, 2], center=true); }
+          cube([cover_h - 1, 8.5, 2], center=true); }
 
     // Upper Spring perch recesses.
-    translate([4.5, 2.825, 3.25]) rotate([0, 90, -65])
+    translate([4, 3.575, 3.25]) rotate([0, 90, -65])
       cylinder($fn=96, r=2.02, h=0.325, center=true);
-    translate([4.5, -2.825, 3.25]) rotate([0, 90, 65])
+    translate([4, -3.575, 3.25]) rotate([0, 90, 65])
       cylinder($fn=96, r=2.02, h=0.325, center=true);
     // Lower Spring perch recesses.
-    translate([4.5, 2.825, 7.375]) rotate([0, 90, -65])
+    translate([4, 3.575, 7.375]) rotate([0, 90, -65])
       cylinder($fn=96, r=2.02, h=0.325, center=true);
-    translate([4.5, -2.825, 7.375]) rotate([0, 90, 65])
+    translate([4, -3.575, 7.375]) rotate([0, 90, 65])
       cylinder($fn=96, r=2.02, h=0.325, center=true);
 
     // Cookie cutter — centered at Z=0 with center=true spans full cover height.

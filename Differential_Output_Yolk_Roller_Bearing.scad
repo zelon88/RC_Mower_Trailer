@@ -14,22 +14,20 @@
 // PART INFORMATION
 
 // NAME:  Differential Output Yolk Roller Bearing
-// REVISION:  A3
+// REVISION:  A4
 // START DATE:  7/21/2026
 // CURRENT VERSION DATE:  7/27/2026
 // AUTHOR:  Justin Grimes (@zelon88) & Claude Opus 5.
 // DESCRIPTION:
-//    A frustum-shaped roller bearing for the Differential Output Yolk assembly.
-//    Rides in a matching race cut into the ID of the cover drum and partially into
-//    the OD of the yolk drum. The frustum profile (r1=0.875, r2=1) seats with the
-//    large end toward the fat end of the race, which is the end the installation
-//    hole and notch both open onto, so a roller dropped through lands in the widest
-//    section. Multiple rollers are distributed around the bearing circumference.
-//    Both end corners are broken to fillet_r to match the radius in the yolk and
-//    cover race grooves, so the roller seats without a sharp-edge interference and
-//    crosses the partially uncovered installation openings without catching a lip.
-//    OAL is unchanged at h=3.375; the corners are broken inward from the existing
-//    profile rather than added onto the length.
+//    A conical roller for the Differential Output Yolk bearing. Rides between a cone
+//    cut into the OD of the yolk drum and a matching cone cut into the ID of the cover
+//    drum. All three cones share one apex on the drum axis, which is the condition for
+//    pure rolling, so the roller does not scrub along its contact line.
+//    The roller seats with its axis leaning 3.037 degrees out from the drum axis and
+//    its fat end toward low Z, which is the end the installation hole feeds.
+//    The bearing is preloaded rather than clearance fitted. It locates the two drums
+//    both radially and axially, so the clamping screws can be run light against a stop
+//    and the cover still turns freely instead of binding on screw friction.
 // FILE NAME: Differential_Output_Yolk_Roller_Bearing.scad
 // ----------------------------------------------------------------------------------------------------
 
@@ -57,14 +55,23 @@ include <Workfiles/Filleted_Frustum.scad>;
 // GEOMETRY
 
 module Output_Yolk_Roller_Bearing() {
-  // Frustum roller — small end (r1=0.875) at Z=0, large end (r2=1) at Z=h.
-  // Matches the frustum race cut in the cover ID and yolk OD.
-  // Both end corners are broken to fillet_r, which must match the race fillet_r so the
-  // roller seats into the rounded groove roots rather than bearing on a sharp corner.
-  // Rounding a corner only takes material off the roller, so neither the taper, the
-  // 3.375mm OAL, nor either race dimension changes on account of it.
+  // Conical roller, thin end (r=0.82745) at Z=0 and fat end (r=0.84375) at Z=h.
+  // These radii are not chosen — they are whatever exactly fills the gap between the
+  // yolk and cover race cones, which is what makes the bearing a true conical roller
+  // bearing rather than a conical roller in a mismatched race. The roller cone shares
+  // its apex with both races, so contact is pure rolling along the whole contact line.
+  // Nominal clearance is zero. The bearing is preloaded: the screws clamping the two
+  // drums draw the cover down the cone until the rollers take up, so print tolerance
+  // is absorbed by axial screw position rather than by a designed-in gap. Any clearance
+  // built in here would instead become dead travel, at roughly 17mm of axial motion
+  // per 1mm of radial take-up.
+  // Total taper is only 0.0163mm across the length. A correct conical roller at this
+  // pitch diameter is necessarily near cylindrical, because the races must sweep about
+  // eight times the roller's own taper and the yolk drum wall cannot give up that much.
+  // Both end corners are broken to fillet_r to match the race groove roots, so the
+  // roller crosses the partially uncovered installation opening without catching a lip.
   fillet_r = 0.15;
-  Filleted_Frustum(r1=0.875, r2=1, h=3.375, fillet_r=fillet_r, fillet_end="both", fn=96); }
+  Filleted_Frustum(r1=0.82745, r2=0.84375, h=3.375, fillet_r=fillet_r, fillet_end="both", fn=96); }
 
 // Render the object.
 // Comment or uncomment as needed.
