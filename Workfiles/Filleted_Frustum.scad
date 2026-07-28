@@ -14,7 +14,7 @@
 // PART INFORMATION
 
 // NAME:  Filleted Frustum
-// REVISION:  A5
+// REVISION:  A6
 // START DATE:  7/26/2026
 // CURRENT VERSION DATE:  7/27/2026
 // AUTHOR:  Justin Grimes (@zelon88) & Claude Opus 5.
@@ -112,10 +112,13 @@ module Filleted_Frustum(r1, r2, h, fillet_r, extra_h=0, fillet_end="r2", fn=96, 
   }
 }
 
-module Race_Groove(base_r, fat_r, thin_r, race_h, ramp_h, run_h, back_r, fillet_r, fn=96) {
-  // A cutting tool for one half of a roller race. The frustum's fat end sits at local
-  // Z=0 and its thin end at local Z=race_h, so a caller positions the fat end directly.
-  // That is the end the rollers are installed through, so it is the end worth anchoring.
+module Race_Groove(base_r, r_start, r_end, race_h, ramp_h, run_h, back_r, fillet_r, fn=96) {
+  // A cutting tool for one half of a roller race. r_start is the race radius at local
+  // Z=0 and r_end the radius at local Z=race_h, so the caller states the cone directly.
+  // Which of those is the deeper cut is deliberately not encoded here: on a true conical
+  // bearing the inner and outer races both taper the same way about a shared apex, so
+  // the inner race runs shallow at the end where the outer race runs deep. Naming these
+  // for the roller's fat and thin ends would be wrong on one of the two parts.
   // The profile spans base_r on the surface side to back_r behind it and never reaches
   // the axis. The tool is therefore an annulus and is incapable of removing material
   // from the core of the part no matter how it is positioned or how tall it is made.
@@ -127,7 +130,7 @@ module Race_Groove(base_r, fat_r, thin_r, race_h, ramp_h, run_h, back_r, fillet_
   // tool's convex corners leaves the part a fillet at each groove root, which the
   // roller's own radiused end seats into. Rounding the tool's concave corners leaves
   // the part a round-over at each groove mouth, which is what lets a roller cross the
-  // partially uncovered installation notch without catching a lip, and which spreads
+  // partially uncovered installation opening without catching a lip, and which spreads
   // contact load across a radius rather than an edge.
   // offset() does the rounding rather than derived tangent arcs because every segment
   // of this profile is at least 1mm long against a fillet_r a fraction of that size,
@@ -139,6 +142,6 @@ module Race_Groove(base_r, fat_r, thin_r, race_h, ramp_h, run_h, back_r, fillet_
     offset(r=-fillet_r) offset(delta=fillet_r)
       offset(r=fillet_r) offset(delta=-fillet_r)
         polygon(points=[
-          [base_r, z_bot], [base_r, -ramp_h], [fat_r, 0], [thin_r, race_h],
+          [base_r, z_bot], [base_r, -ramp_h], [r_start, 0], [r_end, race_h],
           [base_r, race_h + ramp_h], [base_r, z_top], [back_r, z_top], [back_r, z_bot] ]); }
 // ----------------------------------------------------------------------------------------------------
