@@ -59,9 +59,9 @@ module Clippings_Flange_Exhaust_Header() {
   // Primary dimensions.
   flange_r    = 18;   // Bottom flange outer radius.
   flange_t    = 2.5;  // Bottom flange thickness.
-  flange_id   = 13;   // Bottom flange inner bore radius.
-  tube_id     = 13;   // Tube inner radius (all sections).
-  tube_od     = 14;   // Tube outer radius — 1mm wall (all sections).
+  flange_id   = 12;   // Bottom flange inner bore radius.
+  tube_id     = 12;   // Tube inner radius (all sections).
+  tube_od     = 13;   // Tube outer radius — 1mm wall (all sections).
   tube_h      = 35;   // Straight tube height above bottom flange.
   bend_r      = 14;   // Centerline bend radius — same for all elbows.
   bend_angle  = 45;   // First and second elbow bend angle from vertical (degrees).

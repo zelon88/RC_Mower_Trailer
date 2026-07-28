@@ -73,7 +73,7 @@ module Body_Half_Dirty() {
     translate([0, 0, 16.59]) cube([25.6, 300, 3.175], center=true);
     rotate([0, 0, 90]) translate([75, 0, 13.415]) cube([25.6, 150, 3.175], center=true);
     // Cut out the hole for clippings.
-    translate([-32, 40, 16]) cylinder(r=13, h=4, $fn=48, center=false);
+    translate([-32, 40, 16]) cylinder(r1=13, r2=12, h=4, $fn=48, center=false);
     translate([-32, 40, 16]) cylinder(r1=18, r2=13.75, h=2.5, $fn=48, center=false);
     translate([-32, 40, 12]) cylinder(r1=20, r2=18, h=4, $fn=48, center=false);
     // Cut the landing pad for the clippings flange.
@@ -128,7 +128,7 @@ module Body_Half_Dirty() {
       // Create lower reinforcement.
       rotate([0, 0, 90]) translate([75, 0, 15.25]) cube([25.6, 140, 1.175], center=true); }
     // Cut out the hole for clippings.
-    translate([-32, 40, 16]) cylinder(r=13, h=4, $fn=48, center=false);
+    translate([-32, 40, 16]) cylinder(r1=13, r2=12, h=4, $fn=48, center=false);
     translate([-32, 40, 16]) cylinder(r1=18, r2=13.75, h=2.5, $fn=48, center=false);
     translate([-32, 40, 12]) cylinder(r1=20, r2=18, h=4, $fn=48, center=false);
     // Cut the landing pad for the clippings flange.
@@ -234,7 +234,7 @@ module Body_Half_Dirty() {
     translate([0, 75, 0]) Torus(40, 150);
     translate([0, 75, 0]) cylinder(r=50, h=38, $fn=28, center=false);
     // Cut out the hole for clippings.
-    translate([-32, 40, 16]) cylinder(r=13, h=4, $fn=48, center=false);
+    translate([-32, 40, 16]) cylinder(r1=13, r2=12, h=4, $fn=48, center=false);
     translate([-32, 40, 16]) cylinder(r1=18, r2=13.75, h=2.5, $fn=48, center=false);
     translate([-32, 40, 12]) cylinder(r1=20, r2=18, h=4, $fn=48, center=false);
     // Cut the landing pad for the clippings flange.
@@ -276,7 +276,7 @@ module Body_Half_Dirty() {
     // Cut the landing pad for the clippings flange.
     translate([-32, 40, 19.9]) cylinder(r1=19, r2=15.25, h=0.33, $fn=48, center=false);
     // Cut out the hole for clippings.
-    translate([-32, 40, 16]) cylinder(r=13, h=4, $fn=48, center=false);
+    translate([-32, 40, 16]) cylinder(r1=13, r2=12, h=4, $fn=48, center=false);
     translate([-32, 40, 16]) cylinder(r1=18, r2=13.75, h=2.5, $fn=48, center=false);
     translate([-32, 40, 12]) cylinder(r1=20, r2=18, h=4, $fn=48, center=false);
     // Clippings flange screw holes.

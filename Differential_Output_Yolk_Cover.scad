@@ -14,7 +14,7 @@
 // PART INFORMATION
 
 // NAME:  Differential Output Yolk Cover
-// REVISION:  A9
+// REVISION:  B3
 // START DATE:  7/20/2026
 // CURRENT VERSION DATE:  7/27/2026
 // AUTHOR:  Justin Grimes (@zelon88) & Claude Opus 5.
@@ -52,6 +52,8 @@
 include <Workfiles/Bearings.scad>;
 // Shared roller and race profiles, held in common with the yolk so both halves agree.
 include <Workfiles/Filleted_Frustum.scad>;
+// GT2 2mm belt pulley geometry, shared with the motor drive pulley.
+include <Workfiles/GT2_Pulley.scad>;
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
@@ -84,12 +86,48 @@ module Differential_Output_Yolk_Cover() {
   slot_r   = 1.72;  // Slot minor radius — yolk boss OD 1.65 plus 0.07 running clearance.
   arc_half = 15;    // ±15deg gives 30deg total travel, centered on neutral position.
 
+  // Belt drive. 38T against a 20T motor pulley on a 122mm GT2 belt gives 1.900:1 and
+  // asks for a 30.9389mm centre distance, which is 0.068mm off what the Center Bracket
+  // fixes at 30.8707mm — around a tenth of a percent of belt length, and inside what
+  // ordinary belt tension absorbs. An exact 2:1 would need a 121.11mm belt, which is not
+  // a length anyone makes; the nearest stock 122mm leaves seven times that much slack.
+  belt_teeth = 38;
+  belt_w     = 6;                              // Stock GT2 face width. 5mm is not made.
+  belt_z     = outer_face_h;                   // Belt's inboard edge at the chamfer's top.
+  pulley_r   = GT2_2mm_OD(belt_teeth) / 2;     // 11.84219mm.
+
+  // Belt flanges. The toothed band stands proud of the cover on BOTH sides, so without
+  // these the belt is free to walk off in either direction; nothing about the chamfer
+  // step registers it. Radius is set by the 540 can, not by the belt: the textbook
+  // flange of pulley OD + 1.5mm would foul the can by 0.526mm at the bracket's centre
+  // distance. 12.6 keeps 0.216mm off the can and still stands 0.128mm above the belt's
+  // back, which is what actually stops the belt climbing out.
+  flange_r  = 12.6;
+  flange_w  = 0.5;
+  flange_ch = 0.25;                            // Edge break on each flange's outer face.
+
   // Cover shell.
   // The chamfer at the open end (Z=0) is built via intersection rather than
   // subtracting a centered cone — a subtracted cone only ever widens the bore
   // from the inside and can't reduce the OD, and the previous attempt left the
   // rim feathered to a zero-thickness knife edge instead of a real bevel.
   difference() {
+    union() {
+    // Belt pulley blank. A raised band rather than growing the whole cover, so the
+    // extra diameter is only paid for where teeth are actually cut.
+    translate([0, 0, belt_z])
+      cylinder($fn=96, r=pulley_r, h=belt_w, center=false);
+    // Inboard belt flange. It occupies the chamfer's height at the cover's open end,
+    // so the original chamfer is absorbed into it; the edge break is carried on the
+    // flange's own outer face instead.
+    cylinder($fn=96, r1=flange_r - flange_ch, r2=flange_r, h=flange_ch, center=false);
+    translate([0, 0, flange_ch])
+      cylinder($fn=96, r=flange_r, h=belt_z - flange_ch, center=false);
+    // Outboard belt flange.
+    translate([0, 0, belt_z + belt_w])
+      cylinder($fn=96, r=flange_r, h=flange_w - flange_ch, center=false);
+    translate([0, 0, belt_z + belt_w + flange_w - flange_ch])
+      cylinder($fn=96, r1=flange_r, r2=flange_r - flange_ch, h=flange_ch, center=false);
     intersection() {
       // Raw stock — defines the true OD everywhere.
       cylinder($fn=96, r=cover_outer_r, h=cover_h, center=false);
@@ -103,7 +141,17 @@ module Differential_Output_Yolk_Cover() {
         // diameter toward the main body, matching the yolk's taper direction.
         cylinder($fn=96, r1=cover_outer_r - outer_face_h, r2=cover_outer_r, h=outer_face_h, center=false);
       }
-    }
+    } }
+    // GT2 teeth. Cut after the blank is unioned on, so the grooves are taken out of the
+    // raised band rather than out of raw stock that later gets clipped.
+    // 38 teeth is boxed in from both sides by the rest of the machine: fewer than 38 and
+    // the groove roots break into the bearing race beneath, more than 40 and the pulley
+    // fouls the 540 can at the bracket's fixed 30.8707mm centre distance.
+    // The cutter is confined to the belt face and given only enough overshoot to break
+    // out cleanly at each end. Run at the module's default it would reach 0.5mm past the
+    // face and cut straight through the inboard flange.
+    translate([0, 0, belt_z])
+      GT2_2mm_Teeth(teeth=belt_teeth, face_w=belt_w, overshoot=0.02, fn=96);
     // Inner bore — open at Z=0 (entry side), leaves 1mm solid cap at Z=cover_h-1 to Z=cover_h.
     translate([0, 0, -1])
       cylinder($fn=96, r=cover_inner_r, h=cover_h, center=false);
@@ -115,8 +163,18 @@ module Differential_Output_Yolk_Cover() {
     // The apex sits below the assembly, so the gap widens toward world Z=7.575 and this
     // cover is preloaded by being drawn upward — the direction the clamping screws pull
     // against the yolk's standoff bosses.
-    // Cut depth runs 1.1990mm at that end to 1.4059mm at the far end, leaving at least
-    // 0.894mm of the 2.3mm cover wall standing outboard of the race.
+    // Cut depth runs 1.1990mm at that end to 1.4029mm at the rib, leaving at least
+    // 0.897mm of the 2.3mm cover wall standing outboard of the race.
+    // race_h ends the cone at Z=7.52263 in world terms, 0.05mm above the roller's fat
+    // end face, and rib_r then steps the bore in to 9.60 to form the locating rib.
+    // Without it the roller has nothing fixing its position along its own axis: with all
+    // three cones sharing an apex it fits equally well anywhere along that axis, simply
+    // sitting at a different radius. Under load it climbs toward its fat end, so the rib
+    // goes just beyond that end and catches 0.500mm of the face, about 30% of the face
+    // diameter. The rib sits on this part rather than the yolk because nothing has to
+    // slide past it here; on the yolk it would have to clear this cover's 8.7mm bore
+    // during assembly, which would cap it at roughly half the engagement.
+    // Axial load on it is light, under 1% of the radial contact force.
     // Nominal clearance against the roller is zero. Print tolerance is taken up by boss
     // length rather than a designed-in gap, so the cover must be backed off before the
     // rollers will pass through the installation hole.
@@ -125,7 +183,7 @@ module Differential_Output_Yolk_Cover() {
     // ramp_h is longer here than on the yolk's race to hold a similar mouth angle
     // against a cut roughly six times as deep.
     translate([0, 0, 5.9875]) rotate([180, 0, 0])
-      Race_Groove(base_r=cover_inner_r, r_start=9.89897, r_end=10.10593, race_h=3.575, ramp_h=1.5, run_h=1, back_r=cover_inner_r - 1, fillet_r=0.15, fn=96);
+      Race_Groove(base_r=cover_inner_r, r_start=9.89897, r_end=10.10290, race_h=3.52263, ramp_h=1.5, run_h=1, back_r=cover_inner_r - 1, fillet_r=0.15, rib_r=9.60, rib_h=0.5, fn=96);
     // Roller bearing installation hole through cap, for inserting rollers into the race.
     // Collinear with a seated roller, so it leans 3.037 degrees out from the drum axis
     // exactly as the rollers do. A hole left parallel to the drum axis would jam the
