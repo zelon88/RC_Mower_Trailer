@@ -14,7 +14,7 @@
 // PART INFORMATION
 
 // NAME:  Filleted Frustum
-// REVISION:  A6
+// REVISION:  A7
 // START DATE:  7/26/2026
 // CURRENT VERSION DATE:  7/27/2026
 // AUTHOR:  Justin Grimes (@zelon88) & Claude Opus 5.
@@ -112,13 +112,20 @@ module Filleted_Frustum(r1, r2, h, fillet_r, extra_h=0, fillet_end="r2", fn=96, 
   }
 }
 
-module Race_Groove(base_r, r_start, r_end, race_h, ramp_h, run_h, back_r, fillet_r, fn=96) {
+module Race_Groove(base_r, r_start, r_end, race_h, ramp_h, run_h, back_r, fillet_r, rib_r=0, rib_h=0, fn=96) {
   // A cutting tool for one half of a roller race. r_start is the race radius at local
   // Z=0 and r_end the radius at local Z=race_h, so the caller states the cone directly.
   // Which of those is the deeper cut is deliberately not encoded here: on a true conical
   // bearing the inner and outer races both taper the same way about a shared apex, so
   // the inner race runs shallow at the end where the outer race runs deep. Naming these
   // for the roller's fat and thin ends would be wrong on one of the two parts.
+  // rib_r and rib_h optionally end the race in a locating shoulder rather than a ramp.
+  // A conical bearing whose three cones share an apex leaves the roller free to slide
+  // along its own axis: moving it toward or away from the apex simply seats it at a
+  // different radius, still in contact with both races. Something has to fix that
+  // position, and under load the roller always climbs toward its fat end, so a rib just
+  // beyond that end is what stops it. This is the same job the large end rib does on the
+  // cone of a commercial tapered roller bearing.
   // The profile spans base_r on the surface side to back_r behind it and never reaches
   // the axis. The tool is therefore an annulus and is incapable of removing material
   // from the core of the part no matter how it is positioned or how tall it is made.
@@ -132,16 +139,17 @@ module Race_Groove(base_r, r_start, r_end, race_h, ramp_h, run_h, back_r, fillet
   // the part a round-over at each groove mouth, which is what lets a roller cross the
   // partially uncovered installation opening without catching a lip, and which spreads
   // contact load across a radius rather than an edge.
-  // offset() does the rounding rather than derived tangent arcs because every segment
-  // of this profile is at least 1mm long against a fillet_r a fraction of that size,
-  // which leaves the erode step of each offset pair a wide margin before it could
-  // collapse a segment and self-intersect the profile.
+  // offset() does the rounding rather than derived tangent arcs. Keep every segment of
+  // this profile longer than twice fillet_r, or the erode step of each offset pair will
+  // collapse it and self-intersect the outline. The rib face is the shortest segment
+  // here, so it sets how small a rib the tool can cut.
   z_bot = -ramp_h - run_h;
-  z_top = race_h + ramp_h + run_h;
+  z_top = race_h + rib_h + ramp_h + run_h;
   rotate_extrude($fn=fn)
     offset(r=-fillet_r) offset(delta=fillet_r)
       offset(r=fillet_r) offset(delta=-fillet_r)
-        polygon(points=[
-          [base_r, z_bot], [base_r, -ramp_h], [r_start, 0], [r_end, race_h],
-          [base_r, race_h + ramp_h], [base_r, z_top], [back_r, z_top], [back_r, z_bot] ]); }
+        polygon(points = concat(
+          [[base_r, z_bot], [base_r, -ramp_h], [r_start, 0], [r_end, race_h]],
+          (rib_r > 0) ? [[rib_r, race_h], [rib_r, race_h + rib_h]] : [],
+          [[base_r, race_h + rib_h + ramp_h], [base_r, z_top], [back_r, z_top], [back_r, z_bot]] )); }
 // ----------------------------------------------------------------------------------------------------

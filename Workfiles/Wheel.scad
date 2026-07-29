@@ -13,14 +13,14 @@
 // ----------------------------------------------------------------------------------------------------
 // PART INFORMATION
 
-// NAME:  Torus
+// NAME:  Wheel
 // REVISION:  A1
-// START DATE:  5/25/2026
-// CURRENT VERSION DATE:  5/25/2026
+// START DATE:  6/3/2026
+// CURRENT VERSION DATE:  6/3/2026
 // AUTHOR:  Justin Grimes (@zelon88)
 // DESCRIPTION:
-//    A utility module for creating a torus, used to aid in crafting the mating surfaces of the body.
-// FILE NAME: Torus.scad
+//    A placeholder wheel used to represent a standard 1.9" R/C wheel and tire for rendering.
+// FILE NAME: Wheel.scad
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
@@ -36,7 +36,21 @@
 // ----------------------------------------------------------------------------------------------------
 // GEOMETRY
 
-module Torus(R1, R2) {
-  RA = R1 / 2;
-  RB = R2 / 2 - R1 / 2;
-  rotate_extrude(convexity=10, $fn=512) translate([RB, 0, 0]) circle(r=RA, $fn=144); }
+module Wheel() {
+  difference() {
+    // Create a cylinder to represent the tire.
+    rotate([90, 0, 0]) cylinder($fn=48, r=46, h=30, center=true);
+    // Bore a center hole.
+    rotate([90, 0, 0]) cylinder($fn=48, r=2, h=30, center=true);
+    // Bore a hole in the sides to represent a 1.9" rim.
+    translate([0, 22, 0]) rotate([90, 0, 0]) cylinder($fn=48, r=24.13, h=30, center=true);
+    translate([0, -12, 0]) rotate([90, 0, 0]) cylinder($fn=48, r=24.13, h=30, center=true); } }
+
+// Render the object.
+// Comment or uncomment as needed.
+//Wheel();
+
+// Render the object for printing.
+// Comment or uncomment as needed.
+//Wheel();
+// ----------------------------------------------------------------------------------------------------
