@@ -64,10 +64,6 @@ module Center_Bracket() {
 
     // Reinforcement slot.
     translate([0, 0, 16.58]) cube([25.6, 100, 3.175], center=true);
-    // Through hole, motor clamp mounting screw, center.
-    translate([9, 25, 30]) rotate([90, 0, 0]) cylinder($fn=15, r=1.22, h=36);
-    // Through hole, motor clamp mounting screw, left.
-    translate([12, 25, 25]) rotate([90, 0, 0]) cylinder($fn=15, r=1.22, h=36);
     // Through hole for motor armature shaft.
     translate([-28, 18, 40]) rotate([90, 0, 0]) cylinder(r=6.55, h=9);
     // Through hole, motor screws, lower.
@@ -117,10 +113,6 @@ module Center_Bracket() {
 
     // Reinforcement slot.
     translate([0, 0, 16.58]) cube([25.6, 100, 3.175], center=true);
-    // Through hole for motor clamp mounting screw, center.
-    translate([-9, 1, 30]) rotate([90, 0, 0]) cylinder($fn=15, r=1.22, h=36);
-    // Through hole for motor clamp mounting screw, left.
-    translate([-12, 1, 25]) rotate([90, 0, 0]) cylinder($fn=15, r=1.22, h=36);
     // Through hole for motor armature shaft.
     translate([28, -9.5, 40]) rotate([90, 0, 0]) cylinder(r=6.55, h=9);
     // Through hole for motor screws, lower.
@@ -287,7 +279,7 @@ module Center_Bracket() {
 
 // Render the object.
 // Comment or uncomment as needed.
-Center_Bracket();
+//Center_Bracket();
 
 // Comment or uncomment to simulate motors as needed.
 //Motors();

@@ -59,9 +59,9 @@ module Clippings_Flange_Exhaust_Header() {
   // Primary dimensions.
   flange_r    = 18;   // Bottom flange outer radius.
   flange_t    = 2.5;  // Bottom flange thickness.
-  flange_id   = 12;   // Bottom flange inner bore radius.
-  tube_id     = 12;   // Tube inner radius (all sections).
-  tube_od     = 13;   // Tube outer radius — 1mm wall (all sections).
+  flange_id   = 13;   // Bottom flange inner bore radius.
+  tube_id     = 13;   // Tube inner radius (all sections).
+  tube_od     = 14;   // Tube outer radius — 1mm wall (all sections).
   tube_h      = 35;   // Straight tube height above bottom flange.
   bend_r      = 14;   // Centerline bend radius — same for all elbows.
   bend_angle  = 45;   // First and second elbow bend angle from vertical (degrees).
@@ -92,9 +92,9 @@ module Clippings_Flange_Exhaust_Header() {
   difference() {
     union() {
       // Bottom flange plate.
-      cylinder($fn=96, r=flange_r, h=flange_t, center=false);
+      cylinder($fn=256, r=flange_r, h=flange_t, center=false);
       // Straight tube.
-      translate([0, 0, flange_t]) cylinder($fn=96, r=tube_od, h=tube_h, center=false);
+      translate([0, 0, flange_t]) cylinder($fn=256, r=tube_od, h=tube_h, center=false);
       // Tapered ribs (8x, between screw holes).
       for (i = [0:7]) {
         rotate([0, 0, i * 45 + 22.5])
@@ -109,14 +109,14 @@ module Clippings_Flange_Exhaust_Header() {
       translate([bend_r, 0, 0])
       rotate([0, 0, 180])
       rotate([90, 0, 0])
-      rotate_extrude(angle=bend_angle, $fn=96)
-        translate([bend_r, 0]) circle(r=tube_od, $fn=48);
+      rotate_extrude(angle=bend_angle, $fn=256)
+        translate([bend_r, 0]) circle(r=tube_od, $fn=128);
       // Extension pipe.
       rotate([0, 0, index_angle])
       translate([0, 0, flange_t + tube_h])
       translate([bend_r*(1-cos(bend_angle)), 0, bend_r*sin(bend_angle)])
       rotate([0, 45, 0])
-        cylinder($fn=48, r=tube_od, h=ext_h + 1, center=false);
+        cylinder($fn=128, r=tube_od, h=ext_h + 1, center=false);
       // Second 45deg elbow (pipe direction to horizontal = world +X approximately).
       rotate([0, 0, index_angle])
       translate([0, 0, flange_t + tube_h])
@@ -126,8 +126,8 @@ module Clippings_Flange_Exhaust_Header() {
       translate([bend_r, 0, 0])
       rotate([0, 0, 180])
       rotate([90, 0, 0])
-      rotate_extrude(angle=bend_angle, $fn=96)
-        translate([bend_r, 0]) circle(r=tube_od, $fn=48);
+      rotate_extrude(angle=bend_angle, $fn=256)
+        translate([bend_r, 0]) circle(r=tube_od, $fn=128);
       // Short pipe in world +X direction.
       // In pipe local frame, rotate([0,45,0]) aligns the cylinder axis with
       // local (sin45,0,cos45) = world +X. Terminal face is perpendicular to world +X.
@@ -137,7 +137,7 @@ module Clippings_Flange_Exhaust_Header() {
       rotate([0, 45, 0])
       translate([bend_r*(1-cos(bend_angle)), 0, ext_h + bend_r*sin(bend_angle)])
       rotate([0, 45, 0])
-        cylinder($fn=48, r=tube_od, h=pipe_x_h, center=false);
+        cylinder($fn=128, r=tube_od, h=pipe_x_h, center=false);
       // Terminal circular flange — face perpendicular to world +X, mates with hopper X face.
       rotate([0, 0, index_angle])
       translate([0, 0, flange_t + tube_h])
@@ -146,25 +146,25 @@ module Clippings_Flange_Exhaust_Header() {
       translate([bend_r*(1-cos(bend_angle)), 0, ext_h + bend_r*sin(bend_angle)])
       rotate([0, 45, 0])
       translate([0, 0, pipe_x_h])
-        cylinder($fn=96, r=x_flange_r, h=x_flange_t, center=false); }
+        cylinder($fn=256, r=x_flange_r, h=x_flange_t, center=false); }
 
     // Bore through bottom flange and straight tube.
-    translate([0, 0, -1]) cylinder($fn=96, r=flange_id, h=flange_t + 2, center=false);
-    translate([0, 0, flange_t]) cylinder($fn=96, r=tube_id, h=tube_h + 2, center=false);
+    translate([0, 0, -1]) cylinder($fn=256, r=flange_id, h=flange_t + 2, center=false);
+    translate([0, 0, flange_t]) cylinder($fn=256, r=tube_id, h=tube_h + 2, center=false);
     // Bore through first elbow.
     rotate([0, 0, index_angle])
     translate([0, 0, flange_t + tube_h])
     translate([bend_r, 0, 0])
     rotate([0, 0, 180])
     rotate([90, 0, 0])
-    rotate_extrude(angle=bend_angle + 1, $fn=96)
-      translate([bend_r, 0]) circle(r=tube_id, $fn=48);
+    rotate_extrude(angle=bend_angle + 1, $fn=256)
+      translate([bend_r, 0]) circle(r=tube_id, $fn=128);
     // Bore through extension.
     rotate([0, 0, index_angle])
     translate([0, 0, flange_t + tube_h])
     translate([bend_r*(1-cos(bend_angle)), 0, bend_r*sin(bend_angle)])
     rotate([0, 45, 0])
-      cylinder($fn=48, r=tube_id, h=ext_h + 2, center=false);
+      cylinder($fn=128, r=tube_id, h=ext_h + 2, center=false);
     // Bore through second elbow.
     rotate([0, 0, index_angle])
     translate([0, 0, flange_t + tube_h])
@@ -174,8 +174,8 @@ module Clippings_Flange_Exhaust_Header() {
     translate([bend_r, 0, 0])
     rotate([0, 0, 180])
     rotate([90, 0, 0])
-    rotate_extrude(angle=bend_angle + 1, $fn=96)
-      translate([bend_r, 0]) circle(r=tube_id, $fn=48);
+    rotate_extrude(angle=bend_angle + 1, $fn=256)
+      translate([bend_r, 0]) circle(r=tube_id, $fn=128);
     // Bore through short X pipe and terminal flange.
     rotate([0, 0, index_angle])
     translate([0, 0, flange_t + tube_h])
@@ -183,7 +183,7 @@ module Clippings_Flange_Exhaust_Header() {
     rotate([0, 45, 0])
     translate([bend_r*(1-cos(bend_angle)), 0, ext_h + bend_r*sin(bend_angle)])
     rotate([0, 45, 0])
-      cylinder($fn=48, r=tube_id, h=pipe_x_h + x_flange_t + 1, center=false);
+      cylinder($fn=128, r=tube_id, h=pipe_x_h + x_flange_t + 1, center=false);
     // 8x screw holes through terminal X-facing flange.
     rotate([0, 0, index_angle])
     translate([0, 0, flange_t + tube_h])

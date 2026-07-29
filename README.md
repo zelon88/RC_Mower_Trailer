@@ -66,6 +66,8 @@ Each damper is designed in two main parts; a yolk & a cover. Both the cover & th
 It is important to note that the motors are not protected by the inertial damper. The dampers exist to protect the differential gears from exposure to overwhelming force by spreading that force over a longer duration of time. The motors rotate the cover of the inertial damper, and the center differential is attached to the center yolk. When a blade decelerates due to impacted debris; the motor is also slowed instantly. Because the motor is located outside the protection of the damper, it's acceleration torque actually helps the inertial damper recover sooner. Additionally, the energy stored by the spring in the damper is redirected back into the motor as additional torque during re-acceleration. 
 
 ![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Output_Yolk_Assembly_Rev-A1_7-26-2026_3.png)
+![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Drivetrain_Complete_Assembly_Rev-A1_7-29-2026_1.png)
+![R/C Mower Trailer](https://github.com/zelon88/RC_Mower_Trailer/blob/main/Screenshots/Drivetrain_Complete_Assembly_Rev-A1_7-29-2026_2.png)
 
 Everything about our blade drive system is designed to control, absorb, store, & distribute kinetic energy in the most stable & efficient way possible.
 

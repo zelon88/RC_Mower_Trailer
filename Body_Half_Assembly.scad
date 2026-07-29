@@ -48,6 +48,8 @@ include <Workfiles/Motors.scad>;
 include <Workfiles/RC_Servo.scad>;
 // A variety of modules representing different possilbe battery configurations.
 include <Workfiles/RC_Batteries.scad>;
+// A module for calling in the Wheel.
+include <Workfiles/Wheel.scad>;
 // A module for calling in the Center Bracket.
 include <Center_Bracket.scad>;
 // A module for calling in the Center Differential Gears.
@@ -88,8 +90,6 @@ include <Attachment_Adjustment_Arm_Ramp_Insert.scad>;
 include <Attachment_Adjustment_Arm_Crosshead.scad>;
 // A module for calling in the Lower Attachment Arm.
 include <Lower_Attachment_Arm.scad>;
-// A module for calling in the Wheel.
-include <Wheel.scad>;
 // A module for calling in the Blade.
 include <Blade.scad>;
 // A module for calling in the Blade Holder.
@@ -118,6 +118,10 @@ include <Clippings_Exhaust_Header.scad>;
 include <Differential_Output_Yolk.scad>;
 // A module for calling in the Differential Output Yolk Assembly.
 include <Differential_Output_Yolk_Assembly.scad>;
+// A module for calling in the Differential Motor Pulley.
+include <Differential_Motor_Pulley.scad>;
+// A module for calling in the Differential Drive Belt.
+include <Differential_Drive_Belt.scad>;
 // ----------------------------------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------------------------------
@@ -126,7 +130,7 @@ include <Differential_Output_Yolk_Assembly.scad>;
 // The Center Bracket that houses the motors & gearbox.
 Center_Bracket();
 // The Center Bracket Top Cover.
-//Top_Cover();
+Top_Cover();
 // The Center Bracket Skid Plate that protects the bottom of the Center Bracket.
 Center_Bracket_Skid_Plate();
 rotate([0, 0, 180]) Center_Bracket_Skid_Plate();
@@ -224,4 +228,10 @@ translate([-32, 40, 19.75]) rotate([0, 0, 180]) Clippings_Flange_Exhaust_Header(
 // The Differential Output Yolk Assemblies.
 translate([0, -30, 53]) rotate([-90, 0, 0]) Differential_Output_Yolk_Assembly();
 translate([0, 30, 53]) rotate([90, 0, 0]) Differential_Output_Yolk_Assembly();
+// The Differential Output Pullies.
+translate([28, -18, 40]) rotate([90, 0, 0]) Differential_Motor_Pulley();
+translate([-28, 18, 40]) rotate([-90, 0, 0]) Differential_Motor_Pulley();
+// The differential Drive Belts.
+translate([0, 18.5625, 53]) rotate([-90, 180 - atan2(13, 28), 0]) Differential_Drive_Belt();
+translate([0, -18.5625, 53]) rotate([90, atan2(13, 28), 0]) Differential_Drive_Belt();
 // ----------------------------------------------------------------------------------------------------

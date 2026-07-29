@@ -86,14 +86,14 @@ module Differential_Output_Yolk_Cover() {
   slot_r   = 1.72;  // Slot minor radius — yolk boss OD 1.65 plus 0.07 running clearance.
   arc_half = 15;    // ±15deg gives 30deg total travel, centered on neutral position.
 
-  // Belt drive. 38T against a 20T motor pulley on a 122mm GT2 belt gives 1.900:1 and
-  // asks for a 30.9389mm centre distance, which is 0.068mm off what the Center Bracket
-  // fixes at 30.8707mm — around a tenth of a percent of belt length, and inside what
-  // ordinary belt tension absorbs. An exact 2:1 would need a 121.11mm belt, which is not
-  // a length anyone makes; the nearest stock 122mm leaves seven times that much slack.
+  // Belt drive. 38T against a 19T motor pulley on a 120mm GT2 belt gives exactly 2.000:1
+  // and asks for a 30.9083mm centre distance, which is 0.0376mm off what the Center
+  // Bracket fixes at 30.8707mm — around a tenth of a percent of belt length, and inside
+  // what ordinary belt tension absorbs. 38T is not a free choice either: below it the
+  // groove roots break into the bearing race beneath, and above 40 the pulley fouls the
+  // 540 can, so the pair that lands a stock belt on this bracket is nearly forced.
   belt_teeth = 38;
   belt_w     = 6;                              // Stock GT2 face width. 5mm is not made.
-  belt_z     = outer_face_h;                   // Belt's inboard edge at the chamfer's top.
   pulley_r   = GT2_2mm_OD(belt_teeth) / 2;     // 11.84219mm.
 
   // Belt flanges. The toothed band stands proud of the cover on BOTH sides, so without
@@ -102,9 +102,24 @@ module Differential_Output_Yolk_Cover() {
   // flange of pulley OD + 1.5mm would foul the can by 0.526mm at the bracket's centre
   // distance. 12.6 keeps 0.216mm off the can and still stands 0.128mm above the belt's
   // back, which is what actually stops the belt climbing out.
-  flange_r  = 12.6;
-  flange_w  = 0.5;
-  flange_ch = 0.25;                            // Edge break on each flange's outer face.
+  flange_r   = 12.6;
+  flange_w   = 0.5;
+  flange_ch  = 0.25;                           // Edge break on each flange's outer face.
+  belt_clr   = 0.125;                          // Side clearance; belts run slightly wide.
+  face_w     = belt_w + belt_clr;              // Toothed face between the flange walls.
+
+  // Axial position of the whole pulley, measured to the outer face of the inboard
+  // flange. Everything else on the pulley is derived from it, so clearing the Clippings
+  // Exhaust Header is a single edit here rather than four coordinated ones.
+  // -2.0125 hangs the pulley past the cover's open end, which is what it takes to bring
+  // the belt plane inboard to world Y 21.5 on the damper at Y+30. The motor shaft
+  // protrudes only 7.0mm past the bracket upright, so nothing carried on it reaches past
+  // world Y 24.5, and the belt plane has to come to the shaft rather than the reverse.
+  // The face grows outboard from here, so belt_clr is spent past the shaft tip rather
+  // than against the bracket upright. The inboard flange holds its 0.5mm off the plate
+  // whatever the face width, and the motor pulley's bore still grips 6.5mm of shaft.
+  pulley_z   = -2.0125;
+  pulley_h   = flange_w + face_w + flange_w;   // 7.125mm overall.
 
   // Cover shell.
   // The chamfer at the open end (Z=0) is built via intersection rather than
@@ -115,18 +130,19 @@ module Differential_Output_Yolk_Cover() {
     union() {
     // Belt pulley blank. A raised band rather than growing the whole cover, so the
     // extra diameter is only paid for where teeth are actually cut.
-    translate([0, 0, belt_z])
-      cylinder($fn=96, r=pulley_r, h=belt_w, center=false);
-    // Inboard belt flange. It occupies the chamfer's height at the cover's open end,
-    // so the original chamfer is absorbed into it; the edge break is carried on the
-    // flange's own outer face instead.
-    cylinder($fn=96, r1=flange_r - flange_ch, r2=flange_r, h=flange_ch, center=false);
-    translate([0, 0, flange_ch])
-      cylinder($fn=96, r=flange_r, h=belt_z - flange_ch, center=false);
-    // Outboard belt flange.
-    translate([0, 0, belt_z + belt_w])
+    translate([0, 0, pulley_z + flange_w])
+      cylinder($fn=96, r=pulley_r, h=face_w, center=false);
+    // Inboard belt flange. With pulley_z negative this now stands past the drum's open
+    // end rather than sitting on the chamfer, so the chamfer survives, buried under the
+    // toothed band. The edge break is carried on the flange's own outer face.
+    translate([0, 0, pulley_z])
+      cylinder($fn=96, r1=flange_r - flange_ch, r2=flange_r, h=flange_ch, center=false);
+    translate([0, 0, pulley_z + flange_ch])
       cylinder($fn=96, r=flange_r, h=flange_w - flange_ch, center=false);
-    translate([0, 0, belt_z + belt_w + flange_w - flange_ch])
+    // Outboard belt flange.
+    translate([0, 0, pulley_z + flange_w + face_w])
+      cylinder($fn=96, r=flange_r, h=flange_w - flange_ch, center=false);
+    translate([0, 0, pulley_z + pulley_h - flange_ch])
       cylinder($fn=96, r1=flange_r, r2=flange_r - flange_ch, h=flange_ch, center=false);
     intersection() {
       // Raw stock — defines the true OD everywhere.
@@ -147,14 +163,17 @@ module Differential_Output_Yolk_Cover() {
     // 38 teeth is boxed in from both sides by the rest of the machine: fewer than 38 and
     // the groove roots break into the bearing race beneath, more than 40 and the pulley
     // fouls the 540 can at the bracket's fixed 30.8707mm centre distance.
-    // The cutter is confined to the belt face and given only enough overshoot to break
-    // out cleanly at each end. Run at the module's default it would reach 0.5mm past the
-    // face and cut straight through the inboard flange.
-    translate([0, 0, belt_z])
-      GT2_2mm_Teeth(teeth=belt_teeth, face_w=belt_w, overshoot=0.02, fn=96);
-    // Inner bore — open at Z=0 (entry side), leaves 1mm solid cap at Z=cover_h-1 to Z=cover_h.
-    translate([0, 0, -1])
-      cylinder($fn=96, r=cover_inner_r, h=cover_h, center=false);
+    // The cutter is confined to the toothed face and given only enough overshoot to
+    // break out cleanly at each end. Run at the module's default it would reach 0.5mm
+    // past the face and cut straight through the inboard flange.
+    translate([0, 0, pulley_z + flange_w])
+      GT2_2mm_Teeth(teeth=belt_teeth, face_w=face_w, overshoot=0.02, fn=96);
+    // Inner bore. It has to start below the pulley, not at the drum's own open end:
+    // with pulley_z negative the pulley band hangs past that end, and the band is a
+    // solid cylinder, so any part of it the bore does not reach would be left filled in
+    // and would foul the yolk's outer hub. Top stays put, leaving the 1mm cap.
+    translate([0, 0, min(-1, pulley_z - 1)])
+      cylinder($fn=96, r=cover_inner_r, h=cover_h - 1 - min(-1, pulley_z - 1), center=false);
 
     // Roller bearing outer race. A cone sharing one apex on the drum axis with the yolk's
     // inner race, which is what makes the pair a true conical roller bearing. Z=5.9875

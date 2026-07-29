@@ -62,8 +62,8 @@ module Center_Bracket_Support() {
     // Cut off the end of the triangle after the final screw hole.
     translate([0, -62, 20]) cube([10, 15, 10], center=true);
 
-    // Square off the top of the triangle for aesthetics, weight & material savings.
-    translate([0, 0, 46]) cube([10, 50, 10], center=true);
+    // Square off the top of the triangle to clear the Differential Output Yolk Cover.
+    translate([0, -20, 45]) cube([10, 10, 10], center=true);
 
     // Adjust height to match reinforcement slot.
     translate([0, 0, 16.59]) cube([25.6, 150, 3.175], center=true);
@@ -88,5 +88,5 @@ module Center_Bracket_Support() {
 
 // Render the object for printing.
 // Comment or uncomment as needed.
-//Center_Bracket_Support();
+Center_Bracket_Support();
 // ----------------------------------------------------------------------------------------------------
